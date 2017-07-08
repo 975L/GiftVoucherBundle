@@ -22,7 +22,8 @@
         "symfony/framework-bundle": "3.*",
         "sensio/framework-extra-bundle": "3.*",
         "symfony/assetic-bundle": "2.*",
-        "c975l/email-bundle": "1.*"
+        "c975l/email-bundle": "1.*",
+        "c975l/payment-bundle": "1.*"
     },
     "minimum-stability": "dev",
     "autoload": {
