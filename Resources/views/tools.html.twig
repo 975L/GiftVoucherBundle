@@ -1,0 +1,12 @@
+{% trans_default_domain 'toolbar' %}
+
+{# Display #}
+{% if type == 'edit' or type == 'delete' or type == 'delete-archived' or type == 'delete-deleted' or type == 'delete-redirected' %}
+    <a href="{{ path('giftvoucher_display', {'number': giftVoucher.number ~ giftVoucher.secret}) }}" class="btn btn-default" title="{{ 'label.number'|trans({}, 'giftVoucher') }}" role="button">
+    <span class="glyphicon glyphicon-eye-open"></span></a>
+{% endif %}
+{# Delete #}
+{% if type == 'display' or type == 'edit' or type == 'archived' or type == 'deleted' or type == 'redirected' %}
+    <a href="{{ path('giftvoucher_delete', {'id': giftVoucher.id}) }}" class="btn btn-default" title="{{ 'label.delete'|trans }}" role="button">
+    <span class="glyphicon glyphicon-trash"></span></a>
+{% endif %}

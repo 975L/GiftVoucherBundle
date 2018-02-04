@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="en" datatype="plaintext" original="gitVoucher.en.xlf">
+        <body>
+            <trans-unit id="1">
+                <source>label.gift_voucher</source>
+                <target>Gift-Voucher</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>label.description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>label.date</source>
+                <target>Date and Time</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>label.amount</source>
+                <target>Amount</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>label.purchased</source>
+                <target>Date of purchase</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>label.valid</source>
+                <target>Valid until</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>label.offered_by</source>
+                <target>Offered by</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>label.offered_to</source>
+                <target>Offered to</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>label.message</source>
+                <target>Message</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>label.payment</source>
+                <target>Payment achieved on</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>label.used</source>
+                <target>Used on</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>label.use</source>
+                <target>Use the Gift Voucher</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>label.data</source>
+                <target>Data</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>label.not_used</source>
+                <target>Not used</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>label.out_of_date</source>
+                <target>Out of date</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>text.voucher_used</source>
+                <target>The Gift-Voucher has been well used</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>text.voucher_purchased</source>
+                <target>The Gift-Voucher has been well purchased and sent by email</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>label.cancel</source>
+                <target>Cancel</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>label.purchase</source>
+                <target>Purchase</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>label.offer</source>
+                <target>Offer</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>text.explanation_offer_to</source>
+                <target>Please fill in the fields below to offer the Gift-Voucher, which will be sent in PDF format, to the specified email address, accompanied by the message.</target>
+            </trans-unit>
+             <trans-unit id="23">
+                <source>label.no_validity_date</source>
+                <target>No validity date</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>text.explanation</source>
+                <target>Gift-Voucher to present before use.</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>label.made_with</source>
+                <target>Made with 975L/GiftVoucherBundle</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>label.modify</source>
+                <target>Modify</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>label.delete</source>
+                <target>Delete</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>label.dashboard</source>
+                <target>Dashboard</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.help</source>
+                <target>Help</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.display</source>
+                <target>Display</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.number</source>
+                <target>Number</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>label.object</source>
+                <target>Object</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>label.duplicate</source>
+                <target>Duplicate</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

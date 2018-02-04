@@ -19,15 +19,27 @@
     ],
     "require": {
         "php": ">=5.5.9",
-        "symfony/framework-bundle": "3.*",
-        "sensio/framework-extra-bundle": "3.*",
-        "symfony/assetic-bundle": "2.*",
-        "c975l/email-bundle": "1.*",
-        "c975l/payment-bundle": "1.*"
+        "symfony/framework-bundle": "^3",
+        "sensio/framework-extra-bundle": "^3",
+        "symfony/assetic-bundle": "^2",
+        "c975l/email-bundle": "^1",
+        "c975l/payment-bundle": "^1",
+        "c975l/toolbar-bundle": "^1",
+        "knplabs/knp-snappy-bundle": "^1",
+        "knplabs/knp-time-bundle" : "^1",
+        "knplabs/knp-paginator-bundle": "^2",
+        "h4cc/wkhtmltopdf-amd64": "^0",
+        "cocur/slugify": "^2",
+        "endroid/qr-code": "^2"
     },
     "minimum-stability": "dev",
     "autoload": {
         "psr-4": { "c975L\\GiftVoucherBundle\\": ""
         }
+    },
+    "support": {
+        "email": "contact@975l.com",
+        "source": "https://github.com/975L/GiftVoucherBundle",
+        "issues": "https://github.com/975L/GiftVoucherBundle/issues"
     }
 }

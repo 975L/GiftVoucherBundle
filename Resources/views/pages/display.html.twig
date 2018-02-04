@@ -1,0 +1,10 @@
+{% extends "@c975LGiftVoucher/layout.html.twig" %}
+{% trans_default_domain 'giftVoucher' %}
+{% set title = 'label.gift_voucher'|trans ~ ' "' ~ giftVoucher.object ~ '" (' ~ giftVoucher.number|giftVoucherNumber ~ ')' %}
+
+{% block giftVoucher_content %}
+    <div class="container">
+        {{ toolbar|raw }}
+        {% include "@c975LGiftVoucher/fragments/giftVoucher.html.twig" %}
+    </div>
+{% endblock %}

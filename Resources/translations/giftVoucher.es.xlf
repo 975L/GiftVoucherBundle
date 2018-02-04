@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="es" datatype="plaintext" original="gitVoucher.en.xlf">
+        <body>
+            <trans-unit id="1">
+                <source>label.gift_voucher</source>
+                <target>Certificado-Regalo</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>label.description</source>
+                <target>Descripción</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>label.date</source>
+                <target>Fecha y Hora</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>label.amount</source>
+                <target>Cantidad</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>label.purchased</source>
+                <target>Fecha de compra</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>label.valid</source>
+                <target>Válido hasta</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>label.offered_by</source>
+                <target>Offrecido por</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>label.offered_to</source>
+                <target>Offrecido a</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>label.message</source>
+                <target>Mensaje</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>label.payment</source>
+                <target>Pago realizado en</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>label.used</source>
+                <target>Utilizado en</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>label.use</source>
+                <target>Utilizar el certificado de regalo</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>label.data</source>
+                <target>Datos</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>label.not_used</source>
+                <target>No utilizado</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>label.out_of_date</source>
+                <target>Desactualizado</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>text.voucher_used</source>
+                <target>El Certificado-Regalo ha sido bien utilizado</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>text.voucher_purchased</source>
+                <target>El Certificado-Regalo ha sido bien pagado y enviado para email</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>label.cancel</source>
+                <target>Cancelar</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>label.purchase</source>
+                <target>Comprar</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>label.offer</source>
+                <target>Ofrecer</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>text.explanation_offer_to</source>
+                <target>Rellene los campos a continuación para ofrecer el Certificado-Regalo, que se enviará en formato PDF a la dirección de correo electrónico especificada, junto con el mensaje.</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>label.no_validity_date</source>
+                <target>Sin fecha de validez</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>text.explanation</source>
+                <target>Certificado-Regalo para presentar antes de su uso.</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>label.made_with</source>
+                <target>Hecho con 975L/GiftVoucherBundle</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>label.modify</source>
+                <target>Modificar</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>label.delete</source>
+                <target>Suprimar</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>label.dashboard</source>
+                <target>Tablero</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.help</source>
+                <target>Ayuda</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.display</source>
+                <target>Visualización</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.number</source>
+                <target>Número</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>label.object</source>
+                <target>Objeto</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>label.duplicate</source>
+                <target>Duplicar</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

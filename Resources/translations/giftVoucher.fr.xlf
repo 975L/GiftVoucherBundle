@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="fr" datatype="plaintext" original="gitVoucher.en.xlf">
+        <body>
+            <trans-unit id="1">
+                <source>label.gift_voucher</source>
+                <target>Bon-Cadeau</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>label.description</source>
+                <target>Description</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>label.date</source>
+                <target>Date et Heure</target>
+            </trans-unit>
+            <trans-unit id="4">
+                <source>label.amount</source>
+                <target>Montant</target>
+            </trans-unit>
+            <trans-unit id="5">
+                <source>label.purchased</source>
+                <target>Date d'achat</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>label.valid</source>
+                <target>Valide jusqu'au</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>label.offered_by</source>
+                <target>Offert par</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>label.offered_to</source>
+                <target>Offert à</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>label.message</source>
+                <target>Message</target>
+            </trans-unit>
+            <trans-unit id="10">
+                <source>label.payment</source>
+                <target>Paiement effectué le</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>label.used</source>
+                <target>Utilisé le</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>label.use</source>
+                <target>Utiliser le Bon-cadeau</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>label.data</source>
+                <target>Données</target>
+            </trans-unit>
+            <trans-unit id="14">
+                <source>label.not_used</source>
+                <target>Non utilisé</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>label.out_of_date</source>
+                <target>Périmé</target>
+            </trans-unit>
+            <trans-unit id="16">
+                <source>text.voucher_used</source>
+                <target>Le Bon-Cadeau a bien été utilisé</target>
+            </trans-unit>
+            <trans-unit id="17">
+                <source>text.voucher_purchased</source>
+                <target>Le Bon-Cadeau a bien été acheté et envoyé par email</target>
+            </trans-unit>
+            <trans-unit id="18">
+                <source>label.cancel</source>
+                <target>Annuler</target>
+            </trans-unit>
+            <trans-unit id="19">
+                <source>label.purchase</source>
+                <target>Acheter</target>
+            </trans-unit>
+            <trans-unit id="20">
+                <source>label.email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="21">
+                <source>label.offer</source>
+                <target>Offrir</target>
+            </trans-unit>
+            <trans-unit id="22">
+                <source>text.explanation_offer_to</source>
+                <target>Merci de renseigner les champs ci-dessous pour offrir le Bon-Cadeau, qui sera envoyé au format PDF, à l'adresse email indiquée, accompagné du message.</target>
+            </trans-unit>
+            <trans-unit id="23">
+                <source>label.no_validity_date</source>
+                <target>Pas de date de validité</target>
+            </trans-unit>
+            <trans-unit id="24">
+                <source>text.explanation</source>
+                <target>Bon-Cadeau à présenter préalablement à son utilisation.</target>
+            </trans-unit>
+            <trans-unit id="25">
+                <source>label.made_with</source>
+                <target>Réalisé avec 975L/GiftVoucherBundle</target>
+            </trans-unit>
+            <trans-unit id="26">
+                <source>label.modify</source>
+                <target>Modifier</target>
+            </trans-unit>
+            <trans-unit id="27">
+                <source>label.delete</source>
+                <target>Supprimer</target>
+            </trans-unit>
+            <trans-unit id="28">
+                <source>label.dashboard</source>
+                <target>Tableau de bord</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.help</source>
+                <target>Aide</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.display</source>
+                <target>Affichage</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.number</source>
+                <target>Numéro</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>label.object</source>
+                <target>Objet</target>
+            </trans-unit>
+            <trans-unit id="33">
+                <source>label.duplicate</source>
+                <target>Dupliquer</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

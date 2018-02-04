@@ -1,0 +1,130 @@
+{% trans_default_domain 'giftVoucher' %}
+
+{% block giftVoucher_content %}
+    <div class="row">
+{# Explanation #}
+        {% if display == 'pdf' %}
+            <p class="alert alert-info text-center">
+                <strong>{{ 'text.explanation'| trans }}</strong>
+            </p>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'label.description'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+{# Description #}
+                <p>
+                    {{ giftVoucher.description }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+{# Offer #}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'label.data'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                {% if display == 'pdf' or display == 'admin' %}
+{# Message #}
+                    <div class="col-xs-12">
+                        <p>
+                            {{ 'label.message'|trans }}
+                        </p>
+                        <p class="well">
+                            {{ giftVoucher.message }}
+                        </p>
+                    </div>
+{# Opens the div to set QrCode aside in pdf #}
+                    {% if display == 'pdf' %}
+                        <div class="col-xs-8">
+                    {% else %}
+                        <div class="col-xs-12">
+                    {% endif %}
+{# OfferedTo #}
+                    <p>
+                        {{ 'label.offered_to'|trans }} : <strong>{{ giftVoucher.offeredTo }}</strong>
+                    </p>
+{# OfferedBy #}
+                    <p>
+                        {{ 'label.offered_by'|trans }} : <strong>{{ giftVoucher.offeredBy }}</strong>
+                        {% if giftVoucher.sendToEmail != null %}
+                            (<a href="mailto:{{ giftVoucher.sendToEmail }}">{{ giftVoucher.sendToEmail }}</a>)
+                        {% endif %}
+                    </p>
+                {% endif %}
+{# Purchased date #}
+                <p>
+                    {{ 'label.purchased'|trans }} : <strong>{{ giftVoucher.purchase|localizeddate('medium', 'medium') }}</strong>
+                </p>
+{# Valid date #}
+                <p>
+                    {{ 'label.valid'|trans }} :
+                    {% if giftVoucher.valid == null %}
+                        {{ 'label.no_validity_date'|trans }}
+                    {% else %}
+                        {% if date(giftVoucher.valid) >= date() %}
+                            <span class="text-success">
+                        {% else %}
+                            <span class="text-danger">
+                        {% endif %}
+                        <strong>{{ giftVoucher.valid|localizeddate('medium', 'none') }}</strong>
+                        </span>
+                        {% if display != 'pdf' %}
+                            &nbsp;({{ giftVoucher.valid|ago }})
+                        {% endif %}
+                        {% if date(giftVoucher.valid) < date() and giftVoucher.used == null %}
+                            <span class="glyphicon glyphicon-exclamation-sign"></span> {{ 'label.out_of_date'|trans }}
+                        {% endif %}
+                    {% endif %}
+                </p>
+{# Amount #}
+                {% if display == 'admin' %}
+                    <p>
+                        {{ 'label.amount'|trans }} : <strong>{{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }}</strong>
+                    </p>
+                {% endif %}
+{# Used #}
+                {% if display != 'pdf' %}
+                    <p>
+                        {{ 'label.used'|trans }} :
+                        {% if giftVoucher.used != null %}
+                            <strong>{{ giftVoucher.used|localizeddate('medium', 'medium') }}</strong>
+                            {% if display != 'pdf' %}
+                                &nbsp;({{ giftVoucher.used|ago }})
+                            {% endif %}
+                            </p>
+{# Use #}
+                        {% else %}
+                            <strong>{{ 'label.not_used'|trans }}</strong>
+                            </p>
+{# Out of date #}
+                            <p>
+                                {% if date(giftVoucher.valid) < date() %}
+                                    <a href="{{ path('giftvoucher_use', {'number': giftVoucher.number ~ giftVoucher.secret, 'force': 'true'}) }}" class="btn btn-lg btn-block btn-danger">{{ 'label.use'|trans }} ({{ 'label.out_of_date'|trans }})</a>
+{# Valid #}
+                                {% else %}
+                                    <a href="{{ path('giftvoucher_use', {'number': giftVoucher.number ~ giftVoucher.secret}) }}" class="btn btn-lg btn-block btn-success">{{ 'label.use'|trans }}</a>
+                                {% endif %}
+                            </p>
+                        {% endif %}
+                    </p>
+                {% endif %}
+{# Closes the div opened to set QrCode aside in pdf #}
+                </div>
+{# QrCode #}
+                {% if display == 'pdf' %}
+                    <div class="col-xs-4">
+                        <div class="text-center">
+                            <p>
+                                <img src="{{ absolute_url(path('giftvoucher_qrcode', {'number': giftVoucher.number ~ giftVoucher.secret})) }}" width="150" />
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
