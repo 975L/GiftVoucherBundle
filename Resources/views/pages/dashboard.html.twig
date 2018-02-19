@@ -1,113 +1,22 @@
 {% extends "@c975LGiftVoucher/layout.html.twig" %}
 {% trans_default_domain 'giftVoucher' %}
-{% set title = 'label.dashboard'|trans %}
+{% set title = 'label.dashboard'|trans({}, 'toolbar') %}
 
 {% block giftVoucher_content %}
-    <div class="container">
 {# Toolbar #}
     {{ toolbar|raw }}
 {# Title #}
     <div class="text-center">
-        <h2>
-            {{ 'label.gift_voucher'|trans }}
-            {% if app.request.query.get('v') == null %}
-                ({{ 'label.ordered'|trans }})
-            {% elseif app.request.query.get('v') == 'available' %}
-                ({{ 'label.available'|trans }})
-            {% endif %}
-        </h2>
-{# Links to different kind of pages #}
-        <p>
-{# Ordered #}
-            {% if app.request.query.get('v') == null %}
-                <strong>{{ 'label.ordered'|trans }}</strong>
-            {% else %}
-                <a href="?v=">{{ 'label.ordered'|trans }}</a>
-            {% endif %}
-            &nbsp;-&nbsp;
-{# Available #}
-            {% if app.request.query.get('v') == 'available' %}
-                <strong>{{ 'label.available'|trans }}</strong>
-            {% else %}
-                <a href="?v=available">{{ 'label.available'|trans }}</a>
-            {% endif %}
-        </p>
-{# List of pages and actions #}
-        <table class="table table-hover table-condensed table-responsive">
-            <thead>
-                <tr>
-                    <th class="text-center">{{ 'label.object'|trans }}</th>
-                    <th class="text-center">{{ 'label.number'|trans }}</th>
-                    <th class="text-center">{{ 'label.purchased'|trans }}</th>
-                    <th class="text-center">{{ 'label.valid'|trans }}</th>
-                    <th class="text-center"><span class="glyphicon glyphicon-eye-open"></span> {{ 'label.display'|trans }}</th>
-                    {% if app.request.query.get('v') == 'available' %}
-                        <th class="text-center"><span class="glyphicon glyphicon-pencil"></span> {{ 'label.modify'|trans }}</th>
-                        <th class="text-center"><span class="glyphicon glyphicon-duplicate"></span> {{ 'label.duplicate'|trans }}</th>
-                    {% endif %}
-                    <th class="text-center"><span class="glyphicon glyphicon-trash"></span> {{ 'label.delete'|trans }}</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for giftVoucher in giftVouchersOrdered %}
-                    <tr>
-{# Object #}
-                        <td class="text-center">
-                            {{ giftVoucher.object }}
-                        </td>
-{# Number #}
-                        <td class="text-center">
-                            {{ giftVoucher.number|giftVoucherNumber }}
-                        </td>
 {# Purchased #}
-                        <td class="text-center">
-                            {{ giftVoucher.purchase|localizeddate('medium', 'none') }}
-                        </td>
-{# Valid #}
-                        <td class="text-center">
-                            {% if giftVoucher.valid == null %}
-                                {{ 'label.no_validity_date'|trans }}
-                            {% else %}
-                                {% if date(giftVoucher.valid) >= date() %}
-                                    <span class="text-success">
-                                {% else %}
-                                    <span class="text-danger">
-                                {% endif %}
-                                {{ giftVoucher.valid|localizeddate('medium', 'none') }} ({{ giftVoucher.valid|ago }})
-                                </span>
-                                {% if date(giftVoucher.valid) < date() and giftVoucher.used == null %}
-                                    <span class="text-danger">
-                                        <span class="glyphicon glyphicon-exclamation-sign"></span> {{ 'label.out_of_date'|trans }}
-                                    </span>
-                                {% endif %}
-                            {% endif %}
-                        </td>
-{# Display #}
-                        <td class="text-center">
-                            <a href="{{ path('giftvoucher_display', {'number': giftVoucher.number ~ giftVoucher.secret}) }}" title="{{ 'label.display'|trans }}">{{ 'label.display'|trans }}</a>
-                        </td>
-{# Edit #}
-                        {% if app.request.query.get('v') == 'available' %}
-                            <td class="text-center">
-                                <a href="{{ path('giftvoucher_edit', {'id': giftVoucher.id}) }}" title="{{ 'label.modify'|trans }}">{{ 'label.modify'|trans }}</a>
-                            </td>
-{# Duplicate #}
-                            <td class="text-center">
-                                <a href="{{ path('giftvoucher_duplicate', {'id': giftVoucher.id}) }}" title="{{ 'label.duplicate'|trans }}">{{ 'label.duplicate'|trans }}</a>
-                            </td>
-                        {% endif %}
-{# Delete #}
-                        <td class="text-center">
-                            <a href="{{ path('giftvoucher_delete', {'id': giftVoucher.id}) }}" title="{{ 'label.delete'|trans }}" class="text-danger">{{ 'label.delete'|trans }}</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        {% if app.request.query.get('v') == null %}
+            {{ include('@c975LGiftVoucher/fragments/dashboardPurchased.html.twig') }}
+{# Available #}
+        {% else %}
+            {{ include('@c975LGiftVoucher/fragments/dashboardAvailable.html.twig') }}
+        {% endif %}
 {# Pagination #}
         <div class="navigation text-center">
-            {{ knp_pagination_render(giftVouchersOrdered) }}
+            {{ knp_pagination_render(giftVouchers) }}
         </div>
-    </div>
     </div>
 {% endblock %}

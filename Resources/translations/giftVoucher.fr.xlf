@@ -19,12 +19,12 @@
                 <target>Montant</target>
             </trans-unit>
             <trans-unit id="5">
-                <source>label.purchased</source>
+                <source>label.purchased_date</source>
                 <target>Date d'achat</target>
             </trans-unit>
             <trans-unit id="6">
-                <source>label.valid</source>
-                <target>Valide jusqu'au</target>
+                <source>label.valid_until</source>
+                <target>Valable jusqu'au</target>
             </trans-unit>
             <trans-unit id="7">
                 <source>label.offered_by</source>
@@ -103,36 +103,76 @@
                 <target>Réalisé avec 975L/GiftVoucherBundle</target>
             </trans-unit>
             <trans-unit id="26">
-                <source>label.modify</source>
-                <target>Modifier</target>
+                <source>label.identifier</source>
+                <target>Identifiant</target>
             </trans-unit>
             <trans-unit id="27">
-                <source>label.delete</source>
-                <target>Supprimer</target>
-            </trans-unit>
-            <trans-unit id="28">
-                <source>label.dashboard</source>
-                <target>Tableau de bord</target>
-            </trans-unit>
-            <trans-unit id="29">
-                <source>label.help</source>
-                <target>Aide</target>
-            </trans-unit>
-            <trans-unit id="30">
-                <source>label.display</source>
-                <target>Affichage</target>
-            </trans-unit>
-            <trans-unit id="31">
-                <source>label.number</source>
-                <target>Numéro</target>
-            </trans-unit>
-            <trans-unit id="32">
                 <source>label.object</source>
                 <target>Objet</target>
             </trans-unit>
+            <trans-unit id="28">
+                <source>label.years</source>
+                <target>Années</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.months</source>
+                <target>Mois</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.weeks</source>
+                <target>Semaines</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.period_validity</source>
+                <target>Période de validité</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>text.create_info</source>
+                <target>Utilisez le formulaire ci-dessous pour créer un nouveau Bon-Cadeau qui sera disponible à l'achat.</target>
+            </trans-unit>
             <trans-unit id="33">
-                <source>label.duplicate</source>
-                <target>Dupliquer</target>
+                <source>label.semantic_url</source>
+                <target>Url sémantique</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>label.purchased</source>
+                <target>Achetés</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>label.available</source>
+                <target>Disponibles</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>label.gift_vouchers</source>
+                <target>Bons-Cadeaux</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>label.days</source>
+                <target>jours</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>label.code</source>
+                <target>Code html</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>label.copy_code</source>
+                <target>Copier l'un des codes suivants à l'endroit ou vous souhaitez insérer un bouton/lien pour offrir ce Bon-Cadeau</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>label.offer_button</source>
+                <target>Bouton Offrir</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>label.offer_link</source>
+                <target>Lien Offrir</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>label.already_used</source>
+                <target>Déjà utilisé</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>text.giftvoucher_out_of_date</source>
+                <target>Vous avez essayé d'utiliser un Bon-Cadeau périmé, vous pouvez forcer son utilisation en cliquant sur le bouton en bas de la page.</target>
             </trans-unit>
         </body>
     </file>

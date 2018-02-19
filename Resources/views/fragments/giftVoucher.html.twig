@@ -49,20 +49,23 @@
                     </p>
 {# OfferedBy #}
                     <p>
-                        {{ 'label.offered_by'|trans }} : <strong>{{ giftVoucher.offeredBy }}</strong>
-                        {% if giftVoucher.sendToEmail != null %}
-                            (<a href="mailto:{{ giftVoucher.sendToEmail }}">{{ giftVoucher.sendToEmail }}</a>)
-                        {% endif %}
+                        {{ 'label.offered_by'|trans }} : <strong>{{ giftVoucher.offeredBy }}</strong>&nbsp;(<a href="mailto:{{ giftVoucher.sendToEmail }}">{{ giftVoucher.sendToEmail }}</a>)
                     </p>
                 {% endif %}
 {# Purchased date #}
                 <p>
-                    {{ 'label.purchased'|trans }} : <strong>{{ giftVoucher.purchase|localizeddate('medium', 'medium') }}</strong>
+                    {{ 'label.purchased_date'|trans }} : <strong>{{ giftVoucher.purchase|localizeddate('medium', 'medium') }}</strong>
                 </p>
 {# Valid date #}
                 <p>
-                    {{ 'label.valid'|trans }} :
-                    {% if giftVoucher.valid == null %}
+                    {{ 'label.valid_until'|trans }} :
+{# Already used #}
+                    {% if giftVoucher.used != null %}
+                            <strong>
+                                {{ 'label.already_used'|trans }}
+                            </strong>
+{# No validity date #}
+                    {% elseif giftVoucher.valid == null %}
                         {{ 'label.no_validity_date'|trans }}
                     {% else %}
                         {% if date(giftVoucher.valid) >= date() %}
@@ -103,10 +106,10 @@
 {# Out of date #}
                             <p>
                                 {% if date(giftVoucher.valid) < date() %}
-                                    <a href="{{ path('giftvoucher_use', {'number': giftVoucher.number ~ giftVoucher.secret, 'force': 'true'}) }}" class="btn btn-lg btn-block btn-danger">{{ 'label.use'|trans }} ({{ 'label.out_of_date'|trans }})</a>
+                                    <a href="{{ path('giftvoucher_use', {'identifier': giftVoucher.identifier ~ giftVoucher.secret, 'force': 'true'}) }}" class="btn btn-lg btn-block btn-danger">{{ 'label.use'|trans }} ({{ 'label.out_of_date'|trans }})</a>
 {# Valid #}
                                 {% else %}
-                                    <a href="{{ path('giftvoucher_use', {'number': giftVoucher.number ~ giftVoucher.secret}) }}" class="btn btn-lg btn-block btn-success">{{ 'label.use'|trans }}</a>
+                                    <a href="{{ path('giftvoucher_use', {'identifier': giftVoucher.identifier ~ giftVoucher.secret}) }}" class="btn btn-lg btn-block btn-primary">{{ 'label.use'|trans }}</a>
                                 {% endif %}
                             </p>
                         {% endif %}
@@ -119,7 +122,7 @@
                     <div class="col-xs-4">
                         <div class="text-center">
                             <p>
-                                <img src="{{ absolute_url(path('giftvoucher_qrcode', {'number': giftVoucher.number ~ giftVoucher.secret})) }}" width="150" />
+                                <img src="{{ absolute_url(path('giftvoucher_qrcode', {'identifier': giftVoucher.identifier ~ giftVoucher.secret})) }}" width="150" />
                             </p>
                         </div>
                     </div>

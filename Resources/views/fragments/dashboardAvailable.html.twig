@@ -1,0 +1,50 @@
+{% trans_default_domain 'giftVoucher' %}
+
+{# Title #}
+<h2>
+    {{ 'label.gift_vouchers'|trans }} ({{ 'label.available'|trans }})
+</h2>
+{# Other choices #}
+<p>
+    <a href="?v=">{{ 'label.purchased'|trans }}</a>
+    &nbsp;-&nbsp;
+    <strong>{{ 'label.available'|trans }}</strong>
+</p>
+{# List of GiftVouchers and actions #}
+<table class="table table-hover table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'Id'|trans, 'v.id') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;{{ knp_pagination_sortable(giftVouchers, 'label.object'|trans, 'v.object') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center"><span class="glyphicon glyphicon-pencil"></span>&nbsp;{{ 'label.modify'|trans({}, 'toolbar') }}</th>
+            <th class="text-center"><span class="glyphicon glyphicon-duplicate"></span>&nbsp;{{ 'label.duplicate'|trans({}, 'toolbar') }}</th>
+            <th class="text-center"><span class="glyphicon glyphicon-trash"></span>&nbsp;{{ 'label.delete'|trans({}, 'toolbar') }}</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for giftVoucher in giftVouchers %}
+            <tr>
+{# Id #}
+                <td class="text-center">
+                    {{ giftVoucher.id }}
+                </td>
+{# Object #}
+                <td class="text-center">
+                    <a href="{{ path('giftvoucher_display_available', {'id': giftVoucher.id}) }}" title="{{ 'label.display'|trans({}, 'toolbar') }}">{{ giftVoucher.object }}</a>
+                </td>
+{# Modify #}
+                <td class="text-center">
+                    <a href="{{ path('giftvoucher_modify_available', {'id': giftVoucher.id}) }}" title="{{ 'label.modify'|trans({}, 'toolbar') }}">{{ 'label.modify'|trans({}, 'toolbar') }}</a>
+                </td>
+{# Duplicate #}
+                <td class="text-center">
+                    <a href="{{ path('giftvoucher_duplicate_available', {'id': giftVoucher.id}) }}" title="{{ 'label.duplicate'|trans({}, 'toolbar') }}">{{ 'label.duplicate'|trans({}, 'toolbar') }}</a>
+                </td>
+{# Delete #}
+                <td class="text-center">
+                    <a href="{{ path('giftvoucher_delete_available', {'id': giftVoucher.id}) }}" title="{{ 'label.delete'|trans({}, 'toolbar') }}" class="text-danger">{{ 'label.delete'|trans({}, 'toolbar') }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

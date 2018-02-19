@@ -12,11 +12,11 @@ namespace c975L\GiftVoucherBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="gift_voucher_ordered")
+ * @ORM\Table(name="gift_voucher_purchased")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Entity(repositoryClass="c975L\GiftVoucherBundle\Repository\GiftVoucherOrderedRepository")
+ * @ORM\Entity(repositoryClass="c975L\GiftVoucherBundle\Repository\GiftVoucherPurchasedRepository")
  */
-class GiftVoucherOrdered
+class GiftVoucherPurchased
 {
     /**
      * @var int
@@ -30,9 +30,9 @@ class GiftVoucherOrdered
     /**
      * @var string
      *
-     * @ORM\Column(name="number", type="string")
+     * @ORM\Column(name="identifier", type="string")
      */
-    protected $number;
+    protected $identifier;
 
     /**
      * @var string
@@ -147,27 +147,27 @@ class GiftVoucherOrdered
     }
 
     /**
-     * Set number
+     * Set identifier
      *
-     * @param string $number
+     * @param string $identifier
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
-    public function setNumber($number)
+    public function setIdentifier($identifier)
     {
-        $this->number = $number;
+        $this->identifier = strtoupper($identifier);
 
         return $this;
     }
 
     /**
-     * Get number
+     * Get identifier
      *
      * @return string
      */
-    public function getNumber()
+    public function getIdentifier()
     {
-        return $this->number;
+        return $this->identifier;
     }
 
     /**
@@ -175,11 +175,11 @@ class GiftVoucherOrdered
      *
      * @param string $secret
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setSecret($secret)
     {
-        $this->secret = $secret;
+        $this->secret = strtoupper($secret);
 
         return $this;
     }
@@ -199,7 +199,7 @@ class GiftVoucherOrdered
      *
      * @param string $object
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setObject($object)
     {
@@ -223,7 +223,7 @@ class GiftVoucherOrdered
      *
      * @param string $description
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setDescription($description)
     {
@@ -247,7 +247,7 @@ class GiftVoucherOrdered
      *
      * @param string $offeredBy
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setOfferedBy($offeredBy)
     {
@@ -271,7 +271,7 @@ class GiftVoucherOrdered
      *
      * @param string $offeredTo
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setOfferedTo($offeredTo)
     {
@@ -295,7 +295,7 @@ class GiftVoucherOrdered
      *
      * @param string $message
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setMessage($message)
     {
@@ -319,7 +319,7 @@ class GiftVoucherOrdered
      *
      * @param string $sendToEmail
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setSendToEmail($sendToEmail)
     {
@@ -343,7 +343,7 @@ class GiftVoucherOrdered
      *
      * @param datetime $purchase
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setPurchase($purchase)
     {
@@ -367,7 +367,7 @@ class GiftVoucherOrdered
      *
      * @param datetime $valid
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setValid($valid)
     {
@@ -391,7 +391,7 @@ class GiftVoucherOrdered
      *
      * @param integer $amount
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setAmount($amount)
     {
@@ -415,7 +415,7 @@ class GiftVoucherOrdered
      *
      * @param string $currency
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setCurrency($currency)
     {
@@ -439,7 +439,7 @@ class GiftVoucherOrdered
      *
      * @param datetime $used
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setUsed($used)
     {
@@ -463,7 +463,7 @@ class GiftVoucherOrdered
      *
      * @param string $userIp
      *
-     * @return GiftVoucherOrdered
+     * @return GiftVoucherPurchased
      */
     public function setUserIp($userIp)
     {

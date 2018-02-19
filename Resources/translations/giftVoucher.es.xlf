@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="1">
                 <source>label.gift_voucher</source>
-                <target>Certificado-Regalo</target>
+                <target>Vale-Regalo</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>label.description</source>
@@ -19,11 +19,11 @@
                 <target>Cantidad</target>
             </trans-unit>
             <trans-unit id="5">
-                <source>label.purchased</source>
+                <source>label.purchased_date</source>
                 <target>Fecha de compra</target>
             </trans-unit>
             <trans-unit id="6">
-                <source>label.valid</source>
+                <source>label.valid_until</source>
                 <target>Válido hasta</target>
             </trans-unit>
             <trans-unit id="7">
@@ -48,7 +48,7 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>label.use</source>
-                <target>Utilizar el certificado de regalo</target>
+                <target>Utilizar el Vale-Regalo</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>label.data</source>
@@ -64,15 +64,11 @@
             </trans-unit>
             <trans-unit id="16">
                 <source>text.voucher_used</source>
-                <target>El Certificado-Regalo ha sido bien utilizado</target>
+                <target>El Vale-Regalo ha sido bien utilizado</target>
             </trans-unit>
             <trans-unit id="17">
                 <source>text.voucher_purchased</source>
-                <target>El Certificado-Regalo ha sido bien pagado y enviado para email</target>
-            </trans-unit>
-            <trans-unit id="18">
-                <source>label.cancel</source>
-                <target>Cancelar</target>
+                <target>El Vale-Regalo ha sido bien pagado y enviado para email</target>
             </trans-unit>
             <trans-unit id="19">
                 <source>label.purchase</source>
@@ -88,7 +84,7 @@
             </trans-unit>
             <trans-unit id="22">
                 <source>text.explanation_offer_to</source>
-                <target>Rellene los campos a continuación para ofrecer el Certificado-Regalo, que se enviará en formato PDF a la dirección de correo electrónico especificada, junto con el mensaje.</target>
+                <target>Rellene los campos a continuación para ofrecer el Vale-Regalo, que se enviará en formato PDF a la dirección de correo electrónico especificada, junto con el mensaje.</target>
             </trans-unit>
             <trans-unit id="23">
                 <source>label.no_validity_date</source>
@@ -96,43 +92,83 @@
             </trans-unit>
             <trans-unit id="24">
                 <source>text.explanation</source>
-                <target>Certificado-Regalo para presentar antes de su uso.</target>
+                <target>Vale-Regalo para presentar antes de su uso.</target>
             </trans-unit>
             <trans-unit id="25">
                 <source>label.made_with</source>
                 <target>Hecho con 975L/GiftVoucherBundle</target>
             </trans-unit>
             <trans-unit id="26">
-                <source>label.modify</source>
-                <target>Modificar</target>
+                <source>label.identifier</source>
+                <target>Identificador</target>
             </trans-unit>
             <trans-unit id="27">
-                <source>label.delete</source>
-                <target>Suprimar</target>
-            </trans-unit>
-            <trans-unit id="28">
-                <source>label.dashboard</source>
-                <target>Tablero</target>
-            </trans-unit>
-            <trans-unit id="29">
-                <source>label.help</source>
-                <target>Ayuda</target>
-            </trans-unit>
-            <trans-unit id="30">
-                <source>label.display</source>
-                <target>Visualización</target>
-            </trans-unit>
-            <trans-unit id="31">
-                <source>label.number</source>
-                <target>Número</target>
-            </trans-unit>
-            <trans-unit id="32">
                 <source>label.object</source>
                 <target>Objeto</target>
             </trans-unit>
+            <trans-unit id="28">
+                <source>label.years</source>#""
+                <target>Año</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.months</source>
+                <target>Meses</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.weeks</source>
+                <target>Semanas</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.period_validity</source>
+                <target>Período de validez</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>text.create_info</source>
+                <target>Use el formulario a continuación para crear un nuevo Vale-Regalo que estará disponible para la compra.</target>
+            </trans-unit>
             <trans-unit id="33">
-                <source>label.duplicate</source>
-                <target>Duplicar</target>
+                <source>label.semantic_url</source>
+                <target>Url semántica</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>label.purchased</source>
+                <target>Comprados</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>label.available</source>
+                <target>Disponibles</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>label.gift_vouchers</source>
+                <target>Certificados-Regalos</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>label.days</source>
+                <target>dias</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>label.code</source>
+                <target>Código html</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>label.copy_code</source>
+                <target>Copie uno de los siguientes códigos donde desea insertar un botón/enlace de oferta para este Vale-Regalo</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>label.offer_button</source>
+                <target>Bouton Offrir</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>label.offer_link</source>
+                <target>Lien Offrir</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>label.already_used</source>
+                <target>Déjà utilisé</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>text.giftvoucher_out_of_date</source>
+                <target>Ha intentado utilizar un Vale-Regalo caducado, puede forzar su uso haciendo clic en el botón en la parte inferior de la página.</target>
             </trans-unit>
         </body>
     </file>

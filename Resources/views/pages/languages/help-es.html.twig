@@ -1,0 +1,36 @@
+{% trans_default_domain 'giftVoucher' %}
+
+<h2>Gestión del evento</h2>
+<p>
+    Las herramientas están disponibles cuando se identifica al usuario y tiene los derechos necesarios. Una barra de herramientas aparece en cada Vale-Regalo. También es posible gestionar las Vales-Regalos en el <a href="{{ path('giftvoucher_dashboard') }}">{{ 'label.dashboard'|trans({}, 'toolbar') }}</a>.
+</p>
+<p>
+    <strong>Crear un Vale-Regalo</strong> : utilizar el botón <span class="glyphicon glyphicon-plus class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Modificar un Vale-Regalo</strong> : utilizar el botón <span class="glyphicon glyphicon-pencil class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Duplicar un Vale-Regalo</strong> : utilizar el botón <span class="glyphicon glyphicon-duplicate class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Suprimar un Vale-Regalo</strong> : utilizar el botón <span class="glyphicon glyphicon-trash class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Ver la versión actual de un Vale-Regalo</strong> : utilizar el botón <span class="glyphicon glyphicon-eye-open class btn btn-default btn-xs"></span>
+</p>
+
+<h2>Datos necesarios</h2>
+<p>
+    Para cado Vale-Regalo es necesario proporcionar
+    <br />
+    <strong>Objeto</strong> : se utiliza para mostrar en el Vale-Regalo y envía al navegador.
+    <br />
+    <strong>Url semántica</strong> : enlace utilizado para llamar el evento, por ejemplo: http://example.com/gift-voucher/<strong>url-semantica</strong>, solamente minúsculas sin acento y '-'. Se ajusta automáticamente con el título, se puede cambiar, pero esto no se recomienda para tener una mejor referencia.
+    <br />
+    <strong>Descripción</strong>: descripción del Vale-Regalo.
+    <br />
+    <strong>Válido hasta</strong> : período de validez del Vale-Regalo.
+    <br />
+    <strong>Cantidad</strong> : precio del Vale-Regalo.
+</p>
+
+<p class="text-center">
+    <strong><a href="https://975l.com/es/pages/gift-voucher-bundle">>> Vale-Regalo (Tutoriales, capturas de pantalla, etc.) <<</a></strong>
+</p>

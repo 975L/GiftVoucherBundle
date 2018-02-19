@@ -10,18 +10,25 @@
 namespace c975L\GiftVoucherBundle\Service;
 
 use Symfony\Component\HttpFoundation\Request;
-use c975L\GiftVoucherBundle\Entity\StripeGiftVoucher;
+use Cocur\Slugify\Slugify;
 
 class GiftVoucherService
 {
-    //Defines the number of the Gift-Voucher, including the secret code
-    public function getNumber()
+    //Defines the identifier of the Gift-Voucher, including the secret code
+    public function getIdentifier()
     {
-        //Defines data
+        //Defines data, only letters except "o" to avoid confusion with 0
         $signsRemoved = array('o', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
         $signsReplacing = array('t', 'y', 'f', 'r', 'k', 'h', 'x', 'p', 'l', 'm', 'a');
-        $number = strtoupper(substr(str_replace($signsRemoved, $signsReplacing, md5(time())), 12, 16));
+        $identifier = strtoupper(substr(str_replace($signsRemoved, $signsReplacing, md5(time())), 12, 16));
 
-        return $number;
+        return $identifier;
+    }
+
+    //Slugify
+    public function slugify($text)
+    {
+        $slugify = new Slugify();
+        return $slugify->slugify($text);
     }
 }

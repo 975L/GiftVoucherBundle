@@ -14,28 +14,29 @@ SET FOREIGN_KEY_CHECKS=0;
 -- DROP TABLE IF EXISTS `gift_voucher_available`;
 CREATE TABLE `gift_voucher_available` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `slug` varchar(128) DEFAULT NULL,
+  `suppressed` bit(1) NULL,
   `object` varchar(128) DEFAULT NULL,
-  `description` blob,
-  `valid` varchar(2) DEFAULT NULL,
+  `slug` varchar(128) DEFAULT NULL,
+  `description` blob DEFAULT NULL,
+  `valid` varchar(24) DEFAULT NULL,
   `amount` mediumint(8) DEFAULT NULL,
   `currency` varchar(3) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Table structure for gift_voucher_ordered
+-- Table structure for gift_voucher_purchased
 -- ----------------------------
--- DROP TABLE IF EXISTS `gift_voucher_ordered`;
-CREATE TABLE `gift_voucher_ordered` (
+-- DROP TABLE IF EXISTS `gift_voucher_purchased`;
+CREATE TABLE `gift_voucher_purchased` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
-  `number` varchar(12) DEFAULT NULL,
+  `identifier` varchar(12) DEFAULT NULL,
   `secret` varchar(4) DEFAULT NULL,
   `object` varchar(128) DEFAULT NULL,
-  `description` blob,
+  `description` blob DEFAULT NULL,
   `offered_by` varchar(128) DEFAULT NULL,
   `offered_to` varchar(128) DEFAULT NULL,
-  `message` blob,
+  `message` blob DEFAULT NULL,
   `send_to_email` varchar(128) DEFAULT NULL,
   `purchase` datetime DEFAULT NULL,
   `valid` date DEFAULT NULL,

@@ -1,0 +1,37 @@
+{% trans_default_domain 'giftVoucher' %}
+
+<h2>Event Management</h2>
+<p>
+    The tools are accessible when the user is identified and has the necessary rights. A toolbar appears on each Gift-Voucher. It is also possible to manage the Gifts-Vouchers from <a href="{{ path('giftvoucher_dashboard') }}">{{ 'label.dashboard'|trans({}, 'toolbar') }}</a>.
+</p>
+<p>
+    <strong>Create a Gift-Voucher</strong>: use the button <span class="glyphicon glyphicon-plus class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Modify a Gift-Voucher</strong>: use the button <span class="glyphicon glyphicon-pencil class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Duplicate a Gift-Voucher</strong> : use the button <span class="glyphicon glyphicon-duplicate class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Delete a Gift-Voucher</strong>: use the button <span class="glyphicon glyphicon-trash class btn btn-default btn-xs"></span>
+    <br />
+    <strong>View the current version of a Gift-Voucher</strong>: use the button <span class="glyphicon glyphicon-eye-open class btn btn-default btn-xs"></span>
+</p>
+
+<h2>Data requirements</h2>
+<p>
+    For each Gift-Voucher it is necessary to provide
+    <br />
+    <strong>Object</strong>: Used to be displayed on the event and sent to the browser.
+    <br />
+    <strong>Semantic url</strong>: link used to call the event, for example: http://example.com/gift-voucher/<strong>semantic-url</strong>, only unaccented lowercase letters and '-'. It is set automatically according to the title, it can be changed, but this is not recommended in order to have a better referencing.
+    <br />
+    <strong>Description</strong>: description of the Gift-Voucher.
+
+    <br />
+    <strong>Period of validity</strong> : period of validity of the Gift-Voucher.
+    <br />
+    <strong>Amount</strong> : price of the Gift-Voucher.
+</p>
+
+<p class="text-center">
+    <strong><a href="https://975l.com/en/pages/gift-voucher-bundle">>> Gift-Voucher (Tutorials, screenshots, etc.) <<</a></strong>
+</p>

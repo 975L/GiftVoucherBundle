@@ -19,11 +19,11 @@
                 <target>Amount</target>
             </trans-unit>
             <trans-unit id="5">
-                <source>label.purchased</source>
+                <source>label.purchased_date</source>
                 <target>Date of purchase</target>
             </trans-unit>
             <trans-unit id="6">
-                <source>label.valid</source>
+                <source>label.valid_until</source>
                 <target>Valid until</target>
             </trans-unit>
             <trans-unit id="7">
@@ -90,7 +90,7 @@
                 <source>text.explanation_offer_to</source>
                 <target>Please fill in the fields below to offer the Gift-Voucher, which will be sent in PDF format, to the specified email address, accompanied by the message.</target>
             </trans-unit>
-             <trans-unit id="23">
+            <trans-unit id="23">
                 <source>label.no_validity_date</source>
                 <target>No validity date</target>
             </trans-unit>
@@ -103,36 +103,76 @@
                 <target>Made with 975L/GiftVoucherBundle</target>
             </trans-unit>
             <trans-unit id="26">
-                <source>label.modify</source>
-                <target>Modify</target>
+                <source>label.identifier</source>
+                <target>Identifier</target>
             </trans-unit>
             <trans-unit id="27">
-                <source>label.delete</source>
-                <target>Delete</target>
-            </trans-unit>
-            <trans-unit id="28">
-                <source>label.dashboard</source>
-                <target>Dashboard</target>
-            </trans-unit>
-            <trans-unit id="29">
-                <source>label.help</source>
-                <target>Help</target>
-            </trans-unit>
-            <trans-unit id="30">
-                <source>label.display</source>
-                <target>Display</target>
-            </trans-unit>
-            <trans-unit id="31">
-                <source>label.number</source>
-                <target>Number</target>
-            </trans-unit>
-            <trans-unit id="32">
                 <source>label.object</source>
                 <target>Object</target>
             </trans-unit>
+            <trans-unit id="28">
+                <source>label.years</source>
+                <target>Years</target>
+            </trans-unit>
+            <trans-unit id="29">
+                <source>label.months</source>
+                <target>Months</target>
+            </trans-unit>
+            <trans-unit id="30">
+                <source>label.weeks</source>
+                <target>Weeks</target>
+            </trans-unit>
+            <trans-unit id="31">
+                <source>label.period_validity</source>
+                <target>Period of validity</target>
+            </trans-unit>
+            <trans-unit id="32">
+                <source>text.create_info</source>
+                <target>Use the form below to create a new Gift-Voucher that will be made available for purchase.</target>
+            </trans-unit>
             <trans-unit id="33">
-                <source>label.duplicate</source>
-                <target>Duplicate</target>
+                <source>label.semantic_url</source>
+                <target>Semantic url</target>
+            </trans-unit>
+            <trans-unit id="34">
+                <source>label.purchased</source>
+                <target>Purchased</target>
+            </trans-unit>
+            <trans-unit id="35">
+                <source>label.available</source>
+                <target>Available</target>
+            </trans-unit>
+            <trans-unit id="36">
+                <source>label.gift_vouchers</source>
+                <target>Gifts-Vouchers</target>
+            </trans-unit>
+            <trans-unit id="37">
+                <source>label.days</source>
+                <target>days</target>
+            </trans-unit>
+            <trans-unit id="39">
+                <source>label.code</source>
+                <target>html code</target>
+            </trans-unit>
+            <trans-unit id="40">
+                <source>label.copy_code</source>
+                <target>Copy one of the following codes where you want to insert an offer button/link for this Gift-Voucher</target>
+            </trans-unit>
+            <trans-unit id="41">
+                <source>label.offer_button</source>
+                <target>Offer button</target>
+            </trans-unit>
+            <trans-unit id="42">
+                <source>label.offer_link</source>
+                <target>Offer link</target>
+            </trans-unit>
+            <trans-unit id="43">
+                <source>label.already_used</source>
+                <target>Already used</target>
+            </trans-unit>
+            <trans-unit id="44">
+                <source>text.giftvoucher_out_of_date</source>
+                <target>You have tried to use an out of date Gift-Voucher, you can force its use by clicking on the button at the bottom of the page.</target>
             </trans-unit>
         </body>
     </file>

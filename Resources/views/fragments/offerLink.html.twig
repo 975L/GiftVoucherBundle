@@ -1,0 +1,4 @@
+{% trans_default_domain 'giftVoucher' %}
+
+<a href="{{ path('giftvoucher_offer', {'slug': giftVoucher.slug, 'id': giftVoucher.id}) }}" title="{{ 'label.offer'|trans }}">
+    {{ 'label.offer'|trans }} "{{ giftVoucher.object }}"</a>

@@ -21,6 +21,12 @@
             {% endblock %}
 {# Javascript #}
             {% block javascript %}
+{# jQuery - https://jquery.com #}
+                <script type="text/javascript"
+                    src="//code.jquery.com/jquery-3.2.1.min.js"
+                    integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+                    crossorigin="anonymous">
+                </script>
 {# Bootstrap - http://getbootstrap.com #}
 {# Link MUST be absolute even if not included in the PDf #}
                 <script type="text/javascript"
@@ -44,8 +50,10 @@
             {% endfor %}
         {% endfor %}
 
-        {% block giftVoucher_content %}
-        {% endblock %}
+        <div class="container">
+            {% block giftVoucher_content %}
+            {% endblock %}
+        </div>
     </body>
 </html>
 {% endspaceless %}

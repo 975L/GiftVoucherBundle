@@ -1,0 +1,58 @@
+{% extends "@c975LGiftVoucher/layout.html.twig" %}
+{% trans_default_domain 'giftVoucher' %}
+{% set title = 'label.gift_voucher'|trans ~ ' "' ~ giftVoucher.object ~ '" (' ~ giftVoucher.id ~ ')' %}
+
+{% block giftVoucher_content %}
+    {{ toolbar|raw }}
+{# Object #}
+    <p>
+        <strong>{{ 'label.object'|trans }}</strong>
+        <br />
+        {{ giftVoucher.object }}
+    </p>
+{# Slug #}
+    <p>
+        <strong>{{ 'label.semantic_url'|trans }}</strong>
+        <br />
+        {{ giftVoucher.slug }}
+    </p>
+{# Description #}
+    <p>
+        <strong>{{ 'label.description'|trans }}</strong>
+        <br />
+        {{ giftVoucher.description }}
+    </p>
+{# Valid #}
+    <p>
+        <strong>{{ 'label.period_validity'|trans }}</strong>
+        <br />
+        {{ giftVoucher.valid|date('%y') ~ ' ' ~ 'label.years'|trans ~ ', ' ~ giftVoucher.valid|date('%m') ~ ' ' ~ 'label.months'|trans ~ ', ' ~ giftVoucher.valid|date('%d') ~ ' ' ~ 'label.days'|trans }}
+    </p>
+{# Amount #}
+    <p>
+        <strong>{{ 'label.amount'|trans }}</strong>
+        <br />
+        {{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }}
+    </p>
+{# Twig code #}
+    <p class="alert alert-info text-center">
+        {{ 'label.copy_code'|trans }}
+    </p>
+{# Purchase Button #}
+    <div class="col-xs-12 col-sm-6 text-center">
+        <strong>{{ 'label.offer_button'|trans }}</strong>
+        <br />
+        {{ gift_voucher_offer_button(giftVoucher.id)|raw }}
+        <pre>{% verbatim %}{{ gift_voucher_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}) }}{% endverbatim %}</pre>
+    </div>
+{# Purchase Link #}
+    <div class="col-xs-12 col-sm-6 text-center">
+        <strong>{{ 'label.offer_link'|trans }}</strong>
+        <br />
+        <br />
+        {{ gift_voucher_offer_link(giftVoucher.id)|raw }}
+        <br />
+        <br />
+        <pre>{% verbatim %}{{ gift_voucher_offer_link({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}) }}{% endverbatim %}</pre>
+    </div>
+{% endblock %}

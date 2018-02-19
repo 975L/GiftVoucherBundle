@@ -28,13 +28,6 @@ Use [Composer](https://getcomposer.org) to install the library
     composer require c975l/gift-voucher-bundle
 ```
 
-Depending on your system you must add one of the following
-```bash
-    composer require h4cc/wkhtmltopdf-amd64
-    #OR
-    composer require h4cc/wkhtmltopdf-i386
-```
-
 Step 2: Enable the Bundles
 --------------------------
 Then, enable the bundles by adding them to the list of registered bundles in the `app/AppKernel.php` file of your project:
@@ -69,7 +62,7 @@ knp_snappy:
     temporary_folder: "%kernel.cache_dir%/snappy"
     pdf:
         enabled:    true
-        binary:     %kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64 #Or /h4cc/wkhtmltopdf-i386/bin/wkhtmltopdf-i386
+        binary:     %kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64
         options:
             print-media-type: true
             page-size: A4
@@ -105,7 +98,7 @@ c975_l_giftvoucher:
 
 Step 5: Create MySql tables
 ---------------------------
-- Use `/Resources/sql/gift-voucher.sql` to create the tables `gift_voucher_available` and `gift_voucher_ordered`. The `DROP TABLE` are commented to avoid dropping by mistake.
+- Use `/Resources/sql/gift-voucher.sql` to create the tables `gift_voucher_available` and `gift_voucher_purchased`. The `DROP TABLE` are commented to avoid dropping by mistake.
 
 How to use
 ----------
@@ -114,13 +107,18 @@ You should override `Resources/layout-pdf.html.twig`, `Resources/fragments/heade
 
 The different Routes (naming self-explanatory) available are:
 - giftvoucher_display
+- giftvoucher_display_available
 - giftvoucher_new
-- giftvoucher_edit
+- giftvoucher_modify
 - giftvoucher_duplicate
 - giftvoucher_delete
 - giftvoucher_dashboard
+- giftvoucher_offer
+- giftvoucher_use
 - giftvoucher_slug
 - giftvoucher_help
 - giftvoucher_qrcode
-- giftvoucher_use
-- giftvoucher_purchase
+
+Problems
+--------
+Due to https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3001, you may have to follow https://gist.github.com/kai101/99d57462f2459245d28b4f5ea51aa7d0 to enable https links.

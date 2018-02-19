@@ -4,5 +4,10 @@
 
 {% block giftVoucher_content %}
     {{ toolbar|raw }}
+{# Explanation #}
+        <div class="alert alert-danger text-center">
+            {{ 'text.giftvoucher_out_of_date'|trans }}
+        </div>
+{# GiftVoucher #}
     {% include "@c975LGiftVoucher/fragments/giftVoucher.html.twig" %}
 {% endblock %}

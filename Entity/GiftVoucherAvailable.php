@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="gift_voucher_available")
  * @ORM\HasLifecycleCallbacks()
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="c975L\GiftVoucherBundle\Repository\GiftVoucherAvailableRepository")
  */
 class GiftVoucherAvailable
 {
@@ -26,6 +26,11 @@ class GiftVoucherAvailable
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+
+    /**
+     * @ORM\Column(name="suppressed", type="boolean")
+     */
+    protected $suppressed;
 
     /**
      * @var string
@@ -49,9 +54,9 @@ class GiftVoucherAvailable
     protected $description;
 
     /**
-     * @var string
+     * @var dateinterval
      *
-     * @ORM\Column(name="valid", type="string", nullable=true)
+     * @ORM\Column(name="valid", type="dateinterval", nullable=true)
      */
     protected $valid;
 
@@ -68,6 +73,14 @@ class GiftVoucherAvailable
      * @ORM\Column(name="currency", type="string", nullable=true)
      */
     protected $currency;
+
+    protected $action;
+
+
+    public function __construct($action = null)
+    {
+        $this->setAction($action);
+    }
 
 
     /**
@@ -90,6 +103,50 @@ class GiftVoucherAvailable
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set suppressed
+     *
+     * @return GiftVoucherAvailable
+     */
+    public function setSuppressed($suppressed)
+    {
+        $this->suppressed = $suppressed;
+
+        return $this;
+    }
+
+    /**
+     * Get suppressed
+     *
+     * @return string
+     */
+    public function getSuppressed()
+    {
+        return $this->suppressed;
+    }
+
+    /**
+     * Set action
+     *
+     * @return GiftVoucherAvailable
+     */
+    public function setAction($action)
+    {
+        $this->action = $action;
+
+        return $this;
+    }
+
+    /**
+     * Get action
+     *
+     * @return string
+     */
+    public function getAction()
+    {
+        return $this->action;
     }
 
     /**
@@ -167,7 +224,7 @@ class GiftVoucherAvailable
     /**
      * Set valid
      *
-     * @param string $valid
+     * @param dateinterval $valid
      *
      * @return GiftVoucherAvailable
      */
@@ -181,7 +238,7 @@ class GiftVoucherAvailable
     /**
      * Get valid
      *
-     * @return string
+     * @return dateinterval
      */
     public function getValid()
     {

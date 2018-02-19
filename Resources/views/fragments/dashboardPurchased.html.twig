@@ -1,0 +1,66 @@
+{% trans_default_domain 'giftVoucher' %}
+
+<h2>
+    {{ 'label.gift_vouchers'|trans }} ({{ 'label.purchased'|trans }})
+</h2>
+{# Other choices #}
+<p>
+    <strong>{{ 'label.purchased'|trans }}</strong>
+    &nbsp;-&nbsp;
+    <a href="?v=available">{{ 'label.available'|trans }}</a>
+</p>
+{# List of GiftVouchers and actions #}
+<table class="table table-hover table-condensed table-responsive">
+    <thead>
+        <tr>
+            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'label.object'|trans, 'v.object') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;{{ knp_pagination_sortable(giftVouchers, 'label.identifier'|trans, 'v.identifier') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'label.purchased_date'|trans, 'v.purchased') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'label.amount'|trans, 'v.amount') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'label.valid_until'|trans, 'v.valid') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for giftVoucher in giftVouchers %}
+            <tr>
+{# Object #}
+                <td class="text-center">
+                    {{ giftVoucher.object }}
+                </td>
+{# Identifier & Display #}
+                {% if app.request.query.get('v') == null %}
+                    <td class="text-center">
+                        <a href="{{ path('giftvoucher_display', {'identifier': giftVoucher.identifier ~ giftVoucher.secret}) }}" title="{{ 'label.display'|trans({}, 'toolbar') }}">{{ giftVoucher.identifier|giftVoucherIdentifier }}</a>
+                    </td>
+{# Purchased #}
+                    <td class="text-center">
+                        {{ giftVoucher.purchase|localizeddate('medium', 'none') }}
+                    </td>
+{# Amount #}
+                    <td class="text-center">
+                        {{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }}
+                    </td>
+{# Valid #}
+                    <td class="text-center">
+                        {% if giftVoucher.valid == null %}
+                            {{ 'label.no_validity_date'|trans }}
+                        {% else %}
+                            {% if date(giftVoucher.valid) >= date() %}
+                                <span class="text-success">
+                            {% else %}
+                                <span class="text-danger">
+                            {% endif %}
+                            {{ giftVoucher.valid|localizeddate('medium', 'none') }} ({{ giftVoucher.valid|ago }})
+                            </span>
+                            {% if date(giftVoucher.valid) < date() and giftVoucher.used == null %}
+                                <span class="text-danger">
+                                    <span class="glyphicon glyphicon-exclamation-sign"></span> {{ 'label.out_of_date'|trans }}
+                                </span>
+                            {% endif %}
+                        {% endif %}
+                    </td>
+                {% endif %}
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

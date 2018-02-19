@@ -1,0 +1,36 @@
+{% trans_default_domain 'giftVoucher' %}
+
+<h2>Gestion du Bon-Cadeau</h2>
+<p>
+    Les outils sont accessibles lorsque l'utilisateur/trice est identifié/e et dispose des droits nécessaires. Une barre d'outils apparaît alors sur chaque Bon-Cadeau. Il est aussi possible de gérer les Bons-Cadeaux depuis le <a href="{{ path('giftvoucher_dashboard') }}">{{ 'label.dashboard'|trans({}, 'toolbar') }}</a>.
+</p>
+<p>
+    <strong>Créer un Bon-Cadeau</strong> : utiliser le bouton <span class="glyphicon glyphicon-plus class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Modifier un Bon-Cadeau</strong> : utiliser le bouton <span class="glyphicon glyphicon-pencil class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Dupliquer un Bon-Cadeau</strong> : utiliser le bouton <span class="glyphicon glyphicon-duplicate class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Supprimer un Bon-Cadeau</strong> : utiliser le bouton <span class="glyphicon glyphicon-trash class btn btn-default btn-xs"></span>
+    <br />
+    <strong>Afficher la version actuelle d'un Bon-Cadeau</strong> : utiliser le bouton <span class="glyphicon glyphicon-eye-open class btn btn-default btn-xs"></span>
+</p>
+
+<h2>Données nécessaires</h2>
+<p>
+    Pour chaque Bon-Cadeau il est nécessaire de fournir
+    <br />
+    <strong>Objet</strong> : utilisé pour être affiché sur la page ainsi que dans le fichier PDF envoyé.
+    <br />
+    <strong>Url sémantique</strong> : lien utilisé pour appeler le Bon-Cadeau, par exemple : http://example.com/gift-voucher/<strong>url-semantique</strong>, uniquement des minuscules non accentuées et '-'. Il est défini automatiquement en fonction du titre, il peut être modifié, mais cela est déconseillé afin d'avoir un meilleur référencement.
+    <br />
+    <strong>Description</strong> : description du Bon-Cadeau.
+    <br />
+    <strong>Période de validité</strong> : durée de validité du Bon-Cadeau.
+    <br />
+    <strong>Montant</strong> : prix du Bon-Cadeau.
+</p>
+
+<p class="text-center">
+    <strong><a href="https://975l.com/fr/pages/gift-voucher-bundle">>> Bon-Cadeau (Tutoriels, copies d'écran, etc.) <<</a></strong>
+</p>

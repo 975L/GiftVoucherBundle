@@ -16,7 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class GiftVoucherType extends AbstractType
+class GiftVoucherPurchasedType extends AbstractType
 {
     //Builds the form
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -53,8 +53,8 @@ class GiftVoucherType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'c975L\GiftVoucherBundle\Entity\GiftVoucherOrdered',
-            'intention'  => 'giftVoucherForm',
+            'data_class' => 'c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased',
+            'intention'  => 'giftVoucherPurchasedForm',
             'translation_domain' => 'giftVoucher',
         ));
     }

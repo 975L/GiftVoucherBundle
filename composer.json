@@ -19,6 +19,7 @@
     ],
     "require": {
         "php": ">=5.5.9",
+        "doctrine/dbal": ">=2.6",
         "symfony/framework-bundle": "^3",
         "sensio/framework-extra-bundle": "^3",
         "symfony/assetic-bundle": "^2",
