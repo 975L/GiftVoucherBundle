@@ -24,7 +24,7 @@ class GiftVoucherOfferLink extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction(
-                'gift_voucher_offer_link',
+                'gv_offer_link',
                 array($this, 'offerLink'),
                 array('needs_environment' => true)
             ),

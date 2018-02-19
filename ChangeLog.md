@@ -1,5 +1,11 @@
 # Changelog
 
+v1.3
+----
+- Added possibilty to style offer button (19/02/2018)
+- Removed `<pre></pre>` as they get copied withe code (19/02/2018)
+- Reduced name of Twig function to get button/link from 'gift_voucher_' to 'gv_' (19/02/2018)
+
 v1.2
 ----
 - Updated ToolbarBundle product -> dashboard (05/02/2018)

@@ -155,7 +155,7 @@
                 <target>Code html</target>
             </trans-unit>
             <trans-unit id="40">
-                <source>label.copy_code</source>
+                <source>text.copy_code</source>
                 <target>Copier l'un des codes suivants à l'endroit ou vous souhaitez insérer un bouton/lien pour offrir ce Bon-Cadeau</target>
             </trans-unit>
             <trans-unit id="41">
@@ -173,6 +173,22 @@
             <trans-unit id="44">
                 <source>text.giftvoucher_out_of_date</source>
                 <target>Vous avez essayé d'utiliser un Bon-Cadeau périmé, vous pouvez forcer son utilisation en cliquant sur le bouton en bas de la page.</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>label.user_defined</source>
+                <target>Défini par l'utilisateur</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>text.your_style_defined_in_css</source>
+                <target>Vous pouvez définir votre style (CSS) et l'utiliser en remplaçant 'your_style_defined_in_css'.</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>label.copy_code</source>
+                <target>Copy code</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>label.web_code</source>
+                <target>Web code (Bouton)</target>
             </trans-unit>
         </body>
     </file>

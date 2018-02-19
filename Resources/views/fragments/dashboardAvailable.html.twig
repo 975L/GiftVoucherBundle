@@ -19,6 +19,7 @@
             <th class="text-center"><span class="glyphicon glyphicon-pencil"></span>&nbsp;{{ 'label.modify'|trans({}, 'toolbar') }}</th>
             <th class="text-center"><span class="glyphicon glyphicon-duplicate"></span>&nbsp;{{ 'label.duplicate'|trans({}, 'toolbar') }}</th>
             <th class="text-center"><span class="glyphicon glyphicon-trash"></span>&nbsp;{{ 'label.delete'|trans({}, 'toolbar') }}</th>
+            <th class="text-center"><span class="glyphicon glyphicon-copy"></span>&nbsp;{{ 'label.web_code'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -43,6 +44,13 @@
 {# Delete #}
                 <td class="text-center">
                     <a href="{{ path('giftvoucher_delete_available', {'id': giftVoucher.id}) }}" title="{{ 'label.delete'|trans({}, 'toolbar') }}" class="text-danger">{{ 'label.delete'|trans({}, 'toolbar') }}</a>
+                </td>
+{# Copy code #}
+                <td class="text-center">
+                    <span id="code-{{ giftVoucher.id }}">
+                        {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %})|raw }}{% endverbatim %}
+                    </span>
+                    <button onclick="copyCode('{{ giftVoucher.id }}')" title="{{ 'label.copy_code'|trans }}"><span class="glyphicon glyphicon-copy"></span></button>
                 </td>
             </tr>
         {% endfor %}

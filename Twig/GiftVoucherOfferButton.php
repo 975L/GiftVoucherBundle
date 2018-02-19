@@ -24,14 +24,14 @@ class GiftVoucherOfferButton extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction(
-                'gift_voucher_offer_button',
+                'gv_offer_button',
                 array($this, 'offerButton'),
                 array('needs_environment' => true)
             ),
         );
     }
 
-    public function offerButton(\Twig_Environment $environment, $id)
+    public function offerButton(\Twig_Environment $environment, $id, $style = 'btn btn-lg btn-block btn-primary')
     {
         //Gets repository
         $repository = $this->em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
@@ -42,6 +42,7 @@ class GiftVoucherOfferButton extends \Twig_Extension
         //Defines button
         return $environment->render('@c975LGiftVoucher/fragments/offerButton.html.twig', array(
                 'giftVoucher' => $giftVoucher,
+                'style' => $style,
             ));
     }
 }

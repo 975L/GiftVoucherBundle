@@ -155,7 +155,7 @@
                 <target>html code</target>
             </trans-unit>
             <trans-unit id="40">
-                <source>label.copy_code</source>
+                <source>text.copy_code</source>
                 <target>Copy one of the following codes where you want to insert an offer button/link for this Gift-Voucher</target>
             </trans-unit>
             <trans-unit id="41">
@@ -173,6 +173,22 @@
             <trans-unit id="44">
                 <source>text.giftvoucher_out_of_date</source>
                 <target>You have tried to use an out of date Gift-Voucher, you can force its use by clicking on the button at the bottom of the page.</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>label.user_defined</source>
+                <target>Defined by user</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>text.your_style_defined_in_css</source>
+                <target>You can define your style (CSS) and use it by replacing 'your_style_defined_in_css'.</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>label.copy_code</source>
+                <target>Copy code</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>label.web_code</source>
+                <target>Web code (Button)</target>
             </trans-unit>
         </body>
     </file>

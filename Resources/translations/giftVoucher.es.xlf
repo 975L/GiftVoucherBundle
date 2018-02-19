@@ -151,7 +151,7 @@
                 <target>Código html</target>
             </trans-unit>
             <trans-unit id="40">
-                <source>label.copy_code</source>
+                <source>text.copy_code</source>
                 <target>Copie uno de los siguientes códigos donde desea insertar un botón/enlace de oferta para este Vale-Regalo</target>
             </trans-unit>
             <trans-unit id="41">
@@ -169,6 +169,22 @@
             <trans-unit id="44">
                 <source>text.giftvoucher_out_of_date</source>
                 <target>Ha intentado utilizar un Vale-Regalo caducado, puede forzar su uso haciendo clic en el botón en la parte inferior de la página.</target>
+            </trans-unit>
+            <trans-unit id="45">
+                <source>label.user_defined</source>
+                <target>Definido por el usuario</target>
+            </trans-unit>
+            <trans-unit id="46">
+                <source>text.your_style_defined_in_css</source>
+                <target>Puede definir su estilo (CSS) y usarlo reemplazando 'your_style_defined_in_css'.</target>
+            </trans-unit>
+            <trans-unit id="47">
+                <source>label.copy_code</source>
+                <target>Copy code</target>
+            </trans-unit>
+            <trans-unit id="48">
+                <source>label.web_code</source>
+                <target>Web code (Botón})</target>
             </trans-unit>
         </body>
     </file>

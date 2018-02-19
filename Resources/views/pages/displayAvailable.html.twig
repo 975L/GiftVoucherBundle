@@ -36,23 +36,59 @@
     </p>
 {# Twig code #}
     <p class="alert alert-info text-center">
-        {{ 'label.copy_code'|trans }}
+        {{ 'text.copy_code'|trans }}
     </p>
-{# Purchase Button #}
+{# Offer Buttons #}
     <div class="col-xs-12 col-sm-6 text-center">
-        <strong>{{ 'label.offer_button'|trans }}</strong>
-        <br />
-        {{ gift_voucher_offer_button(giftVoucher.id)|raw }}
-        <pre>{% verbatim %}{{ gift_voucher_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}) }}{% endverbatim %}</pre>
+        <h3>
+            {{ 'label.offer_button'|trans }}
+        </h3>
+{# Default #}
+        <p class="well">
+            {{ gv_offer_button(giftVoucher.id)|raw }}
+            <br />
+            {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %})|raw }}{% endverbatim %}
+        </p>
+{# Primary #}
+        <p class="well">
+            {{ gv_offer_button(giftVoucher.id, 'btn-primary')|raw }}
+            <br />
+            {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'btn btn-primary')|raw }}{% endverbatim %}
+        </p>
+{# Primary + Large #}
+        <p class="well">
+            {{ gv_offer_button(giftVoucher.id, 'btn-lg btn-primary')|raw }}
+            <br />
+            {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'btn btn-lg btn-primary')|raw }}{% endverbatim %}
+        </p>
+{# Success #}
+        <p class="well">
+            {{ gv_offer_button(giftVoucher.id, 'btn-success')|raw }}
+            <br />
+            {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'btn btn-success')|raw }}{% endverbatim %}
+        </p>
+        <hr />
+{# user-defined #}
+        <div class="well">
+            <h4>
+                {{ 'label.user_defined'| trans }}
+            </h4>
+            <p>
+                {{ 'text.your_style_defined_in_css'|trans }}
+                <br />
+                {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'your_style_defined_in_css')|raw }}{% endverbatim %}
+            </p>
+        </div>
     </div>
-{# Purchase Link #}
+{# Offer Link #}
     <div class="col-xs-12 col-sm-6 text-center">
-        <strong>{{ 'label.offer_link'|trans }}</strong>
-        <br />
-        <br />
-        {{ gift_voucher_offer_link(giftVoucher.id)|raw }}
-        <br />
-        <br />
-        <pre>{% verbatim %}{{ gift_voucher_offer_link({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}) }}{% endverbatim %}</pre>
+        <h3>
+            {{ 'label.offer_link'|trans }}
+        </h3>
+        <p class="well">
+            {{ gv_offer_link(giftVoucher.id)|raw }}
+            <br />
+            {% verbatim %}{{ gv_offer_link({% endverbatim %}{{ giftVoucher.id }}{% verbatim %})|raw }}{% endverbatim %}
+        </p>
     </div>
 {% endblock %}

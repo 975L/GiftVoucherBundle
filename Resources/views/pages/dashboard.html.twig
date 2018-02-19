@@ -19,4 +19,12 @@
             {{ knp_pagination_render(giftVouchers) }}
         </div>
     </div>
+{# Javascript #}
+    <script type="text/javascript">
+{# Allows to copy default offer button code #}
+        function copyCode(id) {
+            var text = $('#code-' + id).text().trim();
+            document.execCommand("Copy");
+        }
+    </script>
 {% endblock %}
