@@ -25,7 +25,7 @@ Step 1: Download the Bundle
 ---------------------------
 Use [Composer](https://getcomposer.org) to install the library
 ```bash
-    composer require c975l/gift-voucher-bundle
+    composer require c975l/giftvoucher-bundle
 ```
 
 Step 2: Enable the Bundles

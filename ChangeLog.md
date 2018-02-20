@@ -1,5 +1,9 @@
 # Changelog
 
+v1.4.1
+------
+- Updated `README.md` for package name (20/02/2018)
+
 v1.4
 ----
 - Changed composer folder name (20/02/2018)
