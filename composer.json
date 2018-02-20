@@ -1,5 +1,5 @@
 {
-    "name": "c975l/gift-voucher-bundle",
+    "name": "c975l/giftvoucher-bundle",
     "type": "symfony-bundle",
     "description": "Bundle to manage gift voucher, their payments and transactions",
     "keywords": ["symfony", "bundle", "gift", "voucher"],

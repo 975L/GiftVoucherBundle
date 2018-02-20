@@ -1,5 +1,9 @@
 # Changelog
 
+v1.4
+----
+- Changed composer folder name (20/02/2018)
+
 v1.3
 ----
 - Added possibilty to style offer button (19/02/2018)
