@@ -79,7 +79,7 @@
                             &nbsp;({{ giftVoucher.valid|ago }})
                         {% endif %}
                         {% if date(giftVoucher.valid) < date() and giftVoucher.used == null %}
-                            <span class="glyphicon glyphicon-exclamation-sign"></span> {{ 'label.out_of_date'|trans }}
+                            <span class="fas fa-exclamation-circle"></span> {{ 'label.out_of_date'|trans }}
                         {% endif %}
                     {% endif %}
                 </p>

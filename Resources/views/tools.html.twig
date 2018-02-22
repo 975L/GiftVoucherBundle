@@ -3,37 +3,36 @@
 {% spaceless %}
 {# Display #}
 {% if type == 'modify' or type == 'delete' %}
-    <a href="{{ path('giftvoucher_display_available', {'id': giftVoucher.id}) }}" class="btn btn-default" title="{{ 'label.display'|trans }}" role="button">
-    <span class="glyphicon glyphicon-eye-open"></span></a>
+    {{ toolbar_button(path('giftvoucher_display_available', {'id': giftVoucher.id}), 'display')|raw }}
 {% endif %}
 
 {# New #}
 {% if type != 'new' %}
-    <a href="{{ path('giftvoucher_new_available') }}" class="btn btn-default" title="{{ 'label.new'|trans }}" role="button">
-        <span class="glyphicon glyphicon-plus"></span></a>
+    {{ toolbar_button(path('giftvoucher_new_available'), 'new')|raw }}
 {% endif %}
 
-{# Edit #}
+{# Modify #}
 {% if type == 'displayAvailable' %}
-    <a href="{{ path('giftvoucher_modify_available', {'id': giftVoucher.id}) }}" class="btn btn-default" title="{{ 'label.modify'|trans }}" role="button">
-    <span class="glyphicon glyphicon-pencil"></span></a>
-{% endif %}
-
-{# Cancel #}
-{% if type != 'dashboard' and type != 'displayAvailable' %}
-    <a href="javascript:history.back()" class="btn btn-default" title="{{ 'label.cancel'|trans }}" role="button">
-        <span class="glyphicon glyphicon-remove-circle"></span></a>
+    {{ toolbar_button(path('giftvoucher_modify_available', {'id': giftVoucher.id}), 'modify')|raw }}
 {% endif %}
 
 {# Duplicate #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    <a href="{{ path('giftvoucher_duplicate_available', {'id': giftVoucher.id}) }}" class="btn btn-default" title="{{ 'label.duplicate'|trans }}" role="button">
-        <span class="glyphicon glyphicon-duplicate"></span></a>
+    {{ toolbar_button(path('giftvoucher_duplicate_available', {'id': giftVoucher.id}), 'duplicate')|raw }}
+{% endif %}
+
+{# Cancel #}
+{% if type != 'dashboard' and type != 'displayAvailable' %}
+    {{ toolbar_button('cancel', 'cancel')|raw }}
 {% endif %}
 
 {# Delete #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    <a href="{{ path('giftvoucher_delete_available', {'id': giftVoucher.id}) }}" class="btn btn-default" title="{{ 'label.delete'|trans }}" role="button">
-        <span class="glyphicon glyphicon-trash"></span></a>
+    {{ toolbar_button(path('giftvoucher_delete_available', {'id': giftVoucher.id}), 'delete')|raw }}
+{% endif %}
+
+{# Help #}
+{% if type != 'help' %}
+    {{ toolbar_button(path('giftvoucher_help'), 'help')|raw }}
 {% endif %}
 {% endspaceless %}

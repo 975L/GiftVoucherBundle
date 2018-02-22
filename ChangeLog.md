@@ -1,5 +1,10 @@
 # Changelog
 
+v1.5
+----
+- Updated `README.md` for package name (21/02/2018)
+- Abandoned Glyphicon and replaced by fontawesome (22/02/2018)
+
 v1.4.1
 ------
 - Updated `README.md` for package name (20/02/2018)

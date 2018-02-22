@@ -8,6 +8,7 @@ GiftVoucherBundle does the following:
 - Creates a PDf, using [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle) and [wkhtmltopdf](https://wkhtmltopdf.org/), of the GiftVoucher and sends it by email (if requested),
 - Creates a QR Code using [QrCodeBundle](https://github.com/endroid/qr-code),
 - Allows to use the GiftVoucher via a QrCode plus validation aftewards,
+- Integrates with [c975LToolbarBundle](https://github.com/975L/ToolbarBundle),
 - PDF and Qrcode are NOT stored but created on the fly.
 
 The security is provided by a four-letter secret code, included in the QrCode, but not in the displayed Gift-Voucher identifier.

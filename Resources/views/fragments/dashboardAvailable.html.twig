@@ -14,12 +14,12 @@
 <table class="table table-hover table-condensed table-responsive">
     <thead>
         <tr>
-            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'Id'|trans, 'v.id') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
-            <th class="text-center"><span class="glyphicon glyphicon-eye-open"></span>&nbsp;{{ knp_pagination_sortable(giftVouchers, 'label.object'|trans, 'v.object') }}&nbsp;<span class="glyphicon glyphicon-sort"></span></th>
-            <th class="text-center"><span class="glyphicon glyphicon-pencil"></span>&nbsp;{{ 'label.modify'|trans({}, 'toolbar') }}</th>
-            <th class="text-center"><span class="glyphicon glyphicon-duplicate"></span>&nbsp;{{ 'label.duplicate'|trans({}, 'toolbar') }}</th>
-            <th class="text-center"><span class="glyphicon glyphicon-trash"></span>&nbsp;{{ 'label.delete'|trans({}, 'toolbar') }}</th>
-            <th class="text-center"><span class="glyphicon glyphicon-copy"></span>&nbsp;{{ 'label.web_code'|trans }}</th>
+            <th class="text-center">{{ knp_pagination_sortable(giftVouchers, 'Id'|trans, 'v.id') }}&nbsp;<span class="fas fa-sort"></span></th>
+            <th class="text-center"><span class="fas fa-eye"></span>&nbsp;{{ knp_pagination_sortable(giftVouchers, 'label.object'|trans, 'v.object') }}&nbsp;<span class="fas fa-sort"></span></th>
+            <th class="text-center"><span class="fas fa-pencil-alt"></span>&nbsp;{{ 'label.modify'|trans({}, 'toolbar') }}</th>
+            <th class="text-center"><span class="fas fa-copy"></span>&nbsp;{{ 'label.duplicate'|trans({}, 'toolbar') }}</th>
+            <th class="text-center"><span class="fas fa-trash"></span>&nbsp;{{ 'label.delete'|trans({}, 'toolbar') }}</th>
+            <th class="text-center"><span class="fas fa-code"></span>&nbsp;{{ 'label.web_code'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -50,7 +50,7 @@
                     <span id="code-{{ giftVoucher.id }}">
                         {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %})|raw }}{% endverbatim %}
                     </span>
-                    <button onclick="copyCode('{{ giftVoucher.id }}')" title="{{ 'label.copy_code'|trans }}"><span class="glyphicon glyphicon-copy"></span></button>
+                    <button onclick="copyCode('{{ giftVoucher.id }}')" title="{{ 'label.copy_code'|trans }}"><span class="fas fa-code"></span></button>
                 </td>
             </tr>
         {% endfor %}
