@@ -9,7 +9,6 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
-use Symfony\Component\HttpFoundation\Request;
 use Cocur\Slugify\Slugify;
 
 class GiftVoucherService

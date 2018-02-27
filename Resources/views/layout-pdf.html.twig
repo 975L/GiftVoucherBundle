@@ -11,16 +11,12 @@
             <base />
         {% endblock %}
 {# Css #}
-        {% block css %}
 {# Links MUST be absolute to be included in the PDF #}
-            <link rel="stylesheet"
-                type="text/css"
-                href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-                integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-                crossorigin="anonymous" />
-            <link rel="stylesheet"
-                type="text/css"
-                href="{{ absolute_url(asset('css/styles.min.css')) }}" />
+        {% block css %}
+            {# Uses c975L/IncludeLibraryBundle #}
+            {{ inc_lib('bootstrap', 'css', '3.*') }}
+            {{ inc_lib('fontawesome', 'css', '5.*') }}
+{# Include your own styles #}
         {% endblock %}
     </head>
 {# Body #}

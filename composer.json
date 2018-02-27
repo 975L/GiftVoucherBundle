@@ -26,6 +26,7 @@
         "c975l/email-bundle": "^1",
         "c975l/payment-bundle": "^1",
         "c975l/toolbar-bundle": "^1",
+        "c975l/includelibrary-bundle": "^1",
         "knplabs/knp-snappy-bundle": "^1",
         "knplabs/knp-time-bundle" : "^1",
         "knplabs/knp-paginator-bundle": "^2",
