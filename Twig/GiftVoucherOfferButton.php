@@ -26,7 +26,10 @@ class GiftVoucherOfferButton extends \Twig_Extension
             new \Twig_SimpleFunction(
                 'gv_offer_button',
                 array($this, 'offerButton'),
-                array('needs_environment' => true)
+                array(
+                    'needs_environment' => true,
+                    'is_safe' => array('html'),
+                )
             ),
         );
     }

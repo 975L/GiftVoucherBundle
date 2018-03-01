@@ -26,7 +26,10 @@ class GiftVoucherOfferLink extends \Twig_Extension
             new \Twig_SimpleFunction(
                 'gv_offer_link',
                 array($this, 'offerLink'),
-                array('needs_environment' => true)
+                array(
+                    'needs_environment' => true,
+                    'is_safe' => array('html'),
+                )
             ),
         );
     }

@@ -48,7 +48,7 @@
 {# Copy code #}
                 <td class="text-center">
                     <span id="code-{{ giftVoucher.id }}">
-                        {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %})|raw }}{% endverbatim %}
+                        {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}) }}{% endverbatim %}
                     </span>
                     <button onclick="copyCode('{{ giftVoucher.id }}')" title="{{ 'label.copy_code'|trans }}"><span class="fas fa-code"></span></button>
                 </td>

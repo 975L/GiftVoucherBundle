@@ -3,36 +3,36 @@
 {% spaceless %}
 {# Display #}
 {% if type == 'modify' or type == 'delete' %}
-    {{ toolbar_button(path('giftvoucher_display_available', {'id': giftVoucher.id}), 'display')|raw }}
+    {{ toolbar_button(path('giftvoucher_display_available', {'id': giftVoucher.id}), 'display') }}
 {% endif %}
 
 {# New #}
 {% if type != 'new' %}
-    {{ toolbar_button(path('giftvoucher_new_available'), 'new')|raw }}
+    {{ toolbar_button(path('giftvoucher_new_available'), 'new') }}
 {% endif %}
 
 {# Modify #}
 {% if type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_modify_available', {'id': giftVoucher.id}), 'modify')|raw }}
+    {{ toolbar_button(path('giftvoucher_modify_available', {'id': giftVoucher.id}), 'modify') }}
 {% endif %}
 
 {# Duplicate #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_duplicate_available', {'id': giftVoucher.id}), 'duplicate')|raw }}
+    {{ toolbar_button(path('giftvoucher_duplicate_available', {'id': giftVoucher.id}), 'duplicate') }}
 {% endif %}
 
 {# Cancel #}
 {% if type != 'dashboard' and type != 'displayAvailable' %}
-    {{ toolbar_button('cancel', 'cancel')|raw }}
+    {{ toolbar_button('cancel', 'cancel') }}
 {% endif %}
 
 {# Delete #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_delete_available', {'id': giftVoucher.id}), 'delete')|raw }}
+    {{ toolbar_button(path('giftvoucher_delete_available', {'id': giftVoucher.id}), 'delete') }}
 {% endif %}
 
 {# Help #}
 {% if type != 'help' %}
-    {{ toolbar_button(path('giftvoucher_help'), 'help')|raw }}
+    {{ toolbar_button(path('giftvoucher_help'), 'help') }}
 {% endif %}
 {% endspaceless %}

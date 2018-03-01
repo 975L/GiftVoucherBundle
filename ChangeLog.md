@@ -1,5 +1,10 @@
 # Changelog
 
+v1.6.1
+------
+- Removed the "|raw" for `toolbar_button` call as safe html is now sent (01/03/2018)
+- Added 'is_safe' to Twig extensions `GiftVoucherOfferButton` and `GiftVoucherOfferLink` to remove "|raw" on each call (01/03/2018)
+
 v1.6
 ----
 - Added c957L/IncludeLibrary to include libraries in layout.html.twig (27/02/2018)
