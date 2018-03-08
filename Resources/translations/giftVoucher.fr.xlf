@@ -48,7 +48,7 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>label.use</source>
-                <target>Utiliser le Bon-cadeau</target>
+                <target>Utiliser le Bon-cadeau (Vendeur)</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>label.data</source>
@@ -189,6 +189,18 @@
             <trans-unit id="48">
                 <source>label.web_code</source>
                 <target>Web code (Bouton)</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>text.test</source>
+                <target>!!! Attention, les Bons-Cadeaux sont encore en test, ils ne seront pas valides, le paiement ne sera pas débité !!!</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>text.test_giftvoucher</source>
+                <target>Ce Bon-Cadeau est un test, il n'est pas valide.</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>label.accept_tos</source>
+                <target>J'accepte les Conditions générales de vente</target>
             </trans-unit>
         </body>
     </file>

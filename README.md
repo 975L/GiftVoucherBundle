@@ -5,16 +5,17 @@ GiftVoucherBundle does the following:
 
 - Allows to create Gift Voucher request form,
 - Interfaces with Stripe via [c975LPaymentBundle](https://github.com/975L/PaymentBundle) for its payment,
-- Creates a PDf, using [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle) and [wkhtmltopdf](https://wkhtmltopdf.org/), of the GiftVoucher and sends it by email (if requested),
+- Creates a PDF, using [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle) and [wkhtmltopdf](https://wkhtmltopdf.org/), of the GiftVoucher and sends it by email,
 - Creates a QR Code using [QrCodeBundle](https://github.com/endroid/qr-code),
 - Allows to use the GiftVoucher via a QrCode plus validation aftewards,
 - Integrates with [c975LToolbarBundle](https://github.com/975L/ToolbarBundle),
 - PDF and Qrcode are NOT stored but created on the fly.
 
-The security is provided by a four-letter secret code, included in the QrCode, but not in the displayed Gift-Voucher identifier.
+**The security is provided by a four-letter secret code, included in the QrCode, but not in the displayed Gift-Voucher identifier.**
 
 This Bundle relies on the use of [c975LPaymentBundle](https://github.com/975L/PaymentBundle), [Stripe](https://stripe.com/) and its [PHP Library](https://github.com/stripe/stripe-php).
 **So you MUST have a Stripe account.**
+
 It also recomended to use this with a SSL certificat to reassure the user.
 
 [GiftVoucherBundle dedicated web page](https://975l.com/en/pages/gift-voucher-bundle).
@@ -72,17 +73,22 @@ knp_snappy:
             dpi: 300
             images: true
             image-quality: 80
-            margin-left: 15mm
-            margin-right: 15mm
-            margin-top: 15mm
-            margin-bottom: 15mm
+            margin-left: 10mm
+            margin-right: 10mm
+            margin-top: 10mm
+            margin-bottom: 10mm
     image:
         enabled:    false
 
-#GiftVoucherBundle
 c975_l_gift_voucher:
-    #The role needed to use a GiftVoucher
+    #The role needed to create/modify/use a GiftVoucher
     roleNeeded: 'ROLE_ADMIN'
+    #If your gift-vouchers are live or in test
+    live: true #Default false
+    #The location of your Terms of sales to be displayed to user, it can be a Route with parameters or an absolute url
+    tosUrl: "pageedit_display, {page: conditions-de-vente}"
+    #The location of your Terms of sales, in PDF, to be sent to user, it can be a Route with parameters or an absolute url
+    tosPdf: "pageedit_pdf, {page: conditions-de-vente}"
 ```
 
 Step 4: Enable the Routes
@@ -93,8 +99,11 @@ Then, enable the routes by adding them to the `app/config/routing.yml` file of y
 c975_l_giftvoucher:
     resource: "@c975LGiftVoucherBundle/Controller/"
     type:     annotation
-    #Multilingual website use: prefix: /{_locale}
     prefix:   /
+    #Multilingual website use the following
+    #prefix: /{_locale}
+    #requirements:
+    #    _locale: en|fr|es
 ```
 
 Step 5: Create MySql tables
@@ -103,8 +112,24 @@ Step 5: Create MySql tables
 
 How to use
 ----------
-You should override `Resources/layout-pdf.html.twig`, `Resources/fragments/header-pdf.html.twig` and `Resources/footer-pdf.html.twig`, to define your proper layout for the pdf export.
-**Keep in mind that links have to be absolute to be exported.**
+GiftVoucherBundle uses `KnpSnappyBundle` to generates PDF, which itself uses `wkhtmltopdf`. `wkhtmltopdf` requires that included files, like stylesheets, are included with an absolute url. But, there is a known problem with SSL, see https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3001, which force you to downgrade openssl, like in https://gist.github.com/kai101/99d57462f2459245d28b4f5ea51aa7d0.
+
+You can avoid this problem by including the whole content of included files, which is what `wkhtmltopdf` does, in your html output. To integrate them easily, you can, as [c975L/SiteBundle](https://github.com/975L/SiteBundle) does, use [c975L/IncludeLibraryBundle](https://github.com/975L/IncludeLibraryBundle) with the following code:
+```twig
+{# in your layout.html.twig > head #}
+    {% if display == 'pdf' %}
+        {{ inc_content('bootstrap', 'css', '3.*') }}
+        {{ inc_content(absolute_url(asset('css/styles.min.css')), 'local') }}
+    {% else %}
+        {{ inc_lib('bootstrap', 'css', '3.*') }}
+        {{ inc_lib('cookieconsent', 'css', '3.*') }}
+        {{ inc_lib('fontawesome', 'css', '5.*') }}
+        {{ inc_lib(absolute_url(asset('css/styles.min.css')), 'local') }}
+    {% endif %}
+```
+
+You should override `Resources/fragments/header-pdf.html.twig` and `Resources/footer-pdf.html.twig`, to define your proper data for the pdf export.
+**Keep in mind that links have to be absolute, or their content included, to be exported.**
 
 The different Routes (naming self-explanatory) available are:
 - giftvoucher_display
@@ -119,7 +144,3 @@ The different Routes (naming self-explanatory) available are:
 - giftvoucher_slug
 - giftvoucher_help
 - giftvoucher_qrcode
-
-Problems
---------
-Due to https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3001, you may have to follow https://gist.github.com/kai101/99d57462f2459245d28b4f5ea51aa7d0 to enable https links.

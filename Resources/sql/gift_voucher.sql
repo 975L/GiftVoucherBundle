@@ -42,6 +42,7 @@ CREATE TABLE `gift_voucher_purchased` (
   `valid` date DEFAULT NULL,
   `amount` mediumint(8) DEFAULT NULL,
   `currency` varchar(3) DEFAULT NULL,
+  `order_id` varchar(48) NULL,
   `used` datetime DEFAULT NULL,
   `user_ip` varchar(48) DEFAULT NULL,
   PRIMARY KEY (`id`)

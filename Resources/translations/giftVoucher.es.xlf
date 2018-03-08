@@ -48,7 +48,7 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>label.use</source>
-                <target>Utilizar el Vale-Regalo</target>
+                <target>Utilizar el Vale-Regalo (Vendedor)</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>label.data</source>
@@ -107,7 +107,7 @@
                 <target>Objeto</target>
             </trans-unit>
             <trans-unit id="28">
-                <source>label.years</source>#""
+                <source>label.years</source>
                 <target>Año</target>
             </trans-unit>
             <trans-unit id="29">
@@ -185,6 +185,18 @@
             <trans-unit id="48">
                 <source>label.web_code</source>
                 <target>Web code (Botón})</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>text.test</source>
+                <target>!!! Atención, los Vales-Regalo todavía están en prueba, no serán válidos, el pago no se debitará !!!</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>text.test_giftvoucher</source>
+                <target>Este Vale-Regalo es una prueba, no es válido.</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>label.accept_tos</source>
+                <target>Acepto los Términos de venta</target>
             </trans-unit>
         </body>
     </file>

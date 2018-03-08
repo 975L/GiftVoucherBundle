@@ -1,5 +1,25 @@
 # Changelog
 
+v1.7
+----
+- Added "_locale requirement" part for multilingual prefix in `routing.yml` in `README.md` (04/03/2018)
+- Added `live` config value (05/03/2018)
+- Added mention of test if Gift-Vouchers are not live (05/03/2018)
+- Added field `order_id` to store payment order_id (05/03/2018)
+- Added link to payment via orderId (Need to update database table) (05/03/2018)
+- Corrected display of Qrcode in email on xs devices (05/03/2018)
+- Modified the wording of "Use Gift-Voucher" that may be confusing to users (05/03/2018)
+- Re-ordered Gift-Voucher purchased data (05/03/2018)
+- Moved "made by" mention from footer to under data panel (05/03/2018)
+- Added config value `tos` to be approved when buying Gift-Voucher (06/03/2018)
+- Added config value `tos_pdf` to be sent in email with Gift-Voucher (06/03/2018)
+- Corrected `giftVoucher.es.xlf` (06/03/2018)
+- Added `h4cc/wkhtmltopdf-amd64` to `composer.json` (07/03/2018)
+- Added checkbox to approve the Terms of sales (07/03/2018)
+- Corrected layout to include the content of css for the pdf (07/03/2018)
+- Created method `Service > getIdentifierFormatted()` and made Twig extension to call it (to have it formatted in only one place) (08/03/2018)
+- Grouped all display GiftVoucher templates under `display.html.twig` and removed the unused ones (08/03/2018)
+
 v1.6.1
 ------
 - Removed the "|raw" for `toolbar_button` call as safe html is now sent (01/03/2018)

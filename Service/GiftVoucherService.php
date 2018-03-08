@@ -10,9 +10,19 @@
 namespace c975L\GiftVoucherBundle\Service;
 
 use Cocur\Slugify\Slugify;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class GiftVoucherService
 {
+    private $container;
+
+    public function __construct(
+        \Symfony\Component\DependencyInjection\ContainerInterface $container
+    )
+    {
+        $this->container = $container;
+    }
+
     //Defines the identifier of the Gift-Voucher, including the secret code
     public function getIdentifier()
     {
@@ -22,6 +32,36 @@ class GiftVoucherService
         $identifier = strtoupper(substr(str_replace($signsRemoved, $signsReplacing, md5(time())), 12, 16));
 
         return $identifier;
+    }
+
+    //Formats the identifier to be displayed
+    public function getIdentifierFormatted($identifier)
+    {
+        return sprintf("%s-%s-%s", substr($identifier, 0, 4), substr($identifier, 4, 4), substr($identifier, 8, 4));
+    }
+
+    //Gets url from a Route
+    public function getUrlFromRoute($route)
+    {
+        //Gets Route
+        $routeValue = trim(substr($route, 0, strpos($route, ',')), "\'\"");
+
+        //Gets parameters
+        $params = trim(substr($route, strpos($route, '{')), "{}");
+        $params = str_replace(array('"', "'"), '', $params);
+        $params = explode(',', $params);
+
+        //Caculates url
+        $paramsArray = array();
+        foreach($params as $value) {
+            $parameter = explode(':', $value);
+            $paramsArray[trim($parameter[0])] = trim($parameter[1]);
+        }
+
+        return array(
+            'route' => $routeValue,
+            'params' => $paramsArray
+        );
     }
 
     //Slugify

@@ -4,5 +4,164 @@
 
 {% block giftVoucher_content %}
     {{ toolbar|raw }}
-    {% include "@c975LGiftVoucher/fragments/giftVoucher.html.twig" %}
+
+    <div class="row">
+{# Force use explanation #}
+        {% if forceUse is defined and forceUse == true %}
+            <div class="alert alert-danger text-center">
+                {{ 'text.giftvoucher_out_of_date'|trans }}
+            </div>
+        {% endif %}
+{# Explanation #}
+        {% if display == 'pdf' %}
+            <p class="alert alert-info text-center">
+                <strong>{{ 'text.explanation'| trans }}</strong>
+            </p>
+        {% endif %}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'label.description'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+{# Description #}
+                <p>
+                    {{ giftVoucher.description }}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+{# Offer #}
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ 'label.data'|trans }}</h3>
+            </div>
+            <div class="panel-body">
+                {% if display == 'pdf' or display == 'admin' %}
+{# Message #}
+                    <div class="col-xs-12">
+                        <p>
+                            {{ 'label.message'|trans }}
+                        </p>
+                        <p class="well">
+                            {{ giftVoucher.message }}
+                        </p>
+                    </div>
+{# Opens the div to set QrCode aside in pdf #}
+                    {% if display == 'pdf' %}
+                        <div class="col-xs-8">
+                    {% else %}
+                        <div class="col-xs-12">
+                    {% endif %}
+{# OfferedTo #}
+                    <p>
+                        {{ 'label.offered_to'|trans }} : <strong>{{ giftVoucher.offeredTo }}</strong>
+                    </p>
+{# OfferedBy #}
+                    <p>
+                        {{ 'label.offered_by'|trans }} : <strong>{{ giftVoucher.offeredBy }}</strong>&nbsp;(<a href="mailto:{{ giftVoucher.sendToEmail }}">{{ giftVoucher.sendToEmail }}</a>)
+                    </p>
+                {% endif %}
+{# Amount #}
+                {% if display == 'admin' %}
+                    <p>
+                        {{ 'label.amount'|trans }} : <strong>{{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }}</strong>
+                    </p>
+{# Payment #}
+                    <p>
+                        {{ 'label.payment'|trans({}, 'payment') }} : <a href="{{ path('payment_display', {'orderId': giftVoucher.orderId}) }}">{{ giftVoucher.orderId }}</a>
+                    </p>
+                {% endif %}
+{# Purchased date #}
+                <p>
+                    {{ 'label.purchased_date'|trans }} : <strong>{{ giftVoucher.purchase|localizeddate('medium', 'medium') }}</strong>
+                </p>
+{# Valid date #}
+                <p>
+                    {{ 'label.valid_until'|trans }} :
+{# Already used #}
+                    {% if giftVoucher.used != null %}
+                            <strong>
+                                {{ 'label.already_used'|trans }}
+                            </strong>
+{# No validity date #}
+                    {% elseif giftVoucher.valid == null %}
+                        {{ 'label.no_validity_date'|trans }}
+                    {% else %}
+                        {% if date(giftVoucher.valid) >= date() %}
+                            <span class="text-success">
+                        {% else %}
+                            <span class="text-danger">
+                        {% endif %}
+                        <strong>{{ giftVoucher.valid|localizeddate('medium', 'none') }}</strong>
+                        </span>
+                        {% if display != 'pdf' %}
+                            &nbsp;({{ giftVoucher.valid|ago }})
+                        {% endif %}
+                        {% if date(giftVoucher.valid) < date() and giftVoucher.used == null %}
+                            <span class="fas fa-exclamation-circle"></span> {{ 'label.out_of_date'|trans }}
+                        {% endif %}
+                    {% endif %}
+                </p>
+                {% if display != 'pdf' %}
+{# Used #}
+                    {% if giftVoucher.used != null %}
+                        <p>
+                            {{ 'label.used'|trans }} :
+                            <strong>{{ giftVoucher.used|localizeddate('medium', 'medium') }}</strong>&nbsp;({{ giftVoucher.used|ago }})
+                        </p>
+{# Not used #}
+                    {% else %}
+                        <p>
+                            {{ 'label.used'|trans }} :
+                            <strong>{{ 'label.not_used'|trans }}</strong>
+                        </p>
+                    {% endif %}
+                {% endif %}
+{# Test #}
+                    {% if giftVoucher.object starts with '(TEST)' %}
+                        <p class="alert alert-danger text-center">
+                            {{ 'text.test_giftvoucher'|trans }}
+                        </p>
+                    {% endif %}
+{# Use it #}
+                {% if display != 'pdf' %}
+                    {% if giftVoucher.used == null %}
+                        <p>
+{# Out of date #}
+                            {% if date(giftVoucher.valid) < date() or giftVoucher.object starts with '(TEST)' %}
+                                {% if date(giftVoucher.valid) < date() %}
+                                    {% set labelDanger = 'label.out_of_date'|trans %}
+                                {% else %}
+                                    {% set labelDanger = 'Test' %}
+                                {% endif %}
+                                <a href="{{ path('giftvoucher_use', {'identifier': giftVoucher.identifier ~ giftVoucher.secret, 'force': 'true'}) }}" class="btn btn-lg btn-block btn-danger">{{ 'label.use'|trans }} ({{ labelDanger }})</a>
+{# Valid #}
+                            {% else %}
+                                <a href="{{ path('giftvoucher_use', {'identifier': giftVoucher.identifier ~ giftVoucher.secret}) }}" class="btn btn-lg btn-block btn-primary">{{ 'label.use'|trans }}</a>
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                {% endif %}
+{# Closes the div opened to set QrCode aside in pdf #}
+                </div>
+{# QrCode #}
+                {% if display == 'pdf' %}
+                    <div class="col-xs-4">
+                        <div class="text-center">
+                            <p>
+                                <img src="{{ absolute_url(path('giftvoucher_qrcode', {'identifier': giftVoucher.identifier ~ giftVoucher.secret})) }}" width="150" />
+                            </p>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+{# Made with #}
+            <div class="row">
+                <p class="small text-center">
+                    <a href="https://975l.com/en/pages/gift-voucher-bundle" target="_blank">{{ 'label.made_with'| trans({}, 'giftVoucher') }}</a>
+                </p>
+            </div>
+        </div>
+    </div>
 {% endblock %}

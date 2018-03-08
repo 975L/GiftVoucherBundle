@@ -1,3 +1,8 @@
+{# Display #}
+{% if display is not defined %}
+    {% set display = 'html' %}
+{% endif %}
+
 {% spaceless %}
 <!DOCTYPE html>
     <head>
@@ -8,38 +13,59 @@
             <meta name="format-detection" content="telephone=no" />
             <title>GiftVoucher ({{ title }})</title>
             <base />
+{# Stylesheets #}
+            {% block stylesheets %}
+                {# Include your own styles #}
+                {# Uses c975L/IncludeLibraryBundle #}
+                {% if display == 'pdf' %}
+                    {# Links MUST be absolute to be included in the PDF or their content has to be added to the html output #}
+                    {{ inc_content('bootstrap', 'css', '3.*') }}
+                {% else %}
+                    {{ inc_lib('bootstrap', 'css', '3.*') }}
+                    {{ inc_lib('fontawesome', 'css', '5.*') }}
+                {% endif %}
+            {% endblock %}
         {% endblock %}
-{# Css #}
-            {% block css %}
-                {# Uses c975L/IncludeLibraryBundle #}
-                {{ inc_lib('bootstrap', 'css', '3.*') }}
-                {{ inc_lib('fontawesome', 'css', '5.*') }}
-            {% endblock %}
-{# Javascript #}
-            {% block javascript %}
-                {# Uses c975L/IncludeLibraryBundle #}
-                {{ inc_lib('jquery', 'js', '3.*') }}
-                {{ inc_lib('bootstrap', 'js', '3.*') }}
-            {% endblock %}
     </head>
 {# Body #}
     <body>
 {# Flashes #}
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="flash alert alert-{{ label }} alert-dismissible text-center lead fade in" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ message|raw|nl2br }}
-                </div>
+        {% if display == 'html' %}
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="flash alert alert-{{ label }} alert-dismissible text-center lead fade in" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ message|raw|nl2br }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-
+        {% endif %}
+{# Header #}
+        {% if display == 'pdf' %}
+            {{ include('@c975LGiftVoucher/fragments/header-pdf.html.twig') }}
+        {% endif %}
+{# Title #}
+        <h1>
+            {{ title }}
+        </h1>
+{# Content #}
         <div class="container">
             {% block giftVoucher_content %}
             {% endblock %}
         </div>
+{# Footer #}
+        {% if display == 'pdf' %}
+            {{ include('@c975LGiftVoucher/fragments/footer-pdf.html.twig') }}
+        {% endif %}
+{# Javascript #}
+        {% if display == 'html' %}
+            {% block javascripts %}
+                {{ inc_lib('jquery', 'js', '3.*') }}
+                {{ inc_lib('bootstrap', 'js', '3.*') }}
+            {% endblock %}
+        {% endif %}
     </body>
 </html>
 {% endspaceless %}

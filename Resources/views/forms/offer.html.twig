@@ -28,6 +28,7 @@
             <div class="panel-body">
 {# Form #}
                 {{ form_start(form) }}
+{# Explanation #}
                     <p class="alert alert-info text-center">
                         {{ 'text.explanation_offer_to'| trans }}
                     </p>
@@ -44,6 +45,19 @@
                 <p>
                     {{ 'label.amount'|trans }} : <strong>{{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }}</strong>
                 </p>
+{# Terms of sale acceptance #}
+                <div class="checkbox">
+                    <label for="termsAccepted" class="required">
+                        <input type="checkbox" id="termsAccepted" name="termsAccepted" required="required" />
+                        <a href="{{ tosUrl }}">{{ 'label.accept_tos'|trans }}</a>
+                    </label>
+                </div>
+{# Test #}
+                {% if live == false %}
+                    <p class="alert alert-danger text-center">
+                        {{ 'text.test'|trans }}
+                    </p>
+                {% endif %}
 {# Submit #}
                 <div class="form-group">
                     <button type="submit" name="submit" title="{{ 'label.offer'|trans }}" class="btn btn-lg btn-primary btn-block">

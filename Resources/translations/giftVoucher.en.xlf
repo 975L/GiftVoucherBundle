@@ -48,7 +48,7 @@
             </trans-unit>
             <trans-unit id="12">
                 <source>label.use</source>
-                <target>Use the Gift Voucher</target>
+                <target>Use the Gift Voucher (Seller)</target>
             </trans-unit>
             <trans-unit id="13">
                 <source>label.data</source>
@@ -189,6 +189,18 @@
             <trans-unit id="48">
                 <source>label.web_code</source>
                 <target>Web code (Button)</target>
+            </trans-unit>
+            <trans-unit id="49">
+                <source>text.test</source>
+                <target>!!! Warning, Gift-Vouchers are still under test, it will not be valid, payment will not be debited !!!</target>
+            </trans-unit>
+            <trans-unit id="50">
+                <source>text.test_giftvoucher</source>
+                <target>This Gift-Voucher is a test, it is not valid.</target>
+            </trans-unit>
+            <trans-unit id="51">
+                <source>label.accept_tos</source>
+                <target>I agree with Terms of sale</target>
             </trans-unit>
         </body>
     </file>

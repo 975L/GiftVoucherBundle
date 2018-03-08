@@ -11,6 +11,15 @@ namespace c975L\GiftVoucherBundle\Twig;
 
 class GiftVoucherIdentifier extends \Twig_Extension
 {
+    private $service;
+
+    public function __construct(
+        \c975L\GiftVoucherBundle\Service\GiftVoucherService $service
+        )
+    {
+        $this->service = $service;
+    }
+
     public function getFilters()
     {
         return array(
@@ -21,6 +30,6 @@ class GiftVoucherIdentifier extends \Twig_Extension
     //Returns Gift Voucher identifier formatted
     public function giftVoucherIdentifier($identifier)
     {
-        return sprintf("%s-%s-%s", substr($identifier, 0, 4), substr($identifier, 4, 4), substr($identifier, 8, 4));
+        return $this->service->getIdentifierFormatted($identifier);
     }
 }

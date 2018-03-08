@@ -31,6 +31,9 @@ class c975LGiftVoucherExtension extends Extension
         $configuration = new Configuration();
         $processedConfig = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('c975_l_gift_voucher.live', $processedConfig['live']);
         $container->setParameter('c975_l_gift_voucher.roleNeeded', $processedConfig['roleNeeded']);
+        $container->setParameter('c975_l_gift_voucher.tosUrl', $processedConfig['tosUrl']);
+        $container->setParameter('c975_l_gift_voucher.tosPdf', $processedConfig['tosPdf']);
     }
 }

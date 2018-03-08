@@ -112,6 +112,13 @@ class GiftVoucherPurchased
     protected $currency;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="order_id", type="string", nullable=true)
+     */
+    protected $orderId;
+
+    /**
      * @ORM\Column(name="used", type="datetime")
      */
     protected $used;
@@ -432,6 +439,30 @@ class GiftVoucherPurchased
     public function getCurrency()
     {
         return $this->currency;
+    }
+
+    /**
+     * Set orderId
+     *
+     * @param string $orderId
+     *
+     * @return StripePayment
+     */
+    public function setOrderId($orderId)
+    {
+        $this->orderId = $orderId;
+
+        return $this;
+    }
+
+    /**
+     * Get orderId
+     *
+     * @return string
+     */
+    public function getOrderId()
+    {
+        return $this->orderId;
     }
 
     /**
