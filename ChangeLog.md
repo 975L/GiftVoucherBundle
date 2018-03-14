@@ -1,5 +1,14 @@
 # Changelog
 
+v1.8
+----
+- Changed TermsOfSales pdf filename to a translated one (13/03/2018)
+- Added a global view to display Gift-Voucher to user (13/03/2018)
+- Changed wording for offer link and button (13/03/2018)
+- Added link to select2 library (13/03/2018)
+- Added Twig extension to display some Gift-Vouchers (14/03/2018)
+- Added explanations on `README.md` (14/03/2018)
+
 v1.7
 ----
 - Added "_locale requirement" part for multilingual prefix in `routing.yml` in `README.md` (04/03/2018)

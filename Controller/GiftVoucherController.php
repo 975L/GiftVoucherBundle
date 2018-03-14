@@ -64,7 +64,7 @@ class GiftVoucherController extends Controller
                 //Gets GiftVouchers
                 $paginator  = $this->get('knp_paginator');
                 $pagination = $paginator->paginate(
-                    $repository->findAvailable(),
+                    $repository->findAllAvailable(),
                     $request->query->getInt('p', 1),
                     15
                 );
@@ -412,6 +412,29 @@ class GiftVoucherController extends Controller
 
 //OFFER
     /**
+     * @Route("/gift-voucher/offer",
+     *      name="giftvoucher_offer_all")
+     * @Method({"GET", "HEAD", "POST"})
+     */
+    public function offerAllAction(Request $request)
+    {
+        //Gets the manager
+        $em = $this->getDoctrine()->getManager();
+
+        //Gets repository
+        $repositoryAvailable = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
+
+        //Loads from DB
+        $giftVouchers = $repositoryAvailable->findAll();
+
+        //Renders the page
+        return $this->render('@c975LGiftVoucher/pages/offerAll.html.twig', array(
+            'giftVouchers' => $giftVouchers,
+        ));
+    }
+
+//OFFER SPECIFIED GIFT-VOUCHER
+    /**
      * @Route("/gift-voucher/offer/{id}",
      *      name="giftvoucher_offer_id_redirect",
      *      requirements={
@@ -478,7 +501,6 @@ class GiftVoucherController extends Controller
         $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
         $tosUrl = null;
         $tosUrlConfig = $this->getParameter('c975_l_gift_voucher.tosUrl');
-
         //Calculates the url if a Route is provided
         if (strpos($tosUrlConfig, ',') !== false) {
             $routeData = $giftVoucherService->getUrlFromRoute($tosUrlConfig);
@@ -610,11 +632,11 @@ class GiftVoucherController extends Controller
                 $tosPdfUrl = $tosPdfConfig;
             }
 
-            //Gets the content of TOS
+            //Gets the content of TermsOfSales
             $tosPdfArray = null;
             if ($tosPdfUrl !== null) {
                 $tosPdfContent = file_get_contents($tosPdfUrl);
-                $filenameTos = 'TOS.pdf';
+                $filenameTos = $translator->trans('label.terms_of_sales_filename', array(), 'giftVoucher') . '.pdf';
                 $tosPdfArray = array($tosPdfContent, $filenameTos, 'application/pdf');
             }
 
@@ -635,7 +657,6 @@ class GiftVoucherController extends Controller
             $emailService->send($emailData, true);
 
             //Creates flash
-            $translator = $this->get('translator');
             $flash = $translator->trans('text.voucher_purchased', array(), 'giftVoucher');
             $request->getSession()
                 ->getFlashBag()

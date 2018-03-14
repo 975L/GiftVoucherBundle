@@ -202,6 +202,22 @@
                 <source>label.accept_tos</source>
                 <target>I agree with Terms of sale</target>
             </trans-unit>
+            <trans-unit id="52">
+                <source>label.terms_of_sales_filename</source>
+                <target>TermsOfSales</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>label.offer_as_giftvoucher</source>
+                <target>Offer as a Gift-Voucher</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>label.select_giftvoucher</source>
+                <target>Select a Gift-Voucher</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>text.explanation_giftvouchers</source>
+                <target>We offer the following Gift-Vouchers. Choose the one you want to offer, or select it from the drop-down menu below.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

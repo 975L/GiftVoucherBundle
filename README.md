@@ -18,6 +18,15 @@ This Bundle relies on the use of [c975LPaymentBundle](https://github.com/975L/Pa
 
 It also recomended to use this with a SSL certificat to reassure the user.
 
+You can also give a better user's experience by using [Select2](https://select2.org) for the selection of GiftVoucher. Simply include it to your layout using
+```twig
+    {# jQuery has to be linked before #}
+    {# In your css block #}
+    {{ inc_lib('select2', 'css', '4.*') }}
+    {# In your javascript block #}
+    {{ inc_lib('select2', 'js', '4.*') }}
+```
+
 [GiftVoucherBundle dedicated web page](https://975l.com/en/pages/gift-voucher-bundle).
 
 Bundle installation
@@ -140,7 +149,40 @@ The different Routes (naming self-explanatory) available are:
 - giftvoucher_delete
 - giftvoucher_dashboard
 - giftvoucher_offer
+- giftvoucher_offer_all
 - giftvoucher_use
 - giftvoucher_slug
 - giftvoucher_help
 - giftvoucher_qrcode
+
+**You should use Route `giftvoucher_offer_all` as an entry point to your Gift-Vouchers.**
+
+Twig extensions
+===============
+You can use the following Twig extensions to display Gift-Vouchers around your web site.
+
+`gv_offer_button()`
+-------------------
+There are different ways to use this extension:
+
+`{{ gv_offer_button(GIFTVOUCHER_AVAILABLE_ID) }}` will display a button with defaults styles
+`{{ gv_offer_button(GIFTVOUCHER_AVAILABLE_ID, 'btn-primary') }}` will display a button with specified styles
+`{{ gv_offer_button(GIFTVOUCHER_AVAILABLE_ID, 'WHATEVER_STYLE_YOU_HAVE_DEFINED_IN_CSS') }}` will display a button using your own styles
+
+These codes, and other variants, are recalled on the display of Gift-Voucher for Admin users.
+
+`gv_offer_link()`
+-------------------
+You will use this Twig extension to display a link to ofeer the Gift-Voucher
+
+`{{ gv_offer_link(GIFTVOUCHER_AVAILABLE_ID) }}` will display a link
+
+This code is recalled on the display of Gift-Voucher for Admin users.
+
+`gv_samples()`
+----------------
+This Twig extension will create a view of your Gift-Vouchers. It is used on `Resources/views/pages/offerAll.html.twig` template, used by Route `giftvoucher_offer_all`.
+
+`{{ gv_samples() }}` will create the view with all your available Gift-Vouchers
+`{{ gv_samples(NUMBER_OF_GIFTVOUCHERS_TO_DISPLAY) }}` will create the view with the specified number of your available Gift-Vouchers
+`{{ gv_samples(NUMBER_OF_GIFTVOUCHERS_TO_DISPLAY, ORDERED_FIELD) }}` will create the view with the specified number of your available Gift-Vouchers, ordered by the specified field. Values for this field are the ones of the Database Table `gift_voucher_available`. You will mostly use `id`, `object` (default one), `slug`, `amount`.

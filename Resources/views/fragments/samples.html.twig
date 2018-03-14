@@ -1,0 +1,25 @@
+{% trans_default_domain 'giftVoucher' %}
+
+{% spaceless %}
+{% for giftVoucher in giftVouchers %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">{{ giftVoucher.object }}</h3>
+        </div>
+        <div class="panel-body">
+{# Description #}
+            <p>
+                {{ giftVoucher.description }}
+            </p>
+{# Amount #}
+            <p class="lead text-center">
+                {{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }}
+            </p>
+{# Offer #}
+            <p>
+                {{ gv_offer_button(giftVoucher.id) }}
+            </p>
+        </div>
+    </div>
+{% endfor %}
+{% endspaceless %}

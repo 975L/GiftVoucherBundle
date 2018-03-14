@@ -1,0 +1,26 @@
+{% extends "@c975LGiftVoucher/layout.html.twig" %}
+{% trans_default_domain 'giftVoucher' %}
+{% set title = 'label.gift_vouchers'|trans %}
+
+{% block giftVoucher_content %}
+    <div class="row">
+{# Explanation #}
+        <p class="lead text-center">
+            {{ 'text.explanation_giftvouchers'|trans }}
+        </p>
+    </div>
+{# Select GiftVouchers #}
+    <div class="row">
+        {{ gv_select() }}
+    </div>
+{# GiftVouchers samples #}
+    <div class="row">
+        {{ gv_samples() }}
+    </div>
+{# Made with #}
+    <div class="row">
+        <p class="small text-center">
+            <a href="https://975l.com/en/pages/gift-voucher-bundle" target="_blank">{{ 'label.made_with'| trans({}, 'giftVoucher') }}</a>
+        </p>
+    </div>
+{% endblock %}

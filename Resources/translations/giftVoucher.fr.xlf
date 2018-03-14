@@ -202,6 +202,22 @@
                 <source>label.accept_tos</source>
                 <target>J'accepte les Conditions générales de vente</target>
             </trans-unit>
+            <trans-unit id="52">
+                <source>label.terms_of_sales_filename</source>
+                <target>ConditionsGeneralesVente</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>label.offer_as_giftvoucher</source>
+                <target>Offrir en Bon-Cadeau</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>label.select_giftvoucher</source>
+                <target>Sélectionnez un Bon-Cadeau</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>text.explanation_giftvouchers</source>
+                <target>Nous proposons les Bons-Cadeaux suivants. Choisissez celui que vous souhaitez offrir, ou sélectionnez-le à l'aide du menu déroulant ci-dessous.</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

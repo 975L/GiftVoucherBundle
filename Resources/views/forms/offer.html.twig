@@ -3,18 +3,24 @@
 {% set title = 'label.gift_voucher'|trans ~ ' : ' ~ giftVoucher.object %}
 
 {% block giftVoucher_content %}
+{# Select GiftVouchers #}
+    <div class="row">
+        {{ gv_select(giftVoucherAvailable.id) }}
+    </div>
+{# Gift-Voucher #}
     <div class="row">
         <div class="panel panel-primary">
             <div class="panel-heading">
                 <h3 class="panel-title">{{ 'label.description'|trans }}</h3>
             </div>
             <div class="panel-body">
-                <p>
 {# Object #}
-                    {{ 'label.gift_voucher'|trans }} : <strong>{{ giftVoucher.object }}</strong>
-                    <br />
+                <p class="lead text-center">
+                    {{ 'label.gift_voucher'|trans }} : {{ giftVoucher.object }} ({{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }})
+                </p>
 {# Description #}
-                    {{ giftVoucher.description }}
+                <p>
+                    <span id="gvDesc">{{ giftVoucher.description }}</span>
                 </p>
             </div>
         </div>

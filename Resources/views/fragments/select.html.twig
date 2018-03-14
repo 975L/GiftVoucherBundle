@@ -1,0 +1,26 @@
+{% trans_default_domain 'giftVoucher' %}
+
+{% spaceless %}
+<p class="text-center">
+    <select id="gvSelect">
+        <option value="">{{ 'label.select_giftvoucher'|trans }}</option>
+        {% for giftVoucher in giftVouchers %}
+            <option value="{{ giftVoucher.id }}">{{ giftVoucher.object }} ({{ (giftVoucher.amount / 100)|localizedcurrency(giftVoucher.currency) }})</option>
+        {% endfor %}
+    </select>
+</p>
+{# Javascript #}
+<script type="text/javascript">
+    $(document).ready(function () {
+        {# Assigns Select2 style #}
+        $('#gvSelect')
+            .select2()
+            .select2('val', '{{ id }}');
+        {# Calls url on change #}
+        $('#gvSelect').change(function() {
+            var route = '{{ path('giftvoucher_offer_id_redirect', {'id': '000'}) }}';
+            window.location = route.replace('000', $(this).val());
+        });
+    });
+</script>
+{% endspaceless %}

@@ -23,14 +23,17 @@
                 {% else %}
                     {{ inc_lib('bootstrap', 'css', '3.*') }}
                     {{ inc_lib('fontawesome', 'css', '5.*') }}
+                    {{ inc_lib('select2', 'css', '4.*') }}
                 {% endif %}
             {% endblock %}
         {% endblock %}
     </head>
 {# Body #}
     <body>
-{# Flashes #}
         {% if display == 'html' %}
+{# jQuery #}
+            {{ inc_lib('jquery', 'js', '3.*') }}
+{# Flashes #}
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="flash alert alert-{{ label }} alert-dismissible text-center lead fade in" role="alert">
@@ -62,8 +65,8 @@
 {# Javascript #}
         {% if display == 'html' %}
             {% block javascripts %}
-                {{ inc_lib('jquery', 'js', '3.*') }}
                 {{ inc_lib('bootstrap', 'js', '3.*') }}
+                {{ inc_lib('select2', 'js', '4.*') }}
             {% endblock %}
         {% endif %}
     </body>

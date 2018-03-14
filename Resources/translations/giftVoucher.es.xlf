@@ -140,7 +140,7 @@
             </trans-unit>
             <trans-unit id="36">
                 <source>label.gift_vouchers</source>
-                <target>Certificados-Regalos</target>
+                <target>Vales-Regalos</target>
             </trans-unit>
             <trans-unit id="37">
                 <source>label.days</source>
@@ -197,6 +197,22 @@
             <trans-unit id="51">
                 <source>label.accept_tos</source>
                 <target>Acepto los Términos de venta</target>
+            </trans-unit>
+            <trans-unit id="52">
+                <source>label.terms_of_sales_filename</source>
+                <target>TérminosVenta</target>
+            </trans-unit>
+            <trans-unit id="53">
+                <source>label.offer_as_giftvoucher</source>
+                <target>Ofrecer como un Vale-Regalo</target>
+            </trans-unit>
+            <trans-unit id="54">
+                <source>label.select_giftvoucher</source>
+                <target>Seleccione un Vale-Regalo</target>
+            </trans-unit>
+            <trans-unit id="55">
+                <source>text.explanation_giftvouchers</source>
+                <target>Ofrecemos los siguientes Vales-Regalos. Elija el que desea ofrecer o selecciónelo en el menú desplegable a continuación.</target>
             </trans-unit>
         </body>
     </file>
