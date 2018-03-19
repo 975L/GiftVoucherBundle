@@ -19,8 +19,6 @@ use Doctrine\ORM\Mapping as ORM;
 class GiftVoucherAvailable
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -33,55 +31,34 @@ class GiftVoucherAvailable
     protected $suppressed;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="slug", type="string", nullable=true)
      */
     protected $slug;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="object", type="string", nullable=true)
      */
     protected $object;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="description", type="string", nullable=true)
      */
     protected $description;
 
     /**
-     * @var dateinterval
-     *
      * @ORM\Column(name="valid", type="dateinterval", nullable=true)
      */
     protected $valid;
 
     /**
-     * @var integer
-     *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
     protected $amount;
 
     /**
-     * @var string
-     *
      * @ORM\Column(name="currency", type="string", nullable=true)
      */
     protected $currency;
-
-    protected $action;
-
-
-    public function __construct($action = null)
-    {
-        $this->setAction($action);
-    }
-
 
     /**
      * Set id
@@ -125,28 +102,6 @@ class GiftVoucherAvailable
     public function getSuppressed()
     {
         return $this->suppressed;
-    }
-
-    /**
-     * Set action
-     *
-     * @return GiftVoucherAvailable
-     */
-    public function setAction($action)
-    {
-        $this->action = $action;
-
-        return $this;
-    }
-
-    /**
-     * Get action
-     *
-     * @return string
-     */
-    public function getAction()
-    {
-        return $this->action;
     }
 
     /**
@@ -278,7 +233,7 @@ class GiftVoucherAvailable
      */
     public function setCurrency($currency)
     {
-        $this->currency = $currency;
+        $this->currency = strtoupper($currency);
 
         return $this;
     }
@@ -290,6 +245,6 @@ class GiftVoucherAvailable
      */
     public function getCurrency()
     {
-        return $this->currency;
+        return strtoupper($this->currency);
     }
 }

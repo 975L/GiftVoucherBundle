@@ -218,6 +218,10 @@
                 <source>text.explanation_giftvouchers</source>
                 <target>We offer the following Gift-Vouchers. Choose the one you want to offer, or select it from the drop-down menu below.</target>
             </trans-unit>
+            <trans-unit id="56">
+                <source>label.currency</source>
+                <target>Currency</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

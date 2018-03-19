@@ -107,15 +107,15 @@ class GiftVoucherController extends Controller
         if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
             //Defines form
             $giftVoucher = new GiftVoucherAvailable();
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher);
+            $giftVoucherConfig = array(
+                'action' => 'new',
+            );
+            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 //Gets the manager
                 $em = $this->getDoctrine()->getManager();
-
-                //Adds currency
-                $giftVoucher->setCurrency('EUR');
 
                 //Adjust slug in case of not accepted signs
                 $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
@@ -229,7 +229,10 @@ class GiftVoucherController extends Controller
             }
 
             //Defines form
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher);
+            $giftVoucherConfig = array(
+                'action' => 'modify',
+            );
+            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -303,7 +306,10 @@ class GiftVoucherController extends Controller
                 ->setObject(null)
                 ->setSlug(null)
             ;
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherClone);
+            $giftVoucherConfig = array(
+                'action' => 'duplicate',
+            );
+            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherClone, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -374,8 +380,10 @@ class GiftVoucherController extends Controller
             }
 
             //Defines form
-            $giftVoucher->setAction('delete');
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher);
+            $giftVoucherConfig = array(
+                'action' => 'delete',
+            );
+            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -535,6 +543,10 @@ class GiftVoucherController extends Controller
             $em->persist($giftVoucherPurchased);
             $em->flush();
 
+            //Gets user
+            $user = $this->getUser();
+            $userId = $user !== null ? $user->getId() : null;
+
             //Payment
             $translator = $this->get('translator');
             $paymentData = array(
@@ -542,6 +554,7 @@ class GiftVoucherController extends Controller
                 'currency' => $giftVoucherPurchased->getCurrency(),
                 'action' => json_encode(array('validateGiftVoucher' => $giftVoucherPurchased->getId())),
                 'description' => $translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' - ' . $giftVoucherPurchased->getObject(),
+                'userId' => $userId,
                 'userIp' => $request->getClientIp(),
                 'live' => $this->getParameter('c975_l_gift_voucher.live'),
                 );

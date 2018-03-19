@@ -70,6 +70,10 @@
                 <source>text.voucher_purchased</source>
                 <target>El Vale-Regalo ha sido bien pagado y enviado para email</target>
             </trans-unit>
+            <trans-unit id="18">
+                <source>label.cancel</source>
+                <target>Cancelar</target>
+            </trans-unit>
             <trans-unit id="19">
                 <source>label.purchase</source>
                 <target>Comprar</target>
@@ -213,6 +217,10 @@
             <trans-unit id="55">
                 <source>text.explanation_giftvouchers</source>
                 <target>Ofrecemos los siguientes Vales-Regalos. Elija el que desea ofrecer o selecciónelo en el menú desplegable a continuación.</target>
+            </trans-unit>
+            <trans-unit id="56">
+                <source>label.currency</source>
+                <target>Moneda</target>
             </trans-unit>
         </body>
     </file>

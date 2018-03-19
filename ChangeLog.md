@@ -1,5 +1,15 @@
 # Changelog
 
+v1.9
+----
+- Removed unused data in `GiftVoucherService` (18/03/2018)
+- Corrected `offerLink` template (19/03/2018)
+- Added userId if exists to payment data (19/03/2018)
+- Added missing es translation (19/03/2018)
+- Removed `action` property on Entity `GiftVoucherAvailable` and passed data with array `giftVoucherConfig` to the form (19/03/2018)
+- Added Currency selector on creation of GiftVoucher (19/03/2018)
+- Set currency to be uppercase in DB and Entities `GiftVoucherAvailable` and `GiftVoucherPurchased` (19/03/2018)
+
 v1.8
 ----
 - Changed TermsOfSales pdf filename to a translated one (13/03/2018)

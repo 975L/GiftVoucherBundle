@@ -426,7 +426,7 @@ class GiftVoucherPurchased
      */
     public function setCurrency($currency)
     {
-        $this->currency = $currency;
+        $this->currency = strtoupper($currency);
 
         return $this;
     }
@@ -438,7 +438,7 @@ class GiftVoucherPurchased
      */
     public function getCurrency()
     {
-        return $this->currency;
+        return strtoupper($this->currency);
     }
 
     /**

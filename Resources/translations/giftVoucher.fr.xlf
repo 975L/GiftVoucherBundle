@@ -218,6 +218,10 @@
                 <source>text.explanation_giftvouchers</source>
                 <target>Nous proposons les Bons-Cadeaux suivants. Choisissez celui que vous souhaitez offrir, ou sélectionnez-le à l'aide du menu déroulant ci-dessous.</target>
             </trans-unit>
+            <trans-unit id="56">
+                <source>label.currency</source>
+                <target>Devise</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

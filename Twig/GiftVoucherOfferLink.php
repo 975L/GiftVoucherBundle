@@ -42,7 +42,7 @@ class GiftVoucherOfferLink extends \Twig_Extension
         //Loads from DB
         $giftVoucher = $repository->findOneById($id);
 
-        //Defines button
+        //Defines link
         return $environment->render('@c975LGiftVoucher/fragments/offerLink.html.twig', array(
                 'giftVoucher' => $giftVoucher,
             ));

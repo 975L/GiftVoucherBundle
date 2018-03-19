@@ -10,19 +10,9 @@
 namespace c975L\GiftVoucherBundle\Service;
 
 use Cocur\Slugify\Slugify;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class GiftVoucherService
 {
-    private $container;
-
-    public function __construct(
-        \Symfony\Component\DependencyInjection\ContainerInterface $container
-    )
-    {
-        $this->container = $container;
-    }
-
     //Defines the identifier of the Gift-Voucher, including the secret code
     public function getIdentifier()
     {

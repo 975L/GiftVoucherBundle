@@ -11,18 +11,27 @@ namespace c975L\GiftVoucherBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
-use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class GiftVoucherAvailableType extends AbstractType
 {
+    private $container;
+
+    public function __construct(\Symfony\Component\DependencyInjection\ContainerInterface $container)
+    {
+        $this->container = $container;
+    }
+
     //Builds the form
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $disabled = $options['data']->getAction() == 'delete' ? true : false;
+        $disabled = $options['giftVoucherConfig']['action'] == 'delete' ? true : false;
+        $dataCurrency = $options['giftVoucherConfig']['action'] == 'new' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
 
         $builder
             ->add('object', TextType::class, array(
@@ -61,14 +70,20 @@ class GiftVoucherAvailableType extends AbstractType
                     'weeks' => 'label.weeks',
                     ),
                 ))
-            ->add('amount', MoneyType::class, array(
+            ->add('amount', NumberType::class, array(
                 'label' => 'label.amount',
                 'disabled' => $disabled,
                 'required' => true,
-                'currency' => 'EUR',
-                'divisor' => 100,
                 'attr' => array(
                     'placeholder' => 'label.amount',
+                )))
+            ->add('currency', CurrencyType::class, array(
+                'label' => 'label.currency',
+                'disabled' => $disabled,
+                'required' => true,
+                'data' => $dataCurrency,
+                'attr' => array(
+                    'placeholder' => 'label.currency',
                 )))
             ;
     }
@@ -80,5 +95,7 @@ class GiftVoucherAvailableType extends AbstractType
             'intention'  => 'giftVoucherAvailableForm',
             'translation_domain' => 'giftVoucher',
         ));
+
+        $resolver->setRequired('giftVoucherConfig');
     }
 }
