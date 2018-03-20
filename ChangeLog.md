@@ -1,5 +1,12 @@
 # Changelog
 
+v1.9.1
+------
+- Added `returnRoute` to paymentData as it has changed in c975LPaymentBundle (20/03/2018)
+- Renamed Route `payment_done` (20/03/2018)
+- Added `setFinished(true)` to payment when GiftVoucher has been bought (20/03/2018)
+- Redirect to Route `payment_display` in place of NotFound if Route `giftvoucher_payment_done` is called again after payment finished (20/03/2018)
+
 v1.9
 ----
 - Removed unused data in `GiftVoucherService` (18/03/2018)

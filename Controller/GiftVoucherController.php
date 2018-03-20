@@ -557,6 +557,7 @@ class GiftVoucherController extends Controller
                 'userId' => $userId,
                 'userIp' => $request->getClientIp(),
                 'live' => $this->getParameter('c975_l_gift_voucher.live'),
+                'returnRoute' => 'giftvoucher_payment_done',
                 );
             $paymentService = $this->get(\c975L\PaymentBundle\Service\PaymentService::class);
             $paymentService->create($paymentData);
@@ -576,8 +577,8 @@ class GiftVoucherController extends Controller
 
 //PAYMENT DONE
     /**
-     * @Route("/payment-done/{orderId}",
-     *      name="payment_done")
+     * @Route("/gift-voucher/payment-done/{orderId}",
+     *      name="giftvoucher_payment_done")
      * @Method({"GET", "HEAD"})
      */
     public function paymentDone(Request $request, $orderId)
@@ -587,103 +588,105 @@ class GiftVoucherController extends Controller
 
         //Gets Stripe payment
         $payment = $em->getRepository('c975L\PaymentBundle\Entity\Payment')
-            ->findOneByOrderId($orderId);
+            ->findOneByOrderIdNotFinished($orderId);
 
-        if (!$payment instanceof Payment) {
-            throw $this->createNotFoundException();
+        if ($payment instanceof Payment) {
+            //Validates the GiftVoucher
+            $action = (array) json_decode($payment->getAction());
+
+            if (array_key_exists('validateGiftVoucher', $action)) {
+                $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased');
+                $giftVoucher = $repository->findOneById($action['validateGiftVoucher']);
+
+                //Gets identifier
+                $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
+                $identifierExists = true;
+                do {
+                    $identifier = $giftVoucherService->getIdentifier();
+                    $identifierExists = $repository->findOneBy(array('identifier' => substr($identifier, 0, 12), 'secret' => substr($identifier, 12)));
+                } while ($identifierExists !== null);
+
+                //Updates GiftVoucher
+                $giftVoucher
+                    ->setPurchase(new \DateTime())
+                    ->setIdentifier(substr($identifier, 0, 12))
+                    ->setSecret(substr($identifier, 12))
+                    ->setorderId($payment->getOrderId())
+                    ;
+                $em->persist($giftVoucher);
+
+                //Set payment as finished
+                $payment->setFinished(true);
+                $em->persist($payment);
+
+                //Persist in database
+                $em->flush();
+
+                //Creates PDF
+                $translator = $this->get('translator');
+                $html = $this->renderView('@c975LGiftVoucher/pages/display.html.twig', array(
+                    'giftVoucher' => $giftVoucher,
+                    'toolbar' => null,
+                    'display' => 'pdf',
+                ));
+                $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucher->getIdentifier());
+                $subject = $translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' "' . $giftVoucher->getObject() . '" (' . $identifierFormatted . ')';
+                $filenameGiftVoucher = $translator->trans('label.gift_voucher', array(), 'giftVoucher') . '-' . $identifierFormatted . '.pdf';
+                $giftVoucherPdf = $this->get('knp_snappy.pdf')->getOutputFromHtml($html);
+
+                //Gets the Terms of sales
+                $tosPdfUrl = null;
+                $tosPdfConfig = $this->getParameter('c975_l_gift_voucher.tosPdf');
+
+                //Calculates the url if a Route is provided
+                if (strpos($tosPdfConfig, ',') !== false) {
+                    $routeData = $giftVoucherService->getUrlFromRoute($tosPdfConfig);
+                    $tosPdfUrl = $this->generateUrl($routeData['route'], $routeData['params'], UrlGeneratorInterface::ABSOLUTE_URL);
+                //An url has been provided
+                } elseif (strpos($tosPdfConfig, 'http') !== false) {
+                    $tosPdfUrl = $tosPdfConfig;
+                }
+
+                //Gets the content of TermsOfSales
+                $tosPdfArray = null;
+                if ($tosPdfUrl !== null) {
+                    $tosPdfContent = file_get_contents($tosPdfUrl);
+                    $filenameTos = $translator->trans('label.terms_of_sales_filename', array(), 'giftVoucher') . '.pdf';
+                    $tosPdfArray = array($tosPdfContent, $filenameTos, 'application/pdf');
+                }
+
+                //Sends email
+                $emailData = array(
+                    'subject' => $subject,
+                    'sentFrom' => $this->getParameter('c975_l_email.sentFrom'),
+                    'sentTo' => $giftVoucher->getSendToEmail(),
+                    'replyTo' => $this->getParameter('c975_l_email.sentFrom'),
+                    'body' => preg_replace('/<style(.*)<\/style>/s', '', $html),
+                    'attach' => array(
+                        array($giftVoucherPdf, $filenameGiftVoucher, 'application/pdf'),
+                        $tosPdfArray,
+                        ),
+                    'ip' => $request->getClientIp(),
+                    );
+                $emailService = $this->get(\c975L\EmailBundle\Service\EmailService::class);
+                $emailService->send($emailData, true);
+
+                //Creates flash
+                $flash = $translator->trans('text.voucher_purchased', array(), 'giftVoucher');
+                $request->getSession()
+                    ->getFlashBag()
+                    ->add('success', $flash)
+                    ;
+
+                //Redirects to the Gift-Voucher
+                return $this->redirectToRoute('giftvoucher_display', array(
+                    'identifier' => $giftVoucher->getIdentifier() . $giftVoucher->getSecret(),
+                ));
+            }
         }
 
-        //Validates the GiftVoucher
-        $action = (array) json_decode($payment->getAction());
-
-        if (array_key_exists('validateGiftVoucher', $action)) {
-            $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased');
-            $giftVoucher = $repository->findOneById($action['validateGiftVoucher']);
-
-            //Gets identifier
-            $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
-            $identifierExists = true;
-            do {
-                $identifier = $giftVoucherService->getIdentifier();
-                $identifierExists = $repository->findOneBy(array('identifier' => substr($identifier, 0, 12), 'secret' => substr($identifier, 12)));
-            } while ($identifierExists !== null);
-
-            //Updates GiftVoucher
-            $giftVoucher
-                ->setPurchase(new \DateTime())
-                ->setIdentifier(substr($identifier, 0, 12))
-                ->setSecret(substr($identifier, 12))
-                ->setorderId($payment->getOrderId())
-                ;
-
-            //Persist in database
-            $em->persist($giftVoucher);
-            $em->flush();
-
-            //Creates PDF
-            $translator = $this->get('translator');
-            $html = $this->renderView('@c975LGiftVoucher/pages/display.html.twig', array(
-                'giftVoucher' => $giftVoucher,
-                'toolbar' => null,
-                'display' => 'pdf',
-            ));
-            $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucher->getIdentifier());
-            $subject = $translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' "' . $giftVoucher->getObject() . '" (' . $identifierFormatted . ')';
-            $filenameGiftVoucher = $translator->trans('label.gift_voucher', array(), 'giftVoucher') . '-' . $identifierFormatted . '.pdf';
-            $giftVoucherPdf = $this->get('knp_snappy.pdf')->getOutputFromHtml($html);
-
-            //Gets the Terms of sales
-            $tosPdfUrl = null;
-            $tosPdfConfig = $this->getParameter('c975_l_gift_voucher.tosPdf');
-
-            //Calculates the url if a Route is provided
-            if (strpos($tosPdfConfig, ',') !== false) {
-                $routeData = $giftVoucherService->getUrlFromRoute($tosPdfConfig);
-                $tosPdfUrl = $this->generateUrl($routeData['route'], $routeData['params'], UrlGeneratorInterface::ABSOLUTE_URL);
-            //An url has been provided
-            } elseif (strpos($tosPdfConfig, 'http') !== false) {
-                $tosPdfUrl = $tosPdfConfig;
-            }
-
-            //Gets the content of TermsOfSales
-            $tosPdfArray = null;
-            if ($tosPdfUrl !== null) {
-                $tosPdfContent = file_get_contents($tosPdfUrl);
-                $filenameTos = $translator->trans('label.terms_of_sales_filename', array(), 'giftVoucher') . '.pdf';
-                $tosPdfArray = array($tosPdfContent, $filenameTos, 'application/pdf');
-            }
-
-            //Sends email
-            $emailData = array(
-                'subject' => $subject,
-                'sentFrom' => $this->getParameter('c975_l_email.sentFrom'),
-                'sentTo' => $giftVoucher->getSendToEmail(),
-                'replyTo' => $this->getParameter('c975_l_email.sentFrom'),
-                'body' => preg_replace('/<style(.*)<\/style>/s', '', $html),
-                'attach' => array(
-                    array($giftVoucherPdf, $filenameGiftVoucher, 'application/pdf'),
-                    $tosPdfArray,
-                    ),
-                'ip' => $request->getClientIp(),
-                );
-            $emailService = $this->get(\c975L\EmailBundle\Service\EmailService::class);
-            $emailService->send($emailData, true);
-
-            //Creates flash
-            $flash = $translator->trans('text.voucher_purchased', array(), 'giftVoucher');
-            $request->getSession()
-                ->getFlashBag()
-                ->add('success', $flash)
-                ;
-
-            //Redirects to the Gift-Voucher
-            return $this->redirectToRoute('giftvoucher_display', array(
-                'identifier' => $giftVoucher->getIdentifier() . $giftVoucher->getSecret(),
-            ));
-        }
-
-        //Redirects to the confirmation of payment
-        return $this->redirectToRoute('payment_confirm', array(
+        //Redirects to the display of payment
+        return $this->redirectToRoute('payment_display', array(
             'orderId' => $orderId,
         ));
     }

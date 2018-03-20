@@ -192,7 +192,7 @@
             </trans-unit>
             <trans-unit id="49">
                 <source>text.test</source>
-                <target>!!! Warning, Gift-Vouchers are still under test, it will not be valid, payment will not be debited !!!</target>
+                <target>!!! Warning, Gift-Vouchers are still under test, they will not be valid, payment will not be debited !!!</target>
             </trans-unit>
             <trans-unit id="50">
                 <source>text.test_giftvoucher</source>
@@ -200,7 +200,7 @@
             </trans-unit>
             <trans-unit id="51">
                 <source>label.accept_tos</source>
-                <target>I agree with Terms of sale</target>
+                <target>I agree with Terms of sales</target>
             </trans-unit>
             <trans-unit id="52">
                 <source>label.terms_of_sales_filename</source>
