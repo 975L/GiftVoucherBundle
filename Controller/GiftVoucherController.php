@@ -558,6 +558,7 @@ class GiftVoucherController extends Controller
                 'userIp' => $request->getClientIp(),
                 'live' => $this->getParameter('c975_l_gift_voucher.live'),
                 'returnRoute' => 'giftvoucher_payment_done',
+                'vat' => $this->getParameter('c975_l_gift_voucher.vat'),
                 );
             $paymentService = $this->get(\c975L\PaymentBundle\Service\PaymentService::class);
             $paymentService->create($paymentData);

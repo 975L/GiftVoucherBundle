@@ -35,6 +35,7 @@ class c975LGiftVoucherExtension extends Extension
         $container->setParameter('c975_l_gift_voucher.roleNeeded', $processedConfig['roleNeeded']);
         $container->setParameter('c975_l_gift_voucher.defaultCurrency', strtoupper($processedConfig['defaultCurrency']));
         $container->setParameter('c975_l_gift_voucher.proposedCurrencies', $processedConfig['proposedCurrencies']);
+        $container->setParameter('c975_l_gift_voucher.vat', $processedConfig['vat'] * 100);
         $container->setParameter('c975_l_gift_voucher.tosUrl', $processedConfig['tosUrl']);
         $container->setParameter('c975_l_gift_voucher.tosPdf', $processedConfig['tosPdf']);
     }

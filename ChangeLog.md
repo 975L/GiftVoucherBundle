@@ -1,5 +1,10 @@
 # Changelog
 
+v1.10
+-----
+- Added VAT config value (21/03/2018)
+- Added info about ToS in `README.md` (21/03/2018)
+
 v1.9.3
 ------
 - Modified label for Terms of Sales acceptance (21/03/2018)

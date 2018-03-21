@@ -9,7 +9,8 @@ GiftVoucherBundle does the following:
 - Creates a QR Code using [QrCodeBundle](https://github.com/endroid/qr-code),
 - Allows to use the GiftVoucher via a QrCode plus validation aftewards,
 - Integrates with [c975LToolbarBundle](https://github.com/975L/ToolbarBundle),
-- PDF and Qrcode are NOT stored but created on the fly.
+- PDF and Qrcode are NOT stored but created on the fly,
+- Joins your Terms of sales as PDF to the email,
 
 **The security is provided by a four-letter secret code, included in the QrCode, but not in the displayed Gift-Voucher identifier.**
 
@@ -17,6 +18,8 @@ This Bundle relies on the use of [c975LPaymentBundle](https://github.com/975L/Pa
 **So you MUST have a Stripe account.**
 
 It also recomended to use this with a SSL certificat to reassure the user.
+
+As the Terms of sales MUST be sent to the user with the Gift-Voucher, you MUST provide a Route or url for this PDF file. If you don't have such, you may consider using [c975LSiteBundle](https://github.com/975L/SiteBundle) for its pre-defined models and [c975LPageEditBundle](https://github.com/975L/PageEditBundle) for its ability to create a PDF.
 
 You can also give a better user's experience by using [Select2](https://select2.org) for the selection of GiftVoucher. Simply include it to your layout using
 ```twig
@@ -94,7 +97,6 @@ c975_l_gift_voucher:
     roleNeeded: 'ROLE_ADMIN'
     #If your gift-vouchers are live or in test
     live: true #Default false
-
     #The default currency code on 3 letters
     defaultCurrency: 'EUR' #'EUR'(default)
     #(Optional) The proposed currencies codes on 3 letters
@@ -102,6 +104,8 @@ c975_l_gift_voucher:
     #If you want to propose a set of currencies make a yaml array ['EUR', 'USD']
     #If you want to propose only one currency, make a yaml array with only one value ['EUR']
     proposedCurrencies: ['EUR', 'USD'] #null(default)
+    #(Optional) Your VAT rate without % i.e. 5.5 for 5.5%, or 20 for 20%
+    vat: 5.5 #null(default)
     #The location of your Terms of sales to be displayed to user, it can be a Route with parameters or an absolute url
     tosUrl: "pageedit_display, {page: terms-of-sales}"
     #The location of your Terms of sales, in PDF, to be sent to user, it can be a Route with parameters or an absolute url
