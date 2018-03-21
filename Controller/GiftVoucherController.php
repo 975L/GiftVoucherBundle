@@ -581,7 +581,7 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_payment_done")
      * @Method({"GET", "HEAD"})
      */
-    public function paymentDone(Request $request, $orderId)
+    public function paymentDoneAction(Request $request, $orderId)
     {
         //Gets the manager
         $em = $this->getDoctrine()->getManager();

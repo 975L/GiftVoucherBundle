@@ -1,5 +1,9 @@
 # Changelog
 
+v1.9.2
+------
+- Added `proposedCurrencies` config value to allow only a set of currencies when creating Gift-Voucher (21/03/2018)
+
 v1.9.1
 ------
 - Added `returnRoute` to paymentData as it has changed in c975LPaymentBundle (20/03/2018)

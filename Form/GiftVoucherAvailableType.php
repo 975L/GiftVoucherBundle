@@ -11,6 +11,7 @@ namespace c975L\GiftVoucherBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
@@ -31,7 +32,6 @@ class GiftVoucherAvailableType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $disabled = $options['giftVoucherConfig']['action'] == 'delete' ? true : false;
-        $dataCurrency = $options['giftVoucherConfig']['action'] == 'new' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
 
         $builder
             ->add('object', TextType::class, array(
@@ -77,15 +77,51 @@ class GiftVoucherAvailableType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'label.amount',
                 )))
-            ->add('currency', CurrencyType::class, array(
-                'label' => 'label.currency',
-                'disabled' => $disabled,
-                'required' => true,
-                'data' => $dataCurrency,
-                'attr' => array(
-                    'placeholder' => 'label.currency',
-                )))
             ;
+
+        //All currencies with defaultCurrency selected
+        if (empty($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies'))) {
+            $dataCurrency = $options['giftVoucherConfig']['action'] == 'new' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
+            $builder
+                ->add('currency', CurrencyType::class, array(
+                    'label' => 'label.currency',
+                    'disabled' => $disabled,
+                    'required' => true,
+                    'data' => $dataCurrency,
+                    'attr' => array(
+                        'placeholder' => 'label.currency',
+                    )))
+                ;
+        //Only proposed currencies
+        } else {
+            $currencies = array();
+            foreach ($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies') as $currency) {
+                $currencies[strtoupper($currency)] = $currency;
+            }
+            //Multiples currencies
+            if (count($currencies) > 1) {
+                $builder
+                    ->add('currency', ChoiceType::class, array(
+                        'label' => 'label.currency',
+                        'disabled' => $disabled,
+                        'required' => true,
+                        'choices' => $currencies,
+                        'attr' => array(
+                            'placeholder' => 'label.currency',
+                        )))
+                    ;
+            //Only one currency (locked)
+            } else {
+                $builder
+                    ->add('currency', TextType::class, array(
+                        'label' => 'label.currency',
+                        'disabled' => true,
+                        'required' => true,
+                        'data' => reset($currencies),
+                        ))
+                    ;
+            }
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)

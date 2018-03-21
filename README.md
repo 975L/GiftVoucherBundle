@@ -94,8 +94,14 @@ c975_l_gift_voucher:
     roleNeeded: 'ROLE_ADMIN'
     #If your gift-vouchers are live or in test
     live: true #Default false
+
     #The default currency code on 3 letters
     defaultCurrency: 'EUR' #'EUR'(default)
+    #(Optional) The proposed currencies codes on 3 letters
+    #If you want to propose all currencies leave it null
+    #If you want to propose a set of currencies make a yaml array ['EUR', 'USD']
+    #If you want to propose only one currency, make a yaml array with only one value ['EUR']
+    proposedCurrencies: ['EUR', 'USD'] #null(default)
     #The location of your Terms of sales to be displayed to user, it can be a Route with parameters or an absolute url
     tosUrl: "pageedit_display, {page: conditions-de-vente}"
     #The location of your Terms of sales, in PDF, to be sent to user, it can be a Route with parameters or an absolute url
