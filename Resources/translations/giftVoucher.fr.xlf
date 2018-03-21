@@ -200,7 +200,7 @@
             </trans-unit>
             <trans-unit id="51">
                 <source>label.accept_tos</source>
-                <target>J'accepte les Conditions générales de vente</target>
+                <target><![CDATA[J'accepte les <a href="%tosUrl%">Conditions générales de vente</a>]]></target>
             </trans-unit>
             <trans-unit id="52">
                 <source>label.terms_of_sales_filename</source>
@@ -221,6 +221,10 @@
             <trans-unit id="56">
                 <source>label.currency</source>
                 <target>Devise</target>
+            </trans-unit>
+            <trans-unit id="57">
+                <source>label.mandatory_field</source>
+                <target>* Champ requis</target>
             </trans-unit>
         </body>
     </file>

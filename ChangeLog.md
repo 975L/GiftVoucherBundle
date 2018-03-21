@@ -1,5 +1,10 @@
 # Changelog
 
+v1.9.3
+------
+- Modified label for Terms of Sales acceptance (21/03/2018)
+- Added mandatory field (21/03/2018)
+
 v1.9.2
 ------
 - Added `proposedCurrencies` config value to allow only a set of currencies when creating Gift-Voucher (21/03/2018)

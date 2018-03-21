@@ -103,9 +103,9 @@ c975_l_gift_voucher:
     #If you want to propose only one currency, make a yaml array with only one value ['EUR']
     proposedCurrencies: ['EUR', 'USD'] #null(default)
     #The location of your Terms of sales to be displayed to user, it can be a Route with parameters or an absolute url
-    tosUrl: "pageedit_display, {page: conditions-de-vente}"
+    tosUrl: "pageedit_display, {page: terms-of-sales}"
     #The location of your Terms of sales, in PDF, to be sent to user, it can be a Route with parameters or an absolute url
-    tosPdf: "pageedit_pdf, {page: conditions-de-vente}"
+    tosPdf: 'pageedit_pdf, {page: terms-of-sales}'
 ```
 
 Step 4: Enable the Routes
