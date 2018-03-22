@@ -46,9 +46,9 @@
             {% endfor %}
         {% endif %}
 {# Header #}
-        {% if display == 'pdf' %}
-            {{ include('@c975LGiftVoucher/fragments/header-pdf.html.twig') }}
-        {% endif %}
+        {% block header %}
+            {# Include your header and use the condition `if display == 'pdf'` to display what you need on the Gift-Voucher PDF, the block is not mandatory #}
+        {% endblock %}
 {# Title #}
         <h1>
             {{ title }}
@@ -59,9 +59,9 @@
             {% endblock %}
         </div>
 {# Footer #}
-        {% if display == 'pdf' %}
-            {{ include('@c975LGiftVoucher/fragments/footer-pdf.html.twig') }}
-        {% endif %}
+        {% block footer %}
+            {# Include your footer and use the condition `if display == 'pdf'` to display what you need on the Gift-Voucher PDF, the block is not mandatory #}
+        {% endblock %}
 {# Javascript #}
         {% if display == 'html' %}
             {% block javascripts %}

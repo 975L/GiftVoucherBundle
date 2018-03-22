@@ -1,5 +1,11 @@
 # Changelog
 
+v1.11
+-----
+- Updated `layout.html.twig` to limit overriding files and promote the use of Twig variable `display` (22/03/2018)
+- Removed `fragments/header-pdf.html.twig` and `footer.html.twig` [BC-Break] (22/03/2018)
+- Updated `README.md` (22/03/2018)
+
 v1.10
 -----
 - Added VAT config value (21/03/2018)

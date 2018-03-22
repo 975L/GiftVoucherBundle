@@ -131,6 +131,25 @@ Step 5: Create MySql tables
 ---------------------------
 - Use `/Resources/sql/gift-voucher.sql` to create the tables `gift_voucher_available` and `gift_voucher_purchased`. The `DROP TABLE` are commented to avoid dropping by mistake.
 
+Step 6: Override templates
+--------------------------
+It is strongly recommended to use the [Override Templates from Third-Party Bundles feature](http://symfony.com/doc/current/templating/overriding.html) to integrate fully with your site.
+
+For this, simply, create the following structure `app/Resources/c975LGiftVoucherBundle/views/` in your app and then duplicate the file `layout.html.twig` in it, to override the existing Bundle file.
+
+In `layout.html.twig`, it will mainly consist to extend your layout and define specific variables, i.e. :
+```twig
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    {% block giftVoucher_content %}
+    {% endblock %}
+{% endblock %}```
+
+Then in your `layout.html.twig` and its dependencies, such as `header.html.twig`, `footer.html.twig`, `navbar.html.twig`, etc. you can use the condition `if display == 'pdf'` or `if display == 'html'` to choose what to display to which format, and you keep all your data in one place.
+
+**Keep in mind that links have to be absolute, or their content included, to be exported (see below).**
+
 How to use
 ----------
 GiftVoucherBundle uses `KnpSnappyBundle` to generates PDF, which itself uses `wkhtmltopdf`. `wkhtmltopdf` requires that included files, like stylesheets, are included with an absolute url. But, there is a known problem with SSL, see https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3001, which force you to downgrade openssl, like in https://gist.github.com/kai101/99d57462f2459245d28b4f5ea51aa7d0.
@@ -149,9 +168,8 @@ You can avoid this problem by including the whole content of included files, whi
     {% endif %}
 ```
 
-You should override `Resources/fragments/header-pdf.html.twig` and `Resources/footer-pdf.html.twig`, to define your proper data for the pdf export.
-**Keep in mind that links have to be absolute, or their content included, to be exported.**
-
+Routes
+------
 The different Routes (naming self-explanatory) available are:
 - giftvoucher_display
 - giftvoucher_display_available
