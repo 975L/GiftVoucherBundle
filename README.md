@@ -75,8 +75,8 @@ knp_snappy:
     process_timeout: 20
     temporary_folder: "%kernel.cache_dir%/snappy"
     pdf:
-        enabled:    true
-        binary:     "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
+        enabled: true
+        binary: "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
         options:
             print-media-type: true
             page-size: A4
@@ -90,7 +90,7 @@ knp_snappy:
             margin-top: 10mm
             margin-bottom: 10mm
     image:
-        enabled:    false
+        enabled: false
 
 c975_l_gift_voucher:
     #The role needed to create/modify/use a GiftVoucher
@@ -119,10 +119,11 @@ Then, enable the routes by adding them to the `app/config/routing.yml` file of y
 ```yml
 c975_l_giftvoucher:
     resource: "@c975LGiftVoucherBundle/Controller/"
-    type:     annotation
-    prefix:   /
+    type: annotation
+    prefix: /
     #Multilingual website use the following
     #prefix: /{_locale}
+    #defaults:   { _locale: %locale% }
     #requirements:
     #    _locale: en|fr|es
 ```

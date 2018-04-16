@@ -1,5 +1,9 @@
 # Changelog
 
+v1.11.1
+-------
+- Replaced submit button by `SubmitType` (16/04/2018)
+
 v1.11
 -----
 - Updated `layout.html.twig` to limit overriding files and promote the use of Twig variable `display` (22/03/2018)

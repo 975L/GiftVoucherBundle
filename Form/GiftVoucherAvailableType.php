@@ -1,6 +1,6 @@
 <?php
 /*
- * (c) 2018: 975l <contact@975l.com>
+ * (c) 2018: 975L <contact@975l.com>
  * (c) 2018: Laurent Marquet <laurent.marquet@laposte.net>
  *
  * This source file is subject to the MIT license that is bundled
@@ -15,6 +15,7 @@ use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -32,6 +33,8 @@ class GiftVoucherAvailableType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $disabled = $options['giftVoucherConfig']['action'] == 'delete' ? true : false;
+        $submitLabel = $options['giftVoucherConfig']['action'] == 'delete' ? 'delete' : 'validate';
+        $submitClass = $options['giftVoucherConfig']['action'] == 'delete' ? 'btn-danger' : 'btn-primary';
 
         $builder
             ->add('object', TextType::class, array(
@@ -122,6 +125,14 @@ class GiftVoucherAvailableType extends AbstractType
                     ;
             }
         }
+
+        $builder
+            ->add('submit', SubmitType::class, array(
+                'label' => 'label.' . $submitLabel,
+                'translation_domain' => 'toolbar',
+                'attr' => array('class' => 'btn btn-block btn-lg ' . $submitClass),
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
