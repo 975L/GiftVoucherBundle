@@ -4,8 +4,7 @@
 
 {% block giftVoucher_content %}
 {# Toolbar #}
-    {{ toolbar|raw }}
-
+    {{ toolbar_display('@c975LGiftVoucher/tools.html.twig', 'duplicate', 'md', giftVoucher) }}
 {# Form #}
     {{ form_start(form) }}
         {{ form_widget(form) }}

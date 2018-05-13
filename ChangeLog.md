@@ -1,5 +1,9 @@
 # Changelog
 
+v1.11.2
+-------
+- Modified toolbars calls due to modification of c975LToolbarBundle (13/05/2018)
+
 v1.11.1
 -------
 - Replaced submit button by `SubmitType` (16/04/2018)

@@ -73,19 +73,9 @@ class GiftVoucherController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'dashboard',
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
             //Returns the dashboard
             return $this->render('@c975LGiftVoucher/pages/dashboard.html.twig', array(
                 'giftVouchers' => $pagination,
-                'toolbar' => $toolbar,
             ));
         }
 
@@ -131,18 +121,8 @@ class GiftVoucherController extends Controller
                 ));
             }
 
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'new',
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
             return $this->render('@c975LGiftVoucher/forms/new.html.twig', array(
                 'form' => $form->createView(),
-                'toolbar' => $toolbar,
             ));
         }
 
@@ -179,18 +159,7 @@ class GiftVoucherController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'displayAvailable',
-                'giftVoucher' => $giftVoucher,
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
             return $this->render('@c975LGiftVoucher/pages/displayAvailable.html.twig', array(
-                'toolbar' => $toolbar,
                 'giftVoucher' => $giftVoucher,
             ));
         }
@@ -250,18 +219,7 @@ class GiftVoucherController extends Controller
                 ));
             }
 
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'modify',
-                'giftVoucher' => $giftVoucher,
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
             return $this->render('@c975LGiftVoucher/forms/modify.html.twig', array(
-                'toolbar' => $toolbar,
                 'giftVoucher' => $giftVoucher,
                 'form' => $form->createView(),
             ));
@@ -327,20 +285,9 @@ class GiftVoucherController extends Controller
                 ));
             }
 
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'duplicate',
-                'giftVoucher' => $giftVoucher,
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
             //Returns the form to duplicate content
             return $this->render('@c975LGiftVoucher/forms/duplicate.html.twig', array(
                 'form' => $form->createView(),
-                'toolbar' => $toolbar,
                 'giftVoucher' => $giftVoucherClone,
                 'object' => $giftVoucher->getObject(),
             ));
@@ -397,19 +344,8 @@ class GiftVoucherController extends Controller
                 return $this->redirectToRoute('giftvoucher_dashboard');
             }
 
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'delete',
-                'giftVoucher' => $giftVoucher,
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
             return $this->render('@c975LGiftVoucher/forms/delete.html.twig', array(
                 'form' => $form->createView(),
-                'toolbar' => $toolbar,
                 'giftVoucher' => $giftVoucher,
             ));
         }
@@ -627,7 +563,6 @@ class GiftVoucherController extends Controller
                 $translator = $this->get('translator');
                 $html = $this->renderView('@c975LGiftVoucher/pages/display.html.twig', array(
                     'giftVoucher' => $giftVoucher,
-                    'toolbar' => null,
                     'display' => 'pdf',
                 ));
                 $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucher->getIdentifier());
@@ -722,23 +657,11 @@ class GiftVoucherController extends Controller
 
         //Defines display rights
         $display = 'basic';
-
-        //Defines toolbar
-        $toolbar = '';
         if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
             $display = 'admin';
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'display',
-                'giftVoucher' => $giftVoucher,
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
         }
 
         return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
-            'toolbar' => $toolbar,
             'giftVoucher' => $giftVoucher,
             'display' => $display,
         ));
@@ -791,19 +714,8 @@ class GiftVoucherController extends Controller
                     ;
             //Out of date not "forced"
             } else {
-                //Defines toolbar
-                $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                    'type' => 'display',
-                    'giftVoucher' => $giftVoucher,
-                ));
-                $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                    'tools'  => $tools,
-                    'dashboard'  => 'giftvoucher',
-                ))->getContent();
-
                 //Returns GiftVoucher to allow force use
                 return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
-                    'toolbar' => $toolbar,
                     'giftVoucher' => $giftVoucher,
                     'display' =>'admin',
                     'forceUse' => true,
@@ -885,24 +797,9 @@ class GiftVoucherController extends Controller
      */
     public function helpAction()
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        //Returns the dashboard content
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Defines toolbar
-            $tools  = $this->renderView('@c975LGiftVoucher/tools.html.twig', array(
-                'type' => 'help',
-            ));
-            $toolbar = $this->forward('c975L\ToolbarBundle\Controller\ToolbarController::displayAction', array(
-                'tools'  => $tools,
-                'dashboard'  => 'giftvoucher',
-            ))->getContent();
-
-            //Returns the help
-            return $this->render('@c975LGiftVoucher/pages/help.html.twig', array(
-                'toolbar' => $toolbar,
-            ));
+        //Returns the help
+        if ($this->getUser() !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+            return $this->render('@c975LGiftVoucher/pages/help.html.twig');
         }
 
         //Access is denied

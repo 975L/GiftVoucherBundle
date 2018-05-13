@@ -1,9 +1,12 @@
 {% trans_default_domain 'toolbar' %}
 
 {% spaceless %}
+{# Dashboard #}
+{{ toolbar_button(path('giftvoucher_dashboard'), 'dashboard', 'label.giftvoucher'|trans) }}
+
 {# Display #}
 {% if type == 'modify' or type == 'delete' %}
-    {{ toolbar_button(path('giftvoucher_display_available', {'id': giftVoucher.id}), 'display') }}
+    {{ toolbar_button(path('giftvoucher_display_available', {'id': object.id}), 'display') }}
 {% endif %}
 
 {# New #}
@@ -13,12 +16,12 @@
 
 {# Modify #}
 {% if type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_modify_available', {'id': giftVoucher.id}), 'modify') }}
+    {{ toolbar_button(path('giftvoucher_modify_available', {'id': object.id}), 'modify') }}
 {% endif %}
 
 {# Duplicate #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_duplicate_available', {'id': giftVoucher.id}), 'duplicate') }}
+    {{ toolbar_button(path('giftvoucher_duplicate_available', {'id': object.id}), 'duplicate') }}
 {% endif %}
 
 {# Cancel #}
@@ -28,11 +31,17 @@
 
 {# Delete #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_delete_available', {'id': giftVoucher.id}), 'delete') }}
+    {{ toolbar_button(path('giftvoucher_delete_available', {'id': object.id}), 'delete') }}
 {% endif %}
 
 {# Help #}
 {% if type != 'help' %}
     {{ toolbar_button(path('giftvoucher_help'), 'help') }}
 {% endif %}
+
+{# Signout #}
+{{ toolbar_button(path('user_signout'), 'signout') }}
+
+{# Other dashboards #}
+{{ toolbar_dashboards('md') }}
 {% endspaceless %}

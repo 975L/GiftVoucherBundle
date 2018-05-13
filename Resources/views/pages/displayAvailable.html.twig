@@ -3,7 +3,7 @@
 {% set title = 'label.gift_voucher'|trans ~ ' "' ~ giftVoucher.object ~ '" (' ~ giftVoucher.id ~ ')' %}
 
 {% block giftVoucher_content %}
-    {{ toolbar|raw }}
+    {{ toolbar_display('@c975LGiftVoucher/tools.html.twig', 'displayAvailable', 'md', giftVoucher) }}
 {# Object #}
     <p>
         <strong>{{ 'label.object'|trans }}</strong>

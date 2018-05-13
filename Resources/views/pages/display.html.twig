@@ -3,8 +3,10 @@
 {% set title = 'label.gift_voucher'|trans ~ ' "' ~ giftVoucher.object ~ '" (' ~ giftVoucher.identifier|giftVoucherIdentifier ~ ')' %}
 
 {% block giftVoucher_content %}
-    {{ toolbar|raw }}
-
+{# Toolbar #}
+    {% if display != 'pdf' %}
+        {{ toolbar_display('@c975LGiftVoucher/tools.html.twig', 'display', 'md', giftVoucher) }}
+    {% endif %}
     <div class="row">
 {# Force use explanation #}
         {% if forceUse is defined and forceUse == true %}
