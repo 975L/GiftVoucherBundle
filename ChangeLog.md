@@ -1,5 +1,12 @@
 # Changelog
 
+v1.12
+-----
+- Removed required in composer.json (22/05/2018)
+- Removed `Action` in controller method name as not requested anymore (21/07/2018)
+- Corrected meta in `layout.html.twig` (21/07/2018)
+- Use of Yoda notation (21/07/2018)
+
 v1.11.2
 -------
 - Modified toolbars calls due to modification of c975LToolbarBundle (13/05/2018)

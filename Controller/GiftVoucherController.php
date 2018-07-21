@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use c975L\Email\Service\EmailService;
 use c975L\PaymentBundle\Entity\Payment;
 use c975L\PaymentBundle\Service\PaymentService;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
@@ -36,12 +35,9 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_dashboard")
      * @Method({"GET", "HEAD"})
      */
-    public function dashboardAction(Request $request)
+    public function dashboard(Request $request)
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
             //Gets the manager
             $em = $this->getDoctrine()->getManager();
 
@@ -89,29 +85,21 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_new_available")
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function newAvailableAction(Request $request)
+    public function newAvailable(Request $request, GiftVoucherService $giftVoucherService)
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
             //Defines form
             $giftVoucher = new GiftVoucherAvailable();
-            $giftVoucherConfig = array(
-                'action' => 'new',
-            );
+            $giftVoucherConfig = array('action' => 'new');
             $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
-                //Gets the manager
-                $em = $this->getDoctrine()->getManager();
-
                 //Adjust slug in case of not accepted signs
-                $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
                 $giftVoucher->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
 
                 //Persists data in DB
+                $em = $this->getDoctrine()->getManager();
                 $em->persist($giftVoucher);
                 $em->flush();
 
@@ -139,20 +127,14 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function displayAvailableAction($id)
+    public function displayAvailable($id)
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the manager
-            $em = $this->getDoctrine()->getManager();
-
-            //Gets repository
-            $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-            //Loads from DB
-            $giftVoucher = $repository->findOneById($id);
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+            //Gets the GiftVoucher
+            $giftVoucher = $this->getDoctrine()
+                ->getManager()
+                ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
+                ->findOneById($id);
 
             //Not existing GiftVoucher
             if (!$giftVoucher instanceof GiftVoucherAvailable) {
@@ -177,20 +159,12 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function modifyAvailableAction(Request $request, $id)
+    public function modifyAvailable(Request $request, GiftVoucherService $giftVoucherService, $id)
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the manager
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+            //Gets the GiftVoucher
             $em = $this->getDoctrine()->getManager();
-
-            //Gets repository
-            $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-            //Loads from DB
-            $giftVoucher = $repository->findOneById($id);
+            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
 
             //Not existing GiftVoucher
             if (!$giftVoucher instanceof GiftVoucherAvailable) {
@@ -198,15 +172,12 @@ class GiftVoucherController extends Controller
             }
 
             //Defines form
-            $giftVoucherConfig = array(
-                'action' => 'modify',
-            );
+            $giftVoucherConfig = array('action' => 'modify');
             $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 //Adjust slug in case of not accepted signs
-                $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
                 $giftVoucher->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
 
                 //Persists data in DB
@@ -238,20 +209,12 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function duplicateAvailableAction(Request $request, $id)
+    public function duplicateAvailable(Request $request, GiftVoucherService $giftVoucherService, $id)
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the manager
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+            //Gets the GiftVoucher
             $em = $this->getDoctrine()->getManager();
-
-            //Gets repository
-            $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-            //Loads from DB
-            $giftVoucher = $repository->findOneById($id);
+            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
 
             //Not existing GiftVoucher
             if (!$giftVoucher instanceof GiftVoucherAvailable) {
@@ -264,15 +227,12 @@ class GiftVoucherController extends Controller
                 ->setObject(null)
                 ->setSlug(null)
             ;
-            $giftVoucherConfig = array(
-                'action' => 'duplicate',
-            );
+            $giftVoucherConfig = array('action' => 'duplicate');
             $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherClone, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
                 //Adjust slug in case of not accepted signs
-                $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
                 $giftVoucherClone->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
 
                 //Persists data in DB
@@ -306,20 +266,12 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function deleteAvailableAction(Request $request, $id)
+    public function deleteAvailable(Request $request, $id)
     {
-        //Gets the user
-        $user = $this->getUser();
-
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the manager
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+            //Gets the GiftVoucher
             $em = $this->getDoctrine()->getManager();
-
-            //Gets repository
-            $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-            //Loads from DB
-            $giftVoucher = $repository->findOneById($id);
+            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
 
             //Not existing GiftVoucher
             if (!$giftVoucher instanceof GiftVoucherAvailable) {
@@ -327,9 +279,7 @@ class GiftVoucherController extends Controller
             }
 
             //Defines form
-            $giftVoucherConfig = array(
-                'action' => 'delete',
-            );
+            $giftVoucherConfig = array('action' => 'delete');
             $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
             $form->handleRequest($request);
 
@@ -360,16 +310,13 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_offer_all")
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function offerAllAction(Request $request)
+    public function offerAll(Request $request)
     {
-        //Gets the manager
-        $em = $this->getDoctrine()->getManager();
-
-        //Gets repository
-        $repositoryAvailable = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-        //Loads from DB
-        $giftVouchers = $repositoryAvailable->findAll();
+        //Gets the GiftVouchers
+        $giftVouchers = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
+            ->findAll();
 
         //Renders the page
         return $this->render('@c975LGiftVoucher/pages/offerAll.html.twig', array(
@@ -386,16 +333,13 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function offerIdRedirectAction(Request $request, $id)
+    public function offerIdRedirect(Request $request, $id)
     {
-        //Gets the manager
-        $em = $this->getDoctrine()->getManager();
-
-        //Gets repository
-        $repositoryAvailable = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-        //Loads from DB
-        $giftVoucherAvailable = $repositoryAvailable->findOneById($id);
+        //Gets the GiftVoucher
+        $giftVoucher = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
+            ->findOneById($id);
 
         //Not existing GiftVoucher
         if (!$giftVoucherAvailable instanceof GiftVoucherAvailable) {
@@ -417,16 +361,11 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function offerAction(Request $request, $slug, $id)
+    public function offer(Request $request, GiftVoucherService $giftVoucherService, $slug, $id)
     {
-        //Gets the manager
+        //Gets the GiftVoucher
         $em = $this->getDoctrine()->getManager();
-
-        //Gets repository
-        $repositoryAvailable = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable');
-
-        //Loads from DB
-        $giftVoucherAvailable = $repositoryAvailable->findOneById($id);
+        $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
 
         //Not existing GiftVoucher
         if (!$giftVoucherAvailable instanceof GiftVoucherAvailable) {
@@ -439,19 +378,6 @@ class GiftVoucherController extends Controller
                 'slug' => $giftVoucherAvailable->getSlug(),
                 'id' => $giftVoucherAvailable->getId(),
             ));
-        }
-
-        //Gets the Terms of sales link
-        $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
-        $tosUrl = null;
-        $tosUrlConfig = $this->getParameter('c975_l_gift_voucher.tosUrl');
-        //Calculates the url if a Route is provided
-        if (strpos($tosUrlConfig, ',') !== false) {
-            $routeData = $giftVoucherService->getUrlFromRoute($tosUrlConfig);
-            $tosUrl = $this->generateUrl($routeData['route'], $routeData['params'], UrlGeneratorInterface::ABSOLUTE_URL);
-        //An url has been provided
-        } elseif (strpos($tosUrlConfig, 'http') !== false) {
-            $tosUrl = $tosUrlConfig;
         }
 
         //Defines form
@@ -480,8 +406,7 @@ class GiftVoucherController extends Controller
             $em->flush();
 
             //Gets user
-            $user = $this->getUser();
-            $userId = $user !== null ? $user->getId() : null;
+            $userId = null !== $this->getUser() ? $this->getUser()->getId() : null;
 
             //Payment
             $translator = $this->get('translator');
@@ -508,7 +433,7 @@ class GiftVoucherController extends Controller
             'giftVoucher' => $giftVoucherPurchased,
             'giftVoucherAvailable' => $giftVoucherAvailable,
             'live' => $this->getParameter('c975_l_gift_voucher.live'),
-            'tosUrl' => $tosUrl,
+            'tosUrl' => $giftVoucherService->getTosUrl(),
         ));
     }
 
@@ -518,12 +443,10 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_payment_done")
      * @Method({"GET", "HEAD"})
      */
-    public function paymentDoneAction(Request $request, $orderId)
+    public function paymentDone(Request $request, GiftVoucherService $giftVoucherService, $orderId)
     {
-        //Gets the manager
-        $em = $this->getDoctrine()->getManager();
-
         //Gets Stripe payment
+        $em = $this->getDoctrine()->getManager();
         $payment = $em->getRepository('c975L\PaymentBundle\Entity\Payment')
             ->findOneByOrderIdNotFinished($orderId);
 
@@ -536,7 +459,6 @@ class GiftVoucherController extends Controller
                 $giftVoucher = $repository->findOneById($action['validateGiftVoucher']);
 
                 //Gets identifier
-                $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
                 $identifierExists = true;
                 do {
                     $identifier = $giftVoucherService->getIdentifier();
@@ -555,57 +477,10 @@ class GiftVoucherController extends Controller
                 //Set payment as finished
                 $payment->setFinished(true);
                 $em->persist($payment);
-
-                //Persist in database
                 $em->flush();
 
-                //Creates PDF
-                $translator = $this->get('translator');
-                $html = $this->renderView('@c975LGiftVoucher/pages/display.html.twig', array(
-                    'giftVoucher' => $giftVoucher,
-                    'display' => 'pdf',
-                ));
-                $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucher->getIdentifier());
-                $subject = $translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' "' . $giftVoucher->getObject() . '" (' . $identifierFormatted . ')';
-                $filenameGiftVoucher = $translator->trans('label.gift_voucher', array(), 'giftVoucher') . '-' . $identifierFormatted . '.pdf';
-                $giftVoucherPdf = $this->get('knp_snappy.pdf')->getOutputFromHtml($html);
-
-                //Gets the Terms of sales
-                $tosPdfUrl = null;
-                $tosPdfConfig = $this->getParameter('c975_l_gift_voucher.tosPdf');
-
-                //Calculates the url if a Route is provided
-                if (strpos($tosPdfConfig, ',') !== false) {
-                    $routeData = $giftVoucherService->getUrlFromRoute($tosPdfConfig);
-                    $tosPdfUrl = $this->generateUrl($routeData['route'], $routeData['params'], UrlGeneratorInterface::ABSOLUTE_URL);
-                //An url has been provided
-                } elseif (strpos($tosPdfConfig, 'http') !== false) {
-                    $tosPdfUrl = $tosPdfConfig;
-                }
-
-                //Gets the content of TermsOfSales
-                $tosPdfArray = null;
-                if ($tosPdfUrl !== null) {
-                    $tosPdfContent = file_get_contents($tosPdfUrl);
-                    $filenameTos = $translator->trans('label.terms_of_sales_filename', array(), 'giftVoucher') . '.pdf';
-                    $tosPdfArray = array($tosPdfContent, $filenameTos, 'application/pdf');
-                }
-
                 //Sends email
-                $emailData = array(
-                    'subject' => $subject,
-                    'sentFrom' => $this->getParameter('c975_l_email.sentFrom'),
-                    'sentTo' => $giftVoucher->getSendToEmail(),
-                    'replyTo' => $this->getParameter('c975_l_email.sentFrom'),
-                    'body' => preg_replace('/<style(.*)<\/style>/s', '', $html),
-                    'attach' => array(
-                        array($giftVoucherPdf, $filenameGiftVoucher, 'application/pdf'),
-                        $tosPdfArray,
-                        ),
-                    'ip' => $request->getClientIp(),
-                    );
-                $emailService = $this->get(\c975L\EmailBundle\Service\EmailService::class);
-                $emailService->send($emailData, true);
+                $giftVoucherService->sendEmail($giftVoucher);
 
                 //Creates flash
                 $flash = $translator->trans('text.voucher_purchased', array(), 'giftVoucher');
@@ -636,28 +511,22 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function displayAction(Request $request, $identifier)
+    public function display(Request $request, $identifier)
     {
-        //Gets the manager
-        $em = $this->getDoctrine()->getManager();
-
-        //Gets repository
-        $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased');
-
-        //Loads from DB
-        $giftVoucher = $repository->findOneBasedOnIdentifier($identifier);
+        //Gets the GiftVoucher
+        $giftVoucher = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')
+            ->findOneBasedOnIdentifier($identifier);
 
         //Not existing GiftVoucher
         if (!$giftVoucher instanceof GiftVoucherPurchased) {
             throw $this->createNotFoundException();
         }
 
-        //Gets the user
-        $user = $this->getUser();
-
         //Defines display rights
         $display = 'basic';
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
             $display = 'admin';
         }
 
@@ -676,21 +545,13 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function useAction(Request $request, $identifier)
+    public function use(Request $request, $identifier)
     {
-        //Gets the user
-        $user = $this->getUser();
-
         //Allows use if user has rights
-        if ($user !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the manager
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+            //Gets the GiftVoucher
             $em = $this->getDoctrine()->getManager();
-
-            //Gets repository
-            $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased');
-
-            //Loads from DB
-            $giftVoucher = $repository->findOneBasedOnIdentifier($identifier);
+            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')->findOneBasedOnIdentifier($identifier);
 
             //Not existing GiftVoucher
             if (!$giftVoucher instanceof GiftVoucherPurchased) {
@@ -735,11 +596,8 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_slug")
      * @Method({"POST"})
      */
-    public function slugAction($text)
+    public function slug(GiftVoucherService $giftVoucherService, $text)
     {
-        //Gets the Service
-        $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
-
         return $this->json(array('a' => $giftVoucherService->slugify($text)));
     }
 
@@ -752,16 +610,13 @@ class GiftVoucherController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function qrcodeAction($identifier)
+    public function qrcode(GiftVoucherService $giftVoucherService,$identifier)
     {
-        //Gets the manager
-        $em = $this->getDoctrine()->getManager();
-
-        //Gets repository
-        $repository = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased');
-
-        //Loads from DB
-        $giftVoucher = $repository->findOneBasedOnIdentifier($identifier);
+        //Gets the GiftVoucher
+        $giftVoucher = $this->getDoctrine()
+            ->getManager()
+            ->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')
+            ->findOneBasedOnIdentifier($identifier);
 
         //Not existing GiftVoucher
         if (!$giftVoucher instanceof GiftVoucherPurchased) {
@@ -769,7 +624,6 @@ class GiftVoucherController extends Controller
         }
 
         //Gets the formatted identifier
-        $giftVoucherService = $this->get(\c975L\GiftVoucherBundle\Service\GiftVoucherService::class);
         $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucher->getIdentifier());
 
         //Returns QrCode
@@ -795,10 +649,10 @@ class GiftVoucherController extends Controller
      *      name="giftvoucher_help")
      * @Method({"GET", "HEAD"})
      */
-    public function helpAction()
+    public function help()
     {
         //Returns the help
-        if ($this->getUser() !== null && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
+        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
             return $this->render('@c975LGiftVoucher/pages/help.html.twig');
         }
 
