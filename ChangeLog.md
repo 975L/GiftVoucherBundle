@@ -1,5 +1,9 @@
 # Changelog
 
+v1.12.1
+-------
+- Removed `SubmitType` in GiftVoucherAvailableType and replaced by adding button in template as it's not a "Best Practice" (Revert of v1.11.1) (21/07/2018)
+
 v1.12
 -----
 - Removed required in composer.json (22/05/2018)
