@@ -30,7 +30,7 @@
         "knplabs/knp-snappy-bundle": "^1",
         "h4cc/wkhtmltopdf-amd64": "^0",
         "cocur/slugify": "^2",
-        "endroid/qr-code": "^2"
+        "endroid/qr-code": "^3"
     },
     "minimum-stability": "dev",
     "autoload": {
@@ -41,5 +41,8 @@
         "email": "contact@975l.com",
         "source": "https://github.com/975L/GiftVoucherBundle",
         "issues": "https://github.com/975L/GiftVoucherBundle/issues"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.3@dev"
     }
 }

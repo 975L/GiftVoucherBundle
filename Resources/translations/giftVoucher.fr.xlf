@@ -226,6 +226,10 @@
                 <source>label.mandatory_field</source>
                 <target>* Champ requis</target>
             </trans-unit>
+            <trans-unit id="58">
+                <source>placeholder.username</source>
+                <target>Nom d'utilisateur (si vous voyez ceci, laissez-le vide)</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

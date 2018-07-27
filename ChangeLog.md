@@ -1,5 +1,13 @@
 # Changelog
 
+v1.13
+-----
+- Corrected offer Route (26/07/2018)
+- Added Controller for auto-wire (26/07/2018)
+- Corrected Service > sendEmail method (26/07/2018)
+- Split controller files (27/07/2018)
+- Moved to Endroid/QrCode ^3 (27/07/2018)
+
 v1.12.1
 -------
 - Removed `SubmitType` in GiftVoucherAvailableType and replaced by adding button in template as it's not a "Best Practice" (Revert of v1.11.1) (21/07/2018)
