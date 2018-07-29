@@ -20,7 +20,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use c975L\PaymentBundle\Entity\Payment;
-use c975L\PaymentBundle\Service\PaymentService;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
@@ -220,6 +219,7 @@ class PurchasedController extends Controller
             //Redirects to the payment
             $userId = null !== $this->getUser() ? $this->getUser()->getId() : null;
             $giftVoucherService->payment($giftVoucherPurchased, $userId);
+
             return $this->redirectToRoute('payment_form');
         }
 
@@ -238,7 +238,7 @@ class PurchasedController extends Controller
      *      name="giftvoucher_payment_done")
      * @Method({"GET", "HEAD"})
      */
-    public function paymentDone(Request $request, GiftVoucherService $giftVoucherService, $orderId)
+    public function paymentDone(GiftVoucherService $giftVoucherService, $orderId)
     {
         //Gets Stripe payment
         $em = $this->getDoctrine()->getManager();

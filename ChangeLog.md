@@ -1,5 +1,9 @@
 # Changelog
 
+v1.13.1
+-------
+- Corrected PurchasedController (29/07/2018)
+
 v1.13
 -----
 - Corrected offer Route (26/07/2018)
