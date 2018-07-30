@@ -16,53 +16,60 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\GiftVoucherService;
 
 class GiftVoucherController extends Controller
 {
+    private $accessGranted;
+
+    public function __construct(AuthorizationCheckerInterface $authChecker, string $roleNeeded)
+    {
+        $this->accessGranted = $authChecker->isGranted($roleNeeded);
+    }
+
 //DASHBOARD
     /**
      * @Route("/gift-voucher/dashboard",
      *      name="giftvoucher_dashboard")
      * @Method({"GET", "HEAD"})
      */
-    public function dashboard(Request $request)
+    public function dashboard(Request $request, PaginatorInterface $paginator)
     {
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the manager
-            $em = $this->getDoctrine()->getManager();
-
-            //Gets GiftVouchers Purchased
-            if ($request->query->get('v') === null || $request->query->get('v') == '') {
-                $paginator  = $this->get('knp_paginator');
-                $pagination = $paginator->paginate(
-                    $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')->findPurchased(),
-                    $request->query->getInt('p', 1),
-                    15
-                );
-            //Gets GiftVouchers Available
-            } elseif ($request->query->get('v') == 'available') {
-                $paginator  = $this->get('knp_paginator');
-                $pagination = $paginator->paginate(
-                    $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findAllAvailable(),
-                    $request->query->getInt('p', 1),
-                    15
-                );
-            //Not found
-            } else {
-                throw $this->createNotFoundException();
-            }
-
-            //Returns the dashboard
-            return $this->render('@c975LGiftVoucher/pages/dashboard.html.twig', array(
-                'giftVouchers' => $pagination,
-            ));
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
         }
 
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        //Gets the manager
+        $em = $this->getDoctrine()->getManager();
+
+        //Gets GiftVouchers Purchased
+        if ($request->query->get('v') === null || $request->query->get('v') == '') {
+            $pagination = $paginator->paginate(
+                $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')->findPurchased(),
+                $request->query->getInt('p', 1),
+                15
+            );
+        //Gets GiftVouchers Available
+        } elseif ($request->query->get('v') == 'available') {
+            $pagination = $paginator->paginate(
+                $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findAvailable(),
+                $request->query->getInt('p', 1),
+                15
+            );
+        //Not found
+        } else {
+            throw $this->createNotFoundException();
+        }
+
+        //Renders the dashboard
+        return $this->render('@c975LGiftVoucher/pages/dashboard.html.twig', array(
+            'giftVouchers' => $pagination,
+        ));
     }
 
 //SLUG
@@ -84,12 +91,12 @@ class GiftVoucherController extends Controller
      */
     public function help()
     {
-        //Returns the help
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            return $this->render('@c975LGiftVoucher/pages/help.html.twig');
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
         }
 
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        //Renders the help
+        return $this->render('@c975LGiftVoucher/pages/help.html.twig');
     }
 }

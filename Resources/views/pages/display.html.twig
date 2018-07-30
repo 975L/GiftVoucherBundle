@@ -4,7 +4,7 @@
 
 {% block giftVoucher_content %}
 {# Toolbar #}
-    {% if display != 'pdf' %}
+    {% if display != 'pdf' and display == 'admin' %}
         {{ toolbar_display('@c975LGiftVoucher/tools.html.twig', 'display', 'md', giftVoucher) }}
     {% endif %}
     <div class="row">

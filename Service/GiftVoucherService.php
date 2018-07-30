@@ -18,31 +18,37 @@ class GiftVoucherService
     private $container;
     private $em;
     private $emailService;
+    private $knpSnappyPdf;
     private $paymentService;
     private $request;
     private $router;
     private $templating;
+    private $translator;
 
     public function __construct(
         \Symfony\Component\DependencyInjection\ContainerInterface $container,
         \Doctrine\ORM\EntityManagerInterface $em,
         \c975L\EmailBundle\Service\EmailService $emailService,
+        \Knp\Snappy\Pdf $knpSnappyPdf,
         \c975L\PaymentBundle\Service\PaymentService $paymentService,
         \Symfony\Component\HttpFoundation\RequestStack $requestStack,
         \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router,
-        \Twig_Environment $templating
+        \Twig_Environment $templating,
+        \Symfony\Component\Translation\Translator $translator
         )
     {
         $this->container = $container;
         $this->em = $em;
         $this->emailService = $emailService;
+        $this->knpSnappyPdf = $knpSnappyPdf;
         $this->paymentService = $paymentService;
         $this->request = $requestStack->getCurrentRequest();
         $this->router = $router;
         $this->templating = $templating;
+        $this->translator = $translator;
     }
 
-    //Defines the identifier of the Gift-Voucher, including the secret code
+    //Defines the identifier of the GiftVoucher, including the secret code
     public function getIdentifier()
     {
         //Defines data, only letters except "o" to avoid confusion with 0
@@ -71,8 +77,8 @@ class GiftVoucherService
     //Creates PDF of purchased GiftVoucher
     public function getPdf($html, $identifier)
     {
-        $filenameGiftVoucher = $this->container->get('translator')->trans('label.gift_voucher', array(), 'giftVoucher') . '-' . $this->getIdentifierFormatted($identifier) . '.pdf';
-        $giftVoucherPdf = $this->container->get('knp_snappy.pdf')->getOutputFromHtml($html);
+        $filenameGiftVoucher = $this->translator->trans('label.gift_voucher', array(), 'giftVoucher') . '-' . $this->getIdentifierFormatted($identifier) . '.pdf';
+        $giftVoucherPdf = $this->knpSnappyPdf->getOutputFromHtml($html);
 
         return array($giftVoucherPdf, $filenameGiftVoucher, 'application/pdf');
     }
@@ -85,7 +91,7 @@ class GiftVoucherService
         //Gets the content of TermsOfSales PDF
         if ($tosPdfUrl !== null) {
             $tosPdf = file_get_contents($tosPdfUrl);
-            $filenameTos = $this->container->get('translator')->trans('label.terms_of_sales_filename', array(), 'giftVoucher') . '.pdf';
+            $filenameTos = $this->translator->trans('label.terms_of_sales_filename', array(), 'giftVoucher') . '.pdf';
             return array($tosPdf, $filenameTos, 'application/pdf');
         }
 
@@ -147,7 +153,7 @@ class GiftVoucherService
             'amount' => $giftVoucherPurchased->getAmount(),
             'currency' => $giftVoucherPurchased->getCurrency(),
             'action' => json_encode(array('validateGiftVoucher' => $giftVoucherPurchased->getId())),
-            'description' => $this->container->get('translator')->trans('label.gift_voucher', array(), 'giftVoucher') . ' - ' . $giftVoucherPurchased->getObject(),
+            'description' => $this->translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' - ' . $giftVoucherPurchased->getObject(),
             'userId' => $userId,
             'userIp' => $this->request->getClientIp(),
             'live' => $this->container->getParameter('c975_l_gift_voucher.live'),
@@ -169,7 +175,7 @@ class GiftVoucherService
 
         //Sends email
         $emailData = array(
-            'subject' => $this->container->get('translator')->trans('label.gift_voucher', array(), 'giftVoucher') . ' "' . $giftVoucher->getObject() . '" (' . $this->getIdentifierFormatted($giftVoucher->getIdentifier()) . ')',
+            'subject' => $this->translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' "' . $giftVoucher->getObject() . '" (' . $this->getIdentifierFormatted($giftVoucher->getIdentifier()) . ')',
             'sentFrom' => $this->container->getParameter('c975_l_email.sentFrom'),
             'sentTo' => $giftVoucher->getSendToEmail(),
             'replyTo' => $this->container->getParameter('c975_l_email.sentFrom'),
@@ -227,7 +233,7 @@ class GiftVoucherService
             $this->sendEmail($giftVoucher);
 
             //Creates flash
-            $flash = $this->container->get('translator')->trans('text.voucher_purchased', array(), 'giftVoucher');
+            $flash = $this->translator->trans('text.voucher_purchased', array(), 'giftVoucher');
             $this->request->getSession()
                 ->getFlashBag()
                 ->add('success', $flash)

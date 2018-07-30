@@ -1,5 +1,14 @@
 # Changelog
 
+v1.13.2
+-------
+- Injected `AuthorizationCheckerInterface` in Controllers to avoid use of `$this->get()` (30/07/2018)
+- Made use of ParamConverter (30/07/2018)
+- Injected `Translator` (30/07/2018)
+- Removed toolbar display when not signed in (30/07/2018)
+- Corrected toolbar in help file (30/07/2018)
+- Corrected dashboard links (30/07/2018)
+
 v1.13.1
 -------
 - Corrected PurchasedController (29/07/2018)

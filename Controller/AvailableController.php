@@ -16,49 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
 use c975L\GiftVoucherBundle\Service\GiftVoucherService;
 
 class AvailableController extends Controller
 {
-//NEW
-    /**
-     * @Route("/gift-voucher/new-available",
-     *      name="giftvoucher_new_available")
-     * @Method({"GET", "HEAD", "POST"})
-     */
-    public function newAvailable(Request $request, GiftVoucherService $giftVoucherService)
+    private $accessGranted;
+
+    public function __construct(AuthorizationCheckerInterface $authChecker, string $roleNeeded)
     {
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Defines form
-            $giftVoucher = new GiftVoucherAvailable();
-            $giftVoucherConfig = array('action' => 'new');
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                //Adjust slug in case of not accepted signs
-                $giftVoucher->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
-
-                //Persists data in DB
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($giftVoucher);
-                $em->flush();
-
-                //Redirects to the GiftVoucher created
-                return $this->redirectToRoute('giftvoucher_display_available', array(
-                    'id' => $giftVoucher->getId(),
-                ));
-            }
-
-            return $this->render('@c975LGiftVoucher/forms/new.html.twig', array(
-                'form' => $form->createView(),
-            ));
-        }
-
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        $this->accessGranted = $authChecker->isGranted($roleNeeded);
     }
 
 //DISPLAY
@@ -70,27 +39,57 @@ class AvailableController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function displayAvailable($id)
+    public function display(GiftVoucherAvailable $giftVoucherAvailable)
     {
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the GiftVoucher
-            $giftVoucher = $this->getDoctrine()
-                ->getManager()
-                ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
-                ->findOneById($id);
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
+        }
 
-            //Not existing GiftVoucher
-            if (!$giftVoucher instanceof GiftVoucherAvailable) {
-                throw $this->createNotFoundException();
-            }
+        //Renders the GiftVoucher
+        return $this->render('@c975LGiftVoucher/pages/displayAvailable.html.twig', array(
+            'giftVoucher' => $giftVoucherAvailable,
+        ));
+    }
 
-            return $this->render('@c975LGiftVoucher/pages/displayAvailable.html.twig', array(
-                'giftVoucher' => $giftVoucher,
+//NEW
+    /**
+     * @Route("/gift-voucher/new-available",
+     *      name="giftvoucher_new_available")
+     * @Method({"GET", "HEAD", "POST"})
+     */
+    public function new(Request $request, GiftVoucherService $giftVoucherService)
+    {
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
+        }
+
+        //Defines form
+        $giftVoucherAvailable = new GiftVoucherAvailable();
+        $giftVoucherConfig = array('action' => 'new');
+        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Adjust slug in case of not accepted signs
+            $giftVoucherAvailable->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
+
+            //Persists data in DB
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($giftVoucherAvailable);
+            $em->flush();
+
+            //Redirects to the GiftVoucher created
+            return $this->redirectToRoute('giftvoucher_display_available', array(
+                'id' => $giftVoucherAvailable->getId(),
             ));
         }
 
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        //Renders the new form
+        return $this->render('@c975LGiftVoucher/forms/new.html.twig', array(
+            'form' => $form->createView(),
+        ));
     }
 
 //MODIFY
@@ -102,45 +101,38 @@ class AvailableController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function modifyAvailable(Request $request, GiftVoucherService $giftVoucherService, $id)
+    public function modify(Request $request, GiftVoucherService $giftVoucherService, GiftVoucherAvailable $giftVoucherAvailable)
     {
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the GiftVoucher
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
+        }
+
+        //Defines form
+        $giftVoucherConfig = array('action' => 'modify');
+        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Adjust slug in case of not accepted signs
+            $giftVoucherAvailable->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
+
+            //Persists data in DB
             $em = $this->getDoctrine()->getManager();
-            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
+            $em->persist($giftVoucherAvailable);
+            $em->flush();
 
-            //Not existing GiftVoucher
-            if (!$giftVoucher instanceof GiftVoucherAvailable) {
-                throw $this->createNotFoundException();
-            }
-
-            //Defines form
-            $giftVoucherConfig = array('action' => 'modify');
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                //Adjust slug in case of not accepted signs
-                $giftVoucher->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
-
-                //Persists data in DB
-                $em->persist($giftVoucher);
-                $em->flush();
-
-                //Redirects to the GiftVoucher
-                return $this->redirectToRoute('giftvoucher_display_available', array(
-                    'id' => $giftVoucher->getId(),
-                ));
-            }
-
-            return $this->render('@c975LGiftVoucher/forms/modify.html.twig', array(
-                'giftVoucher' => $giftVoucher,
-                'form' => $form->createView(),
+            //Redirects to the GiftVoucher
+            return $this->redirectToRoute('giftvoucher_display_available', array(
+                'id' => $giftVoucherAvailable->getId(),
             ));
         }
 
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        //Renders the modify form
+        return $this->render('@c975LGiftVoucher/forms/modify.html.twig', array(
+            'giftVoucher' => $giftVoucherAvailable,
+            'form' => $form->createView(),
+        ));
     }
 
 //DUPLICATE
@@ -152,52 +144,44 @@ class AvailableController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function duplicateAvailable(Request $request, GiftVoucherService $giftVoucherService, $id)
+    public function duplicate(Request $request, GiftVoucherService $giftVoucherService, GiftVoucherAvailable $giftVoucherAvailable)
     {
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the GiftVoucher
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
+        }
+
+        //Defines form
+        $giftVoucherAvailableClone = clone $giftVoucherAvailable;
+        $giftVoucherAvailableClone
+            ->setObject(null)
+            ->setSlug(null)
+        ;
+        $giftVoucherConfig = array('action' => 'duplicate');
+        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailableClone, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Adjust slug in case of not accepted signs
+            $giftVoucherAvailableClone->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
+
+            //Persists data in DB
             $em = $this->getDoctrine()->getManager();
-            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
+            $em->persist($giftVoucherAvailableClone);
+            $em->flush();
 
-            //Not existing GiftVoucher
-            if (!$giftVoucher instanceof GiftVoucherAvailable) {
-                throw $this->createNotFoundException();
-            }
-
-            //Defines form
-            $giftVoucherClone = clone $giftVoucher;
-            $giftVoucherClone
-                ->setObject(null)
-                ->setSlug(null)
-            ;
-            $giftVoucherConfig = array('action' => 'duplicate');
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherClone, array('giftVoucherConfig' => $giftVoucherConfig));
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                //Adjust slug in case of not accepted signs
-                $giftVoucherClone->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
-
-                //Persists data in DB
-                $em->persist($giftVoucherClone);
-                $em->flush();
-
-                //Redirects to the GiftVoucher
-                return $this->redirectToRoute('giftvoucher_display_available', array(
-                    'id' => $giftVoucherClone->getId(),
-                ));
-            }
-
-            //Returns the form to duplicate content
-            return $this->render('@c975LGiftVoucher/forms/duplicate.html.twig', array(
-                'form' => $form->createView(),
-                'giftVoucher' => $giftVoucherClone,
-                'object' => $giftVoucher->getObject(),
+            //Redirects to the GiftVoucher
+            return $this->redirectToRoute('giftvoucher_display_available', array(
+                'id' => $giftVoucherAvailableClone->getId(),
             ));
         }
 
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        //Returns the form to duplicate content
+        return $this->render('@c975LGiftVoucher/forms/duplicate.html.twig', array(
+            'form' => $form->createView(),
+            'giftVoucher' => $giftVoucherAvailableClone,
+            'object' => $giftVoucherAvailable->getObject(),
+        ));
     }
 
 //DELETE
@@ -209,41 +193,35 @@ class AvailableController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function deleteAvailable(Request $request, $id)
+    public function delete(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
-        if (null !== $this->getUser() && $this->get('security.authorization_checker')->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded'))) {
-            //Gets the GiftVoucher
-            $em = $this->getDoctrine()->getManager();
-            $giftVoucher = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findOneById($id);
-
-            //Not existing GiftVoucher
-            if (!$giftVoucher instanceof GiftVoucherAvailable) {
-                throw $this->createNotFoundException();
-            }
-
-            //Defines form
-            $giftVoucherConfig = array('action' => 'delete');
-            $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucher, array('giftVoucherConfig' => $giftVoucherConfig));
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                //Persists data in DB
-                $giftVoucher->setSuppressed(true);
-
-                $em->persist($giftVoucher);
-                $em->flush();
-
-                //Redirects to the dashboard
-                return $this->redirectToRoute('giftvoucher_dashboard');
-            }
-
-            return $this->render('@c975LGiftVoucher/forms/delete.html.twig', array(
-                'form' => $form->createView(),
-                'giftVoucher' => $giftVoucher,
-            ));
+        //Access denied
+        if (true !== $this->accessGranted) {
+            throw $this->createAccessDeniedException();
         }
 
-        //Access is denied
-        throw $this->createAccessDeniedException();
+        //Defines form
+        $giftVoucherConfig = array('action' => 'delete');
+        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Persists data in DB
+            $giftVoucherAvailable->setSuppressed(true);
+
+            //Persists data in DB
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($giftVoucherAvailable);
+            $em->flush();
+
+            //Redirects to the dashboard
+            return $this->redirectToRoute('giftvoucher_dashboard');
+        }
+
+        //Renders the delete form
+        return $this->render('@c975LGiftVoucher/forms/delete.html.twig', array(
+            'form' => $form->createView(),
+            'giftVoucher' => $giftVoucherAvailable,
+        ));
     }
 }
