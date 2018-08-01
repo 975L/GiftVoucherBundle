@@ -174,10 +174,10 @@ Routes
 The different Routes (naming self-explanatory) available are:
 - giftvoucher_display
 - giftvoucher_display_available
-- giftvoucher_new
-- giftvoucher_modify
-- giftvoucher_duplicate
-- giftvoucher_delete
+- giftvoucher_add_available
+- giftvoucher_modify_available
+- giftvoucher_duplicate_available
+- giftvoucher_delete_available
 - giftvoucher_dashboard
 - giftvoucher_offer
 - giftvoucher_offer_all

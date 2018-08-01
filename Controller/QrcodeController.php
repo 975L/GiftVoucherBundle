@@ -33,21 +33,21 @@ class QrcodeController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function qrcode(GiftVoucherService $giftVoucherService,$identifier)
+    public function qrcode(GiftVoucherService $giftVoucherService, $identifier)
     {
         //Gets the GiftVoucher
-        $giftVoucher = $this->getDoctrine()
+        $giftVoucherPurchased = $this->getDoctrine()
             ->getManager()
             ->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')
             ->findOneBasedOnIdentifier($identifier);
 
         //Not existing GiftVoucher
-        if (!$giftVoucher instanceof GiftVoucherPurchased) {
+        if (!$giftVoucherPurchased instanceof GiftVoucherPurchased) {
             throw $this->createNotFoundException();
         }
 
         //Gets the formatted identifier
-        $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucher->getIdentifier());
+        $identifierFormatted = $giftVoucherService->getIdentifierFormatted($giftVoucherPurchased->getIdentifier());
 
         //Returns QrCode
         $qrCode = new QrCode();

@@ -1,5 +1,13 @@
 # Changelog
 
+v1.14
+-----
+- Made use of TranslatorInterface (31/07/2018)
+- Made use of Voters for access rights (01/08/2018)
+- Merged `GiftVoucherController.php` to `AvailableController.php` more logical (01/08/2018)
+- Renamed `new` to `add` to avoid using php reserved word (01/08/2018)
+- Renamed `use` to `utilization` to avoid using php reserved word (01/08/2018)
+
 v1.13.2
 -------
 - Injected `AuthorizationCheckerInterface` in Controllers to avoid use of `$this->get()` (30/07/2018)

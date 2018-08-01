@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Translation\Translator;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
@@ -31,13 +31,6 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherService;
 
 class PurchasedController extends Controller
 {
-    private $accessGranted;
-
-    public function __construct(AuthorizationCheckerInterface $authChecker, string $roleNeeded)
-    {
-        $this->accessGranted = $authChecker->isGranted($roleNeeded);
-    }
-
 //DISPLAY
     /**
      * @Route("/gift-voucher/{identifier}",
@@ -47,7 +40,7 @@ class PurchasedController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function display(Request $request, $identifier)
+    public function display(Request $request, AuthorizationCheckerInterface $authChecker, $identifier)
     {
         //Gets the GiftVoucher
         $giftVoucherPurchased = $this->getDoctrine()
@@ -63,7 +56,7 @@ class PurchasedController extends Controller
         //Renders the GiftVoucher
         return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
             'giftVoucher' => $giftVoucherPurchased,
-            'display' => true === $this->accessGranted ? 'admin' : 'basic',
+            'display' => true === $authChecker->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded')) ? 'admin' : 'basic',
         ));
     }
 
@@ -140,7 +133,7 @@ class PurchasedController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Adds test data
-            if ($this->getParameter('c975_l_gift_voucher.live') === false) {
+            if (false === $this->getParameter('c975_l_gift_voucher.live')) {
                 $giftVoucherPurchased->setObject('(TEST) ' . $giftVoucherPurchased->getObject());
             }
 
@@ -205,13 +198,8 @@ class PurchasedController extends Controller
      *      })
      * @Method({"GET", "HEAD"})
      */
-    public function use(Request $request, Translator $translator, $identifier)
+    public function utilisation(Request $request, TranslatorInterface $translator, $identifier)
     {
-        //Access denied
-        if (true !== $this->accessGranted) {
-            throw $this->createAccessDeniedException();
-        }
-
         //Gets the GiftVoucher
         $em = $this->getDoctrine()->getManager();
         $giftVoucherPurchased = $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')->findOneBasedOnIdentifier($identifier);
@@ -222,8 +210,9 @@ class PurchasedController extends Controller
         }
 
         //Valid
+        $this->denyAccessUnlessGranted('utilisation', $giftVoucherPurchased);
         $now = new \DateTime();
-        if ($giftVoucherPurchased->getValid() === null || $giftVoucherPurchased->getValid() > $now || $request->get('force') == 'true') {
+        if (null === $giftVoucherPurchased->getValid() || $giftVoucherPurchased->getValid() > $now || $request->get('force') == 'true') {
             $giftVoucherPurchased->setUsed($now);
 
             $em->persist($giftVoucherPurchased);

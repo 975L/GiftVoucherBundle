@@ -34,7 +34,7 @@ class GiftVoucherService
         \Symfony\Component\HttpFoundation\RequestStack $requestStack,
         \Symfony\Component\Routing\Generator\UrlGeneratorInterface $router,
         \Twig_Environment $templating,
-        \Symfony\Component\Translation\Translator $translator
+        \Symfony\Component\Translation\TranslatorInterface $translator
         )
     {
         $this->container = $container;

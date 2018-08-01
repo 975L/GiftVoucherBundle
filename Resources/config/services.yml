@@ -6,11 +6,14 @@ services:
 
     c975L\GiftVoucherBundle\Controller\:
         resource: '../../Controller/*'
-        bind:
-            $roleNeeded: '%c975_l_gift_voucher.roleNeeded%'
 
     c975L\GiftVoucherBundle\Form\:
         resource: '../../Form/*'
+
+    c975L\GiftVoucherBundle\Security\:
+        resource: '../../Security/*'
+        bind:
+            $roleNeeded: '%c975_l_gift_voucher.roleNeeded%'
 
     c975L\GiftVoucherBundle\Service\:
         resource: '../../Service/*'
