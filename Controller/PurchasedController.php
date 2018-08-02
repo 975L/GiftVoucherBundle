@@ -34,7 +34,7 @@ class PurchasedController extends Controller
 //DISPLAY
     /**
      * @Route("/gift-voucher/{identifier}",
-     *      name="giftvoucher_display",
+     *      name="giftvoucher_purchased",
      *      requirements={
      *          "identifier": "^([a-zA-Z]{16})$"
      *      })
@@ -177,7 +177,7 @@ class PurchasedController extends Controller
 
             //Redirects to the GiftVoucher
             if (false !== $giftVoucherIdentifier) {
-                return $this->redirectToRoute('giftvoucher_display', array(
+                return $this->redirectToRoute('giftvoucher_purchased', array(
                     'identifier' => $giftVoucherIdentifier,
                 ));
             }
@@ -234,6 +234,6 @@ class PurchasedController extends Controller
         }
 
         //Redirects to GiftVoucher
-        return $this->redirectToRoute('giftvoucher_display', array('identifier' => $identifier));
+        return $this->redirectToRoute('giftvoucher_purchased', array('identifier' => $identifier));
     }
 }

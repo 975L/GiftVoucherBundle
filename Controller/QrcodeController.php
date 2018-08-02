@@ -54,7 +54,7 @@ class QrcodeController extends Controller
         $qrCode->setSize(150);
         $qrCode->setMargin(10);
         $qrCode->setValidateResult(true);
-        $qrCode->setText($this->generateUrl('giftvoucher_display', array('identifier' => $identifier), UrlGeneratorInterface::ABSOLUTE_URL));
+        $qrCode->setText($this->generateUrl('giftvoucher_purchased', array('identifier' => $identifier), UrlGeneratorInterface::ABSOLUTE_URL));
         $qrCode->setEncoding('UTF-8');
         $qrCode->setErrorCorrectionLevel(ErrorCorrectionLevel::HIGH);
         $qrCode->setLabel($identifierFormatted);

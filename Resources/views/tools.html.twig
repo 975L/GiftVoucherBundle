@@ -6,22 +6,22 @@
 
 {# Display #}
 {% if type == 'modify' or type == 'delete' %}
-    {{ toolbar_button(path('giftvoucher_display_available', {'id': object.id}), 'display') }}
+    {{ toolbar_button(path('giftvoucher_display', {'id': object.id}), 'display') }}
 {% endif %}
 
 {# New #}
-{% if type != 'new' %}
-    {{ toolbar_button(path('giftvoucher_add_available'), 'new') }}
+{% if type != 'create' %}
+    {{ toolbar_button(path('giftvoucher_create'), 'create') }}
 {% endif %}
 
 {# Modify #}
 {% if type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_modify_available', {'id': object.id}), 'modify') }}
+    {{ toolbar_button(path('giftvoucher_modify', {'id': object.id}), 'modify') }}
 {% endif %}
 
 {# Duplicate #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_duplicate_available', {'id': object.id}), 'duplicate') }}
+    {{ toolbar_button(path('giftvoucher_duplicate', {'id': object.id}), 'duplicate') }}
 {% endif %}
 
 {# Cancel #}
@@ -31,7 +31,7 @@
 
 {# Delete #}
 {% if type == 'display' or type == 'modify' or type == 'displayAvailable' %}
-    {{ toolbar_button(path('giftvoucher_delete_available', {'id': object.id}), 'delete') }}
+    {{ toolbar_button(path('giftvoucher_delete', {'id': object.id}), 'delete') }}
 {% endif %}
 
 {# Help #}

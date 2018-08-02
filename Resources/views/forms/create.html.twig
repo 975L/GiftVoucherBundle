@@ -1,10 +1,10 @@
 {% extends "@c975LGiftVoucher/layout.html.twig" %}
 {% trans_default_domain 'giftVoucher' %}
-{% set title = 'label.gift_voucher'|trans ~ ' (' ~ 'label.new'|trans({}, 'toolbar') ~ ')' %}
+{% set title = 'label.gift_voucher'|trans ~ ' (' ~ 'label.create'|trans({}, 'toolbar') ~ ')' %}
 
 {% block giftVoucher_content %}
 {# Toolbar #}
-    {{ toolbar_display('@c975LGiftVoucher/tools.html.twig', 'new', 'md') }}
+    {{ toolbar_display('@c975LGiftVoucher/tools.html.twig', 'create', 'md') }}
     <div class="row">
         <p class="alert alert-info text-center">
             {{ 'text.create_info'|trans }}

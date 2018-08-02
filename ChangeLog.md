@@ -1,5 +1,16 @@
 # Changelog
 
+v1.14.2
+-------
+- Update slugify method to check unicity of slug (02/08/2018)
+- Renamed things link to `add` to `create` (02/08/2018)
+- Ordered in alphabetical AvailableVoter constants (02/08/2018)
+- Renamed Routes (02/08/2018)
+
+v1.14.1
+-------
+- Renamed `forms/new.html.twig` to `forms/add.html.twig` (01/08/2018)
+
 v1.14
 -----
 - Made use of TranslatorInterface (31/07/2018)

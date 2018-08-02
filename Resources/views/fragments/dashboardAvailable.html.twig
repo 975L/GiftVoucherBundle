@@ -31,19 +31,19 @@
                 </td>
 {# Object #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_display_available', {'id': giftVoucher.id}) }}" title="{{ 'label.display'|trans({}, 'toolbar') }}">{{ giftVoucher.object }}</a>
+                    <a href="{{ path('giftvoucher_display', {'id': giftVoucher.id}) }}" title="{{ 'label.display'|trans({}, 'toolbar') }}">{{ giftVoucher.object }}</a>
                 </td>
 {# Modify #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_modify_available', {'id': giftVoucher.id}) }}" title="{{ 'label.modify'|trans({}, 'toolbar') }}">{{ 'label.modify'|trans({}, 'toolbar') }}</a>
+                    <a href="{{ path('giftvoucher_modify', {'id': giftVoucher.id}) }}" title="{{ 'label.modify'|trans({}, 'toolbar') }}">{{ 'label.modify'|trans({}, 'toolbar') }}</a>
                 </td>
 {# Duplicate #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_duplicate_available', {'id': giftVoucher.id}) }}" title="{{ 'label.duplicate'|trans({}, 'toolbar') }}">{{ 'label.duplicate'|trans({}, 'toolbar') }}</a>
+                    <a href="{{ path('giftvoucher_duplicate', {'id': giftVoucher.id}) }}" title="{{ 'label.duplicate'|trans({}, 'toolbar') }}">{{ 'label.duplicate'|trans({}, 'toolbar') }}</a>
                 </td>
 {# Delete #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_delete_available', {'id': giftVoucher.id}) }}" title="{{ 'label.delete'|trans({}, 'toolbar') }}" class="text-danger">{{ 'label.delete'|trans({}, 'toolbar') }}</a>
+                    <a href="{{ path('giftvoucher_delete', {'id': giftVoucher.id}) }}" title="{{ 'label.delete'|trans({}, 'toolbar') }}" class="text-danger">{{ 'label.delete'|trans({}, 'toolbar') }}</a>
                 </td>
 {# Copy code #}
                 <td class="text-center">

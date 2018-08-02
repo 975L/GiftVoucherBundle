@@ -42,8 +42,6 @@ class PurchasedVoter extends Voter
 
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        $user = $token->getUser();
-
         //Defines access rights
         switch ($attribute) {
             case self::UTILISATION:

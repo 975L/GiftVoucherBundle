@@ -173,12 +173,12 @@ Routes
 ------
 The different Routes (naming self-explanatory) available are:
 - giftvoucher_display
-- giftvoucher_display_available
-- giftvoucher_add_available
-- giftvoucher_modify_available
-- giftvoucher_duplicate_available
-- giftvoucher_delete_available
+- giftvoucher_create
+- giftvoucher_modify
+- giftvoucher_duplicate
+- giftvoucher_delete
 - giftvoucher_dashboard
+- giftvoucher_purchased
 - giftvoucher_offer
 - giftvoucher_offer_all
 - giftvoucher_use

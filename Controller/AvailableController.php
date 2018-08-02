@@ -47,7 +47,7 @@ class AvailableController extends Controller
         //Gets GiftVouchers Available
         } elseif ($request->query->get('v') == 'available') {
             $pagination = $paginator->paginate(
-                $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findAvailable(),
+                $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findAllAvailable(),
                 $request->query->getInt('p', 1),
                 15
             );
@@ -64,8 +64,8 @@ class AvailableController extends Controller
 
 //DISPLAY
     /**
-     * @Route("/gift-voucher/display-available/{id}",
-     *      name="giftvoucher_display_available",
+     * @Route("/gift-voucher/display/{id}",
+     *      name="giftvoucher_display",
      *      requirements={
      *          "id": "^([0-9]+)$"
      *      })
@@ -81,19 +81,19 @@ class AvailableController extends Controller
         ));
     }
 
-//NEW
+//CREATE
     /**
-     * @Route("/gift-voucher/new-available",
-     *      name="giftvoucher_add_available")
+     * @Route("/gift-voucher/create",
+     *      name="giftvoucher_create")
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function add(Request $request, GiftVoucherService $giftVoucherService)
+    public function create(Request $request, GiftVoucherService $giftVoucherService)
     {
         $giftVoucherAvailable = new GiftVoucherAvailable();
-        $this->denyAccessUnlessGranted('add', $giftVoucherAvailable);
+        $this->denyAccessUnlessGranted('create', $giftVoucherAvailable);
 
         //Defines form
-        $giftVoucherConfig = array('action' => 'add');
+        $giftVoucherConfig = array('action' => 'create');
         $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
         $form->handleRequest($request);
 
@@ -107,21 +107,21 @@ class AvailableController extends Controller
             $em->flush();
 
             //Redirects to the GiftVoucher created
-            return $this->redirectToRoute('giftvoucher_display_available', array(
+            return $this->redirectToRoute('giftvoucher_display', array(
                 'id' => $giftVoucherAvailable->getId(),
             ));
         }
 
-        //Renders the new form
-        return $this->render('@c975LGiftVoucher/forms/new.html.twig', array(
+        //Renders the create form
+        return $this->render('@c975LGiftVoucher/forms/create.html.twig', array(
             'form' => $form->createView(),
         ));
     }
 
 //MODIFY
     /**
-     * @Route("/gift-voucher/modify-available/{id}",
-     *      name="giftvoucher_modify_available",
+     * @Route("/gift-voucher/modify/{id}",
+     *      name="giftvoucher_modify",
      *      requirements={
      *          "id": "^([0-9]+)$"
      *      })
@@ -146,7 +146,7 @@ class AvailableController extends Controller
             $em->flush();
 
             //Redirects to the GiftVoucher
-            return $this->redirectToRoute('giftvoucher_display_available', array(
+            return $this->redirectToRoute('giftvoucher_display', array(
                 'id' => $giftVoucherAvailable->getId(),
             ));
         }
@@ -160,8 +160,8 @@ class AvailableController extends Controller
 
 //DUPLICATE
     /**
-     * @Route("/gift-voucher/duplicate-available/{id}",
-     *      name="giftvoucher_duplicate_available",
+     * @Route("/gift-voucher/duplicate/{id}",
+     *      name="giftvoucher_duplicate",
      *      requirements={
      *          "id": "^([0-9]+)$"
      *      })
@@ -191,7 +191,7 @@ class AvailableController extends Controller
             $em->flush();
 
             //Redirects to the GiftVoucher
-            return $this->redirectToRoute('giftvoucher_display_available', array(
+            return $this->redirectToRoute('giftvoucher_display', array(
                 'id' => $giftVoucherAvailableClone->getId(),
             ));
         }
@@ -206,8 +206,8 @@ class AvailableController extends Controller
 
 //DELETE
     /**
-     * @Route("/gift-voucher/delete-available/{id}",
-     *      name="giftvoucher_delete_available",
+     * @Route("/gift-voucher/delete/{id}",
+     *      name="giftvoucher_delete",
      *      requirements={
      *          "id": "^([0-9]+)$"
      *      })

@@ -30,7 +30,7 @@ class GiftVoucherAvailableRepository extends EntityRepository
     }
 
     //Finds all GiftVouchers available
-    public function findAvailable()
+    public function findAllAvailable()
     {
         $qb = $this->createQueryBuilder('v');
         $qb->select('v')

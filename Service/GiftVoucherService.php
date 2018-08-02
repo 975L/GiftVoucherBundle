@@ -189,11 +189,42 @@ class GiftVoucherService
         $this->emailService->send($emailData, true);
     }
 
-    //Slugify
+    //Slugify function - https://github.com/cocur/slugify
     public function slugify($text)
     {
         $slugify = new Slugify();
-        return $slugify->slugify($text);
+        $slug = $slugify->slugify($text);
+
+        //Checks unicity of slug
+        $finalSlug = $slug;
+        $slugExists = true;
+        $i = 1;
+        do {
+            $slugExists = $this->slugExists($finalSlug);
+            if ($slugExists) {
+                $finalSlug = $slug . '-' . $i++;
+            }
+        } while (false !== $slugExists);
+
+        return $finalSlug;
+    }
+
+    //Checks if slug already exists
+    public function slugExists($slug)
+    {
+        //Gets the GiftVouchers available
+        $giftVouchers = $this->em
+            ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
+            ->findAllAvailable()
+            ;
+
+        foreach ($giftVouchers as $giftVoucher) {
+            if ($giftVoucher->getSlug() == $slug) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     //Validates the GiftVoucher after its payment

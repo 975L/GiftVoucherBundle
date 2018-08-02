@@ -81,7 +81,7 @@ class GiftVoucherAvailableType extends AbstractType
 
         //All currencies with defaultCurrency selected
         if (empty($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies'))) {
-            $dataCurrency = $options['giftVoucherConfig']['action'] == 'add' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
+            $dataCurrency = $options['giftVoucherConfig']['action'] == 'create' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
             $builder
                 ->add('currency', CurrencyType::class, array(
                     'label' => 'label.currency',
