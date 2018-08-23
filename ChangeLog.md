@@ -1,5 +1,10 @@
 # Changelog
 
+v1.15.1
+-------
+- Renamed `samples` file and calls (23/08/2018)
+- Put javascript for forms in a separate file (23/08/2018)
+
 v1.15
 -----
 - Added Voter for Slug Route (02/08/2018)

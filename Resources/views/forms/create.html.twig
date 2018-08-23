@@ -21,20 +21,5 @@
         {{ form_end(form) }}
     </div>
 {# Javascript #}
-    <script type="text/javascript">
-        $(document).ready(function() {
-{# Update semantic url #}
-            $('#gift_voucher_available_object')
-                .change(function() {
-                    var slugUrl = '{{ absolute_url(path('giftvoucher_slug', {'text': 'TEXT'})) }}';
-                    var slug = $.post(slugUrl.replace('TEXT', $('#gift_voucher_available_object').val()));
-                    slug.done(function(data) {
-                        if (data.a != 'false') {
-                            $('#gift_voucher_available_slug')
-                                .val(data.a);
-                        }
-                    });
-                });
-        });
-    </script>
+    {{ include('@c975LGiftVoucher/fragments/javascript.html.twig') }}
 {% endblock %}

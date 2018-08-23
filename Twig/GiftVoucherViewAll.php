@@ -44,7 +44,7 @@ class GiftVoucherViewAll extends \Twig_Extension
     }
 
     /**
-     * Returns the xhtml code for the samples GiftVoucherAvailable
+     * Returns the xhtml code to view all the GiftVoucherAvailable
      * @return string
      */
     public function viewAll(\Twig_Environment $environment, $number = null, $order = 'object')
@@ -53,7 +53,7 @@ class GiftVoucherViewAll extends \Twig_Extension
         $giftVouchers = $this->em
             ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
             ->findAllAlphabeticalOrder($number, $order);
-        return $environment->render('@c975LGiftVoucher/fragments/samples.html.twig', array(
+        return $environment->render('@c975LGiftVoucher/fragments/viewAll.html.twig', array(
                 'giftVouchers' => $giftVouchers,
             ));
     }
