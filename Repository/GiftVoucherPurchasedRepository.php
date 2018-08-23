@@ -12,9 +12,18 @@ namespace c975L\GiftVoucherBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 
+/**
+ * Repository for Event Entity
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2018 975L <contact@975l.com>
+ */
 class GiftVoucherPurchasedRepository extends EntityRepository
 {
-    //Finds GiftVoucher based on Identifier
+    /**
+     * Finds GiftVoucherPurchased based on Identifier, so including secret code
+     * @return mixed
+     */
+    //
     public function findOneBasedOnIdentifier($identifier)
     {
         $identifier = strtoupper($identifier);
@@ -30,8 +39,11 @@ class GiftVoucherPurchasedRepository extends EntityRepository
         return $qb->getQuery()->getOneOrNullResult();
     }
 
-    //Finds GiftVoucher purchased
-    public function findPurchased()
+    /**
+     * Finds GiftVoucherPurchased NOT used
+     * @return QueryBuilder
+     */
+    public function findAll()
     {
         $qb = $this->createQueryBuilder('v');
         $qb->select('v')

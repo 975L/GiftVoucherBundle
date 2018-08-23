@@ -19,6 +19,11 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * GiftVoucherAvailable FormType
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2018 975L <contact@975l.com>
+ */
 class GiftVoucherAvailableType extends AbstractType
 {
     private $container;
@@ -78,7 +83,6 @@ class GiftVoucherAvailableType extends AbstractType
                     'placeholder' => 'label.amount',
                 )))
             ;
-
         //All currencies with defaultCurrency selected
         if (empty($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies'))) {
             $dataCurrency = $options['giftVoucherConfig']['action'] == 'create' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();

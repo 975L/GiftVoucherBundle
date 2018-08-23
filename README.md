@@ -32,6 +32,8 @@ You can also give a better user's experience by using [Select2](https://select2.
 
 [GiftVoucherBundle dedicated web page](https://975l.com/en/pages/gift-voucher-bundle).
 
+[GiftVoucherBundle API documentation](https://975l.com/apidoc/c975L/GiftVoucherBundle.html).
+
 Bundle installation
 ===================
 
@@ -97,6 +99,8 @@ c975_l_gift_voucher:
     roleNeeded: 'ROLE_ADMIN'
     #If your gift-vouchers are live or in test
     live: true #Default false
+    #If you want to display the checkbox for GDPR agreement
+    gdpr: false #true(default)
     #The default currency code on 3 letters
     defaultCurrency: 'EUR' #'EUR'(default)
     #(Optional) The proposed currencies codes on 3 letters
@@ -210,10 +214,12 @@ You will use this Twig extension to display a link to ofeer the Gift-Voucher
 
 This code is recalled on the display of Gift-Voucher for Admin users.
 
-`gv_samples()`
+`gv_view_all()`
 ----------------
 This Twig extension will create a view of your Gift-Vouchers. It is used on `Resources/views/pages/offerAll.html.twig` template, used by Route `giftvoucher_offer_all`.
 
-`{{ gv_samples() }}` will create the view with all your available Gift-Vouchers
-`{{ gv_samples(NUMBER_OF_GIFTVOUCHERS_TO_DISPLAY) }}` will create the view with the specified number of your available Gift-Vouchers
-`{{ gv_samples(NUMBER_OF_GIFTVOUCHERS_TO_DISPLAY, ORDERED_FIELD) }}` will create the view with the specified number of your available Gift-Vouchers, ordered by the specified field. Values for this field are the ones of the Database Table `gift_voucher_available`. You will mostly use `id`, `object` (default one), `slug`, `amount`.
+`{{ gv_view_all() }}` will create the view with all your available Gift-Vouchers
+`{{ gv_view_all(NUMBER_OF_GIFTVOUCHERS_TO_DISPLAY) }}` will create the view with the specified number of your available Gift-Vouchers
+`{{ gv_view_all(NUMBER_OF_GIFTVOUCHERS_TO_DISPLAY, ORDERED_FIELD) }}` will create the view with the specified number of your available Gift-Vouchers, ordered by the specified field. Values for this field are the ones of the Database Table `gift_voucher_available`. You will mostly use `id`, `object` (default one), `slug`, `amount`.
+
+**If this project help you to reduce time to develop, you can [buy me a coffee](https://www.buymeacoffee.com/LaurentMarquet) :)**

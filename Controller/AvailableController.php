@@ -15,17 +15,60 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
-use c975L\GiftVoucherBundle\Service\GiftVoucherService;
+use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
+use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+use c975L\GiftVoucherBundle\Service\Slug\GiftVoucherSlugInterface;
 
+/**
+ * GiftVoucherAvailable Controller class
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2017 975L <contact@975l.com>
+ */
 class AvailableController extends Controller
 {
+    /**
+     * Stores GiftVoucherAvailableService
+     * @var GiftVoucherAvailableServiceInterface
+     */
+    private $giftVoucherAvailableService;
+
+    /**
+     * Stores GiftVoucherPurchasedService
+     * @var GiftVoucherPurchasedServiceInterface
+     */
+    private $giftVoucherPurchasedService;
+
+    /**
+     * Stores GiftVoucherSlug
+     * @var GiftVoucherSlugInterface
+     */
+    private $giftVoucherSlug;
+
+    public function __construct(
+        GiftVoucherAvailableServiceInterface $giftVoucherAvailableService,
+        GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService,
+        GiftVoucherSlugInterface $giftVoucherSlug
+    )
+    {
+        $this->giftVoucherAvailableService = $giftVoucherAvailableService;
+        $this->giftVoucherPurchasedService = $giftVoucherPurchasedService;
+        $this->giftVoucherSlug = $giftVoucherSlug;
+    }
+
 //DASHBOARD
     /**
+     * Displays the dashboard
+     * @return Response
+     * @throws AccessDeniedException
+     *
      * @Route("/gift-voucher/dashboard",
      *      name="giftvoucher_dashboard")
      * @Method({"GET", "HEAD"})
@@ -34,36 +77,35 @@ class AvailableController extends Controller
     {
         $this->denyAccessUnlessGranted('dashboard', null);
 
-        //Gets the manager
-        $em = $this->getDoctrine()->getManager();
-
-        //Gets GiftVouchers Purchased
-        if ($request->query->get('v') === null || $request->query->get('v') == '') {
-            $pagination = $paginator->paginate(
-                $em->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')->findPurchased(),
-                $request->query->getInt('p', 1),
-                15
-            );
         //Gets GiftVouchers Available
-        } elseif ($request->query->get('v') == 'available') {
-            $pagination = $paginator->paginate(
-                $em->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')->findAllAvailable(),
+        if ('available' == $request->query->get('v')) {
+            $giftVouchers = $paginator->paginate(
+                $this->giftVoucherAvailableService->getAll(),
                 $request->query->getInt('p', 1),
                 15
             );
-        //Not found
-        } else {
-            throw $this->createNotFoundException();
+        //Gets GiftVouchers Purchased
+        } else  {
+            $giftVouchers = $paginator->paginate(
+                $this->giftVoucherPurchasedService->getAll(),
+                $request->query->getInt('p', 1),
+                15
+            );
         }
 
         //Renders the dashboard
         return $this->render('@c975LGiftVoucher/pages/dashboard.html.twig', array(
-            'giftVouchers' => $pagination,
+            'giftVouchers' => $giftVouchers,
         ));
     }
 
 //DISPLAY
     /**
+     * Displays the GiftVoucherAvailable
+     * @return Response
+     * @throws NotFoundHttpException
+     * @throws AccessDeniedException
+     *
      * @Route("/gift-voucher/display/{id}",
      *      name="giftvoucher_display",
      *      requirements={
@@ -75,7 +117,7 @@ class AvailableController extends Controller
     {
         $this->denyAccessUnlessGranted('display', $giftVoucherAvailable);
 
-        //Renders the GiftVoucher
+        //Renders the GiftVoucherAvailable
         return $this->render('@c975LGiftVoucher/pages/displayAvailable.html.twig', array(
             'giftVoucher' => $giftVoucherAvailable,
         ));
@@ -83,11 +125,15 @@ class AvailableController extends Controller
 
 //CREATE
     /**
+     * Creates a GiftVoucherAvailable
+     * @return Response
+     * @throws AccessDeniedException
+     *
      * @Route("/gift-voucher/create",
      *      name="giftvoucher_create")
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function create(Request $request, GiftVoucherService $giftVoucherService)
+    public function create(Request $request)
     {
         $giftVoucherAvailable = new GiftVoucherAvailable();
         $this->denyAccessUnlessGranted('create', $giftVoucherAvailable);
@@ -98,15 +144,10 @@ class AvailableController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Adjust slug in case of not accepted signs
-            $giftVoucherAvailable->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
+            //Registers the GiftVoucherAvailable
+            $this->giftVoucherAvailableService->register($giftVoucherAvailable);
 
-            //Persists data in DB
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($giftVoucherAvailable);
-            $em->flush();
-
-            //Redirects to the GiftVoucher created
+            //Redirects to the GiftVoucherAvailable
             return $this->redirectToRoute('giftvoucher_display', array(
                 'id' => $giftVoucherAvailable->getId(),
             ));
@@ -120,6 +161,11 @@ class AvailableController extends Controller
 
 //MODIFY
     /**
+     * Modifies the GiftVoucherAvailable using its unique id
+     * @return Response
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
+     *
      * @Route("/gift-voucher/modify/{id}",
      *      name="giftvoucher_modify",
      *      requirements={
@@ -127,7 +173,7 @@ class AvailableController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function modify(Request $request, GiftVoucherService $giftVoucherService, GiftVoucherAvailable $giftVoucherAvailable)
+    public function modify(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
         $this->denyAccessUnlessGranted('modify', $giftVoucherAvailable);
 
@@ -137,13 +183,8 @@ class AvailableController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Adjust slug in case of not accepted signs
-            $giftVoucherAvailable->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
-
-            //Persists data in DB
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($giftVoucherAvailable);
-            $em->flush();
+            //Registers the GiftVoucherAvailable
+            $this->giftVoucherAvailableService->register($giftVoucherAvailable);
 
             //Redirects to the GiftVoucher
             return $this->redirectToRoute('giftvoucher_display', array(
@@ -160,6 +201,11 @@ class AvailableController extends Controller
 
 //DUPLICATE
     /**
+     * Duplicates the GiftVoucherAvailable using its unique id
+     * @return Response
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
+     *
      * @Route("/gift-voucher/duplicate/{id}",
      *      name="giftvoucher_duplicate",
      *      requirements={
@@ -167,7 +213,7 @@ class AvailableController extends Controller
      *      })
      * @Method({"GET", "HEAD", "POST"})
      */
-    public function duplicate(Request $request, GiftVoucherService $giftVoucherService, GiftVoucherAvailable $giftVoucherAvailable)
+    public function duplicate(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
         $this->denyAccessUnlessGranted('duplicate', $giftVoucherAvailable);
 
@@ -182,13 +228,8 @@ class AvailableController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Adjust slug in case of not accepted signs
-            $giftVoucherAvailableClone->setSlug($giftVoucherService->slugify($form->getData()->getSlug()));
-
-            //Persists data in DB
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($giftVoucherAvailableClone);
-            $em->flush();
+            //Registers the GiftVoucherAvailable
+            $this->giftVoucherAvailableService->register($giftVoucherAvailableClone);
 
             //Redirects to the GiftVoucher
             return $this->redirectToRoute('giftvoucher_display', array(
@@ -206,6 +247,11 @@ class AvailableController extends Controller
 
 //DELETE
     /**
+     * Deletes the GiftVoucherAvailable using its unique id
+     * @return Response
+     * @throws AccessDeniedException
+     * @throws NotFoundHttpException
+     *
      * @Route("/gift-voucher/delete/{id}",
      *      name="giftvoucher_delete",
      *      requirements={
@@ -223,13 +269,8 @@ class AvailableController extends Controller
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //Persists data in DB
-            $giftVoucherAvailable->setSuppressed(true);
-
-            //Persists data in DB
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($giftVoucherAvailable);
-            $em->flush();
+            //Marks as deleted the GiftVoucherAvailable
+            $this->giftVoucherAvailableService->delete($giftVoucherAvailable);
 
             //Redirects to the dashboard
             return $this->redirectToRoute('giftvoucher_dashboard');
@@ -244,17 +285,27 @@ class AvailableController extends Controller
 
 //SLUG
     /**
+     * Returns the slug corresponding to the text provided
+     * @return JsonResponse
+     * @throws AccessDeniedException
+     *
      * @Route("/gift-voucher/slug/{text}",
      *      name="giftvoucher_slug")
      * @Method({"POST"})
      */
-    public function slug(GiftVoucherService $giftVoucherService, $text)
+    public function slug($text)
     {
-        return $this->json(array('a' => $giftVoucherService->slugify($text)));
+        $this->denyAccessUnlessGranted('slug', null);
+
+        return $this->json(array('a' => $this->giftVoucherSlug->slugify($text)));
     }
 
 //HELP
     /**
+     * Displays the help
+     * @return Response
+     * @throws AccessDeniedException
+     *
      * @Route("/gift-voucher/help",
      *      name="giftvoucher_help")
      * @Method({"GET", "HEAD"})

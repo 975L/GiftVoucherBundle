@@ -12,11 +12,11 @@ namespace c975L\GiftVoucherBundle\Twig;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
- * Twig extension to display the Link for the GiftVoucherAvailable using `gv_offer_link(id)`
+ * Twig extension to display all the GiftVoucherAvailable as a list (object, description, offer button) using `gv_view_all([$number, $orderField])`
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class GiftVoucherOfferLink extends \Twig_Extension
+class GiftVoucherViewAll extends \Twig_Extension
 {
     /**
      * Stores EntityManager
@@ -33,8 +33,8 @@ class GiftVoucherOfferLink extends \Twig_Extension
     {
         return array(
             new \Twig_SimpleFunction(
-                'gv_offer_link',
-                array($this, 'offerLink'),
+                'gv_view_all',
+                array($this, 'viewAll'),
                 array(
                     'needs_environment' => true,
                     'is_safe' => array('html'),
@@ -44,17 +44,17 @@ class GiftVoucherOfferLink extends \Twig_Extension
     }
 
     /**
-     * Returns the xhtml code for the Offer link
+     * Returns the xhtml code for the samples GiftVoucherAvailable
      * @return string
      */
-    public function offerLink(\Twig_Environment $environment, $id)
+    public function viewAll(\Twig_Environment $environment, $number = null, $order = 'object')
     {
-        //Defines link
-        $giftVoucher = $this->em
+        //Defines button
+        $giftVouchers = $this->em
             ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
-            ->findOneById($id);
-        return $environment->render('@c975LGiftVoucher/fragments/offerLink.html.twig', array(
-                'giftVoucher' => $giftVoucher,
+            ->findAllAlphabeticalOrder($number, $order);
+        return $environment->render('@c975LGiftVoucher/fragments/samples.html.twig', array(
+                'giftVouchers' => $giftVouchers,
             ));
     }
 }

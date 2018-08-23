@@ -12,6 +12,10 @@ namespace c975L\GiftVoucherBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Entity GiftVoucherAvailable (linked to DB table `gift_voucher_available`)
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2017 975L <contact@975l.com>
+ *
  * @ORM\Table(name="gift_voucher_available")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="c975L\GiftVoucherBundle\Repository\GiftVoucherAvailableRepository")
@@ -19,6 +23,9 @@ use Doctrine\ORM\Mapping as ORM;
 class GiftVoucherAvailable
 {
     /**
+     * GiftVoucherAvailable unique id
+     * @var int
+     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -26,55 +33,63 @@ class GiftVoucherAvailable
     protected $id;
 
     /**
+     * If the GiftVoucherAvailable is marked as suppressed
+     * @var bool
+     *
      * @ORM\Column(name="suppressed", type="boolean")
      */
     protected $suppressed;
 
     /**
+     * Slug for the GiftVoucherAvailable
+     * @var string
+     *
      * @ORM\Column(name="slug", type="string", nullable=true)
      */
     protected $slug;
 
     /**
+     * Object for the GiftVoucherAvailable
+     * @var string
+     *
      * @ORM\Column(name="object", type="string", nullable=true)
      */
     protected $object;
 
     /**
+     * Description for the GiftVoucherAvailable
+     * @var string
+     *
      * @ORM\Column(name="description", type="string", nullable=true)
      */
     protected $description;
 
     /**
+     * Interval for which the GiftVoucherAvailable will be valid
+     * @var \DateInterval
+     *
      * @ORM\Column(name="valid", type="dateinterval", nullable=true)
      */
     protected $valid;
 
     /**
+     * Amount in cents for the GiftVoucherAvailable
+     * @var int
+     *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
     protected $amount;
 
     /**
+     * Currency for the GiftVoucherAvailable
+     * @var string
+     *
      * @ORM\Column(name="currency", type="string", nullable=true)
      */
     protected $currency;
 
     /**
-     * Set id
-     *
-     * @param integer $id
-     */
-    public function setId()
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
-    /**
      * Get id
-     *
      * @return int
      */
     public function getId()
@@ -84,7 +99,7 @@ class GiftVoucherAvailable
 
     /**
      * Set suppressed
-     *
+     * @param bool
      * @return GiftVoucherAvailable
      */
     public function setSuppressed($suppressed)
@@ -96,8 +111,7 @@ class GiftVoucherAvailable
 
     /**
      * Get suppressed
-     *
-     * @return string
+     * @return bool
      */
     public function getSuppressed()
     {
@@ -106,9 +120,7 @@ class GiftVoucherAvailable
 
     /**
      * Set object
-     *
-     * @param string $object
-     *
+     * @param string
      * @return GiftVoucherAvailable
      */
     public function setObject($object)
@@ -120,7 +132,6 @@ class GiftVoucherAvailable
 
     /**
      * Get object
-     *
      * @return string
      */
     public function getObject()
@@ -130,9 +141,7 @@ class GiftVoucherAvailable
 
     /**
      * Set slug
-     *
-     * @param string $slug
-     *
+     * @param string
      * @return GiftVoucherAvailable
      */
     public function setSlug($slug)
@@ -144,7 +153,6 @@ class GiftVoucherAvailable
 
     /**
      * Get slug
-     *
      * @return string
      */
     public function getSlug()
@@ -154,9 +162,7 @@ class GiftVoucherAvailable
 
     /**
      * Set description
-     *
-     * @param string $description
-     *
+     * @param string
      * @return GiftVoucherAvailable
      */
     public function setDescription($description)
@@ -168,7 +174,6 @@ class GiftVoucherAvailable
 
     /**
      * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -178,9 +183,7 @@ class GiftVoucherAvailable
 
     /**
      * Set valid
-     *
-     * @param dateinterval $valid
-     *
+     * @param \DateInterval
      * @return GiftVoucherAvailable
      */
     public function setValid($valid)
@@ -192,8 +195,7 @@ class GiftVoucherAvailable
 
     /**
      * Get valid
-     *
-     * @return dateinterval
+     * @return \DateInterval
      */
     public function getValid()
     {
@@ -202,9 +204,7 @@ class GiftVoucherAvailable
 
     /**
      * Set amount
-     *
-     * @param integer $amount
-     *
+     * @param integer
      * @return GiftVoucherAvailable
      */
     public function setAmount($amount)
@@ -216,7 +216,6 @@ class GiftVoucherAvailable
 
     /**
      * Get amount
-     *
      * @return integer
      */
     public function getAmount()
@@ -226,9 +225,7 @@ class GiftVoucherAvailable
 
     /**
      * Set currency
-     *
-     * @param string $currency
-     *
+     * @param string
      * @return GiftVoucherAvailable
      */
     public function setCurrency($currency)
@@ -240,7 +237,6 @@ class GiftVoucherAvailable
 
     /**
      * Get currency
-     *
      * @return string
      */
     public function getCurrency()

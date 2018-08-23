@@ -230,6 +230,22 @@
                 <source>placeholder.username</source>
                 <target>Username (if you see this, leave it empty)</target>
             </trans-unit>
+            <trans-unit id="59">
+                <source>text.gdpr</source>
+                <target>I agree that this website stores the submitted data so that it can answer my request</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>label.ip</source>
+                <target>IP Address</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>text.voucher_created</source>
+                <target>The Gift-Voucher has been well created</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>text.voucher_deleted</source>
+                <target>The Gift-Voucher has been well deleted</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>

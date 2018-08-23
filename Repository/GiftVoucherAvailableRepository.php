@@ -12,9 +12,17 @@ namespace c975L\GiftVoucherBundle\Repository;
 use Doctrine\ORM\EntityRepository;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 
+/**
+ * Repository for Event Entity
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2018 975L <contact@975l.com>
+ */
 class GiftVoucherAvailableRepository extends EntityRepository
 {
-    //Finds all GiftVouchers available ordered by alphabetical order
+    /**
+     * Finds all GiftVoucherAvailable ordered by alphabetical order
+     * @return mixed
+     */
     public function findAllAlphabeticalOrder($number = null, $order = 'object')
     {
         $qb = $this->createQueryBuilder('v');
@@ -29,8 +37,11 @@ class GiftVoucherAvailableRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    //Finds all GiftVouchers available
-    public function findAllAvailable()
+    /**
+     * Finds all GiftVoucherAvailable NOT suppressed
+     * @return mixed
+     */
+    public function findNotSuppressed()
     {
         $qb = $this->createQueryBuilder('v');
         $qb->select('v')

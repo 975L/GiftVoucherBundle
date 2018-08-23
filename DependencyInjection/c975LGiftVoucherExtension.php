@@ -15,11 +15,13 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
+/**
+ * DI Extension Class
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2018 975L <contact@975l.com>
+ */
 class c975LGiftVoucherExtension extends Extension
 {
-    /**
-     * {@inheritdoc}
-     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $loader = new YamlFileLoader(
@@ -33,6 +35,7 @@ class c975LGiftVoucherExtension extends Extension
 
         $container->setParameter('c975_l_gift_voucher.live', $processedConfig['live']);
         $container->setParameter('c975_l_gift_voucher.roleNeeded', $processedConfig['roleNeeded']);
+        $container->setParameter('c975_l_gift_voucher.gdpr', $processedConfig['gdpr']);
         $container->setParameter('c975_l_gift_voucher.defaultCurrency', strtoupper($processedConfig['defaultCurrency']));
         $container->setParameter('c975_l_gift_voucher.proposedCurrencies', $processedConfig['proposedCurrencies']);
         $container->setParameter('c975_l_gift_voucher.vat', $processedConfig['vat'] * 100);

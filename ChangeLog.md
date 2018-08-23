@@ -1,5 +1,24 @@
 # Changelog
 
+v1.15
+-----
+- Added Voter for Slug Route (02/08/2018)
+- Added link to BuyMeCoffee (23/08/2018)
+- Added link to apidoc (23/08/2018)
+- Removed FQCN (23/08/2018)
+- Split GiftVoucherService in multiples files + creation of Interfaces (23/08/2018)
+- Added display of the IP address in offer form to be GDPR compliant (23/08/2018)
+- Added config option for GDPR (23/08/2018)
+- Added checkbok fo GDPR on offer form (23/08/2018)
+- Updated documentation (23/08/2018)
+- Renamed `gv_samples` Twig Function to `gv_view_all` and `GiftVoucherSamples.php` to `GiftVoucherViewAll.php`as not good naming [BC-Break] (23/08/2018)
+- Renamed `giftVoucherIdentifier` Twig filter to `gv_identifier` to be coherent with other naming [BC-Break] (23/08/2018)
+- Made controllers skinny and re-ordered them (23/08/2018)
+- Changed to 'warning' for Test use of GiftVoucherPurchased (23/08/2018)
+- Added ParamConverter for Controller methods (23/08/2018)
+- Added confirmation step for utilisation of GiftVoucherPurchased (23/08/2018)
+- Removed id display in dashboard for GiftVoucherAvailable (23/08/2018)
+
 v1.14.2
 -------
 - Update slugify method to check unicity of slug (02/08/2018)

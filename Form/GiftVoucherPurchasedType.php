@@ -18,9 +18,13 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
+/**
+ * GiftVoucherPurchased FormType
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2018 975L <contact@975l.com>
+ */
 class GiftVoucherPurchasedType extends AbstractType
 {
-    //Builds the form
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
@@ -49,7 +53,23 @@ class GiftVoucherPurchasedType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'label.email',
                 )))
+            ->add('userIp', TextType::class, array(
+                'label' => 'label.ip',
+                'required' => true,
+                'attr' => array(
+                    'readonly' => true,
+                )))
+        ;
+        //GDPR
+        if (true === $options['giftVoucherConfig']['gdpr']) {
+            $builder
+                ->add('gdpr', CheckboxType::class, array(
+                    'label' => 'text.gdpr',
+                    'required' => true,
+                    'mapped' => false,
+                    ))
             ;
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -59,5 +79,7 @@ class GiftVoucherPurchasedType extends AbstractType
             'intention'  => 'giftVoucherPurchasedForm',
             'translation_domain' => 'giftVoucher',
         ));
+
+        $resolver->setRequired('giftVoucherConfig');
     }
 }

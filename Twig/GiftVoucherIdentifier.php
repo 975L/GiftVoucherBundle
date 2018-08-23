@@ -9,27 +9,39 @@
 
 namespace c975L\GiftVoucherBundle\Twig;
 
+use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+
+/**
+ * Twig extension to display the formatted GiftVoucherPurchased identifier using `|gv_identifier`
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2018 975L <contact@975l.com>
+ */
 class GiftVoucherIdentifier extends \Twig_Extension
 {
-    private $service;
+    /**
+     * Stores purchasedService
+     * @var GiftVoucherPurchasedServiceInterface
+     */
+    private $giftVoucherPurchasedService;
 
-    public function __construct(
-        \c975L\GiftVoucherBundle\Service\GiftVoucherService $service
-        )
+    public function __construct(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService)
     {
-        $this->service = $service;
+        $this->giftVoucherPurchasedService = $giftVoucherPurchasedService;
     }
 
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('giftVoucherIdentifier', array($this, 'giftVoucherIdentifier')),
+            new \Twig_SimpleFilter('gv_identifier', array($this, 'identifier')),
         );
     }
 
-    //Returns Gift Voucher identifier formatted
-    public function giftVoucherIdentifier($identifier)
+    /**
+     * Returns GiftVoucherPurchased identifier formatted
+     * @return string
+     */
+    public function identifier($identifier)
     {
-        return $this->service->getIdentifierFormatted($identifier);
+        return $this->giftVoucherPurchasedService->getIdentifierFormatted($identifier);
     }
 }

@@ -12,6 +12,10 @@ namespace c975L\GiftVoucherBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Entity GiftVoucherPurchased (linked to DB table `gift_voucher_purchased`)
+ * @author Laurent Marquet <laurent.marquet@laposte.net>
+ * @copyright 2017 975L <contact@975l.com>
+ *
  * @ORM\Table(name="gift_voucher_purchased")
  * @ORM\HasLifecycleCallbacks()
  * @ORM\Entity(repositoryClass="c975L\GiftVoucherBundle\Repository\GiftVoucherPurchasedRepository")
@@ -28,6 +32,7 @@ class GiftVoucherPurchased
     protected $id;
 
     /**
+     * Unique identifier for GiftVoucherPurchased
      * @var string
      *
      * @ORM\Column(name="identifier", type="string")
@@ -35,6 +40,7 @@ class GiftVoucherPurchased
     protected $identifier;
 
     /**
+     * Secret code for GiftVoucherPurchased
      * @var string
      *
      * @ORM\Column(name="secret", type="string")
@@ -42,6 +48,7 @@ class GiftVoucherPurchased
     protected $secret;
 
     /**
+     * Object for the GiftVoucherPurchased (copy of the object of GiftVoucherAvailable in cas it changes between purchase and use)
      * @var string
      *
      * @ORM\Column(name="object", type="string", nullable=true)
@@ -49,6 +56,7 @@ class GiftVoucherPurchased
     protected $object;
 
     /**
+     * Description for the GiftVoucherPurchased (copy of the description of GiftVoucherAvailable in cas it changes between purchase and use)
      * @var string
      *
      * @ORM\Column(name="description", type="string", nullable=true)
@@ -56,6 +64,7 @@ class GiftVoucherPurchased
     protected $description;
 
     /**
+     * Name of the offering person
      * @var string
      *
      * @ORM\Column(name="offered_by", type="string", nullable=true)
@@ -63,6 +72,7 @@ class GiftVoucherPurchased
     protected $offeredBy;
 
     /**
+     * Name of the receiving offer person
      * @var string
      *
      * @ORM\Column(name="offered_to", type="string", nullable=true)
@@ -70,6 +80,7 @@ class GiftVoucherPurchased
     protected $offeredTo;
 
     /**
+     * Message left by offering person to receiving one
      * @var string
      *
      * @ORM\Column(name="message", type="string", nullable=true)
@@ -77,6 +88,7 @@ class GiftVoucherPurchased
     protected $message;
 
     /**
+     * Email address the GiftVoucherPurchased will be sent to
      * @var string
      *
      * @ORM\Column(name="send_to_email", type="string", nullable=true)
@@ -84,6 +96,7 @@ class GiftVoucherPurchased
     protected $sendToEmail;
 
     /**
+     * DateTime of purchase
      * @var \DateTime
      *
      * @ORM\Column(name="purchase", type="datetime", nullable=true)
@@ -91,6 +104,7 @@ class GiftVoucherPurchased
     protected $purchase;
 
     /**
+     * Final DateTime for validity
      * @var \DateTime
      *
      * @ORM\Column(name="valid", type="datetime", nullable=true)
@@ -98,13 +112,15 @@ class GiftVoucherPurchased
     protected $valid;
 
     /**
-     * @var integer
+     * Amount in cents of the the GiftVoucherPurchased
+     * @var int
      *
      * @ORM\Column(name="amount", type="integer", nullable=true)
      */
     protected $amount;
 
     /**
+     * Currency of the GiftVoucherPurchased
      * @var string
      *
      * @ORM\Column(name="currency", type="string", nullable=true)
@@ -112,6 +128,7 @@ class GiftVoucherPurchased
     protected $currency;
 
     /**
+     * Payment order id
      * @var string
      *
      * @ORM\Column(name="order_id", type="string", nullable=true)
@@ -119,33 +136,23 @@ class GiftVoucherPurchased
     protected $orderId;
 
     /**
+     * DateTime the GiftVoucherPurchased has been used
+     * @var \DateTime
+     *
      * @ORM\Column(name="used", type="datetime")
      */
     protected $used;
 
     /**
+     * Ip address of the user
      * @var string
      *
      * @ORM\Column(name="user_ip", type="string", nullable=true)
      */
     protected $userIp;
 
-
-    /**
-     * Set id
-     *
-     * @param integer $id
-     */
-    public function setId()
-    {
-        $this->id = $id;
-
-        return $this;
-    }
-
     /**
      * Get id
-     *
      * @return int
      */
     public function getId()
@@ -155,9 +162,7 @@ class GiftVoucherPurchased
 
     /**
      * Set identifier
-     *
-     * @param string $identifier
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setIdentifier($identifier)
@@ -169,7 +174,6 @@ class GiftVoucherPurchased
 
     /**
      * Get identifier
-     *
      * @return string
      */
     public function getIdentifier()
@@ -179,9 +183,7 @@ class GiftVoucherPurchased
 
     /**
      * Set secret
-     *
-     * @param string $secret
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setSecret($secret)
@@ -193,7 +195,6 @@ class GiftVoucherPurchased
 
     /**
      * Get secret
-     *
      * @return string
      */
     public function getSecret()
@@ -203,9 +204,7 @@ class GiftVoucherPurchased
 
     /**
      * Set object
-     *
-     * @param string $object
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setObject($object)
@@ -217,7 +216,6 @@ class GiftVoucherPurchased
 
     /**
      * Get object
-     *
      * @return string
      */
     public function getObject()
@@ -227,9 +225,7 @@ class GiftVoucherPurchased
 
     /**
      * Set description
-     *
-     * @param string $description
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setDescription($description)
@@ -241,7 +237,6 @@ class GiftVoucherPurchased
 
     /**
      * Get description
-     *
      * @return string
      */
     public function getDescription()
@@ -251,9 +246,7 @@ class GiftVoucherPurchased
 
     /**
      * Set offeredBy
-     *
-     * @param string $offeredBy
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setOfferedBy($offeredBy)
@@ -265,7 +258,6 @@ class GiftVoucherPurchased
 
     /**
      * Get offeredBy
-     *
      * @return string
      */
     public function getOfferedBy()
@@ -275,9 +267,7 @@ class GiftVoucherPurchased
 
     /**
      * Set offeredTo
-     *
-     * @param string $offeredTo
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setOfferedTo($offeredTo)
@@ -289,7 +279,6 @@ class GiftVoucherPurchased
 
     /**
      * Get offeredTo
-     *
      * @return string
      */
     public function getOfferedTo()
@@ -299,9 +288,7 @@ class GiftVoucherPurchased
 
     /**
      * Set message
-     *
-     * @param string $message
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setMessage($message)
@@ -313,7 +300,6 @@ class GiftVoucherPurchased
 
     /**
      * Get message
-     *
      * @return string
      */
     public function getMessage()
@@ -323,9 +309,7 @@ class GiftVoucherPurchased
 
     /**
      * Set sendToEmail
-     *
-     * @param string $sendToEmail
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setSendToEmail($sendToEmail)
@@ -337,7 +321,6 @@ class GiftVoucherPurchased
 
     /**
      * Get sendToEmail
-     *
      * @return string
      */
     public function getSendToEmail()
@@ -347,9 +330,7 @@ class GiftVoucherPurchased
 
     /**
      * Set purchase
-     *
-     * @param datetime $purchase
-     *
+     * @param \DateTime
      * @return GiftVoucherPurchased
      */
     public function setPurchase($purchase)
@@ -361,8 +342,7 @@ class GiftVoucherPurchased
 
     /**
      * Get purchase
-     *
-     * @return datetime
+     * @return \DateTime
      */
     public function getPurchase()
     {
@@ -371,9 +351,7 @@ class GiftVoucherPurchased
 
     /**
      * Set valid
-     *
-     * @param datetime $valid
-     *
+     * @param \DateTime
      * @return GiftVoucherPurchased
      */
     public function setValid($valid)
@@ -385,8 +363,7 @@ class GiftVoucherPurchased
 
     /**
      * Get valid
-     *
-     * @return datetime
+     * @return \DateTime
      */
     public function getValid()
     {
@@ -395,9 +372,7 @@ class GiftVoucherPurchased
 
     /**
      * Set amount
-     *
-     * @param integer $amount
-     *
+     * @param int
      * @return GiftVoucherPurchased
      */
     public function setAmount($amount)
@@ -409,8 +384,7 @@ class GiftVoucherPurchased
 
     /**
      * Get amount
-     *
-     * @return integer
+     * @return int
      */
     public function getAmount()
     {
@@ -419,9 +393,7 @@ class GiftVoucherPurchased
 
     /**
      * Set currency
-     *
-     * @param string $currency
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setCurrency($currency)
@@ -433,7 +405,6 @@ class GiftVoucherPurchased
 
     /**
      * Get currency
-     *
      * @return string
      */
     public function getCurrency()
@@ -443,10 +414,8 @@ class GiftVoucherPurchased
 
     /**
      * Set orderId
-     *
-     * @param string $orderId
-     *
-     * @return StripePayment
+     * @param string
+     * @return GiftVoucherPurchased
      */
     public function setOrderId($orderId)
     {
@@ -457,7 +426,6 @@ class GiftVoucherPurchased
 
     /**
      * Get orderId
-     *
      * @return string
      */
     public function getOrderId()
@@ -467,9 +435,7 @@ class GiftVoucherPurchased
 
     /**
      * Set used
-     *
-     * @param datetime $used
-     *
+     * @param \DateTime
      * @return GiftVoucherPurchased
      */
     public function setUsed($used)
@@ -481,8 +447,7 @@ class GiftVoucherPurchased
 
     /**
      * Get used
-     *
-     * @return datetime
+     * @return \DateTime
      */
     public function getUsed()
     {
@@ -491,9 +456,7 @@ class GiftVoucherPurchased
 
     /**
      * Set userIp
-     *
-     * @param string $userIp
-     *
+     * @param string
      * @return GiftVoucherPurchased
      */
     public function setUserIp($userIp)
@@ -505,7 +468,6 @@ class GiftVoucherPurchased
 
     /**
      * Get userIp
-     *
      * @return string
      */
     public function getUserIp()

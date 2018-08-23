@@ -230,6 +230,22 @@
                 <source>placeholder.username</source>
                 <target>Nombre de usuario (si ves esto, déjalo vacío)</target>
             </trans-unit>
+            <trans-unit id="59">
+                <source>text.gdpr</source>
+                <target>Acepto que este sitio web almacena los datos enviados para que pueda responder a mi solicitud</target>
+            </trans-unit>
+            <trans-unit id="60">
+                <source>label.ip</source>
+                <target>Dirección IP</target>
+            </trans-unit>
+            <trans-unit id="61">
+                <source>text.voucher_created</source>
+                <target>El Vale-Regalo ha sido bien creado</target>
+            </trans-unit>
+            <trans-unit id="62">
+                <source>text.voucher_deleted</source>
+                <target>El Vale-Regalo ha sido bien eliminado</target>
+            </trans-unit>
         </body>
     </file>
 </xliff>
