@@ -1,5 +1,9 @@
 # Changelog
 
+v1.15.2
+-------
+- Made use of @ParamConverter for payment returnRoute (24/08/2018)
+
 v1.15.1
 -------
 - Renamed `samples` file and calls (23/08/2018)

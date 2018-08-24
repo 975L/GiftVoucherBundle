@@ -76,6 +76,8 @@ class GiftVoucherTools implements GiftVoucherToolsInterface
             case 'voucher_used':
                 $flash = 'text.voucher_used';
                 break;
+            default:
+                break;
         }
 
         if(isset($flash)) {

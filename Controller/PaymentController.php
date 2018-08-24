@@ -11,9 +11,11 @@ namespace c975L\GiftVoucherBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 
@@ -28,34 +30,27 @@ class PaymentController extends Controller
     /**
      * Return Route after having done payment
      * @return Redirect
+     * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/payment-done/{orderId}",
      *      name="giftvoucher_payment_done")
      * @Method({"GET", "HEAD"})
+     * @ParamConverter("payment",
+     *      options={
+     *          "repository_method" = "findOneByOrderIdNotFinished",
+     *          "mapping": {"orderId": "orderId"},
+     *          "map_method_signature" = true
+     *      })
      */
-    public function paymentDone(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService, $orderId)
+    public function paymentDone(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService, Payment $payment)
     {
-        //Gets Stripe payment not finished
-        $payment = $this->getDoctrine()
-            ->getManager()
-            ->getRepository('c975LPaymentBundle:Payment')
-            ->findOneByOrderIdNotFinished($orderId);
+        $giftVoucherIdentifier = $giftVoucherPurchasedService->validate($payment);
 
-        //Validates the GiftVoucher
-        if ($payment instanceof Payment) {
-            $giftVoucherIdentifier = $giftVoucherPurchasedService->validate($payment);
-
-            //Redirects to the GiftVoucherPurchased
-            if (false !== $giftVoucherIdentifier) {
-                return $this->redirectToRoute('giftvoucher_purchased', array(
-                    'identifier' => $giftVoucherIdentifier,
-                ));
-            }
+        //Redirects to the GiftVoucherPurchased
+        if (false !== $giftVoucherIdentifier) {
+            return $this->redirectToRoute('giftvoucher_purchased', array(
+                'identifier' => $giftVoucherIdentifier,
+            ));
         }
-
-        //Redirects to the display of payment
-        return $this->redirectToRoute('payment_display', array(
-            'orderId' => $orderId,
-        ));
     }
 }
