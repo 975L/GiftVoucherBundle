@@ -1,5 +1,9 @@
 # Changelog
 
+v1.15.3.1
+---------
+- Replaced links in dashboard (for purchased) by buttons (25/08/2018)
+
 v1.15.3
 -------
 - Suppressed link for copying code in Dashboard (25/08/2018)

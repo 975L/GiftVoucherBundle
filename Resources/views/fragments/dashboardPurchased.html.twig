@@ -30,7 +30,7 @@
 {# Identifier & Display #}
                 {% if app.request.query.get('v') == null %}
                     <td class="text-center">
-                        <a href="{{ path('giftvoucher_purchased', {'identifier': giftVoucher.identifier ~ giftVoucher.secret}) }}" title="{{ 'label.display'|trans({}, 'toolbar') }}">{{ giftVoucher.identifier|gv_identifier }}</a>
+                        {{ toolbar_button_text(path('giftvoucher_purchased', {'identifier': giftVoucher.identifier ~ giftVoucher.secret}), 'display', 'sm', 'true', 'right', giftVoucher.identifier|gv_identifier) }}
                     </td>
 {# Purchased #}
                     <td class="text-center">
