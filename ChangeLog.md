@@ -1,5 +1,11 @@
 # Changelog
 
+v1.15.3
+-------
+- Suppressed link for copying code in Dashboard (25/08/2018)
+- Replaced links in dashboard by buttons (25/08/2018)
+- Corrected display for offer buttons in display available Gift-Voucher (25/08/2018)
+
 v1.15.2
 -------
 - Made use of @ParamConverter for payment returnRoute (24/08/2018)

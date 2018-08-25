@@ -49,6 +49,7 @@ class GiftVoucherOfferButton extends \Twig_Extension
      */
     public function offerButton(\Twig_Environment $environment, $id, $style = 'btn btn-lg btn-block btn-primary')
     {
+dump($style);
         //Defines button
         $giftVoucher = $this->em
             ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')

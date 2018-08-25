@@ -51,7 +51,7 @@
         </p>
 {# Primary #}
         <p class="well">
-            {{ gv_offer_button(giftVoucher.id, 'btn-primary') }}
+            {{ gv_offer_button(giftVoucher.id, 'btn btn-primary') }}
             <br />
             {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'btn btn-primary') }}{% endverbatim %}
         </p>
@@ -59,16 +59,17 @@
         <p class="well">
             {{ gv_offer_button(giftVoucher.id, 'btn-lg btn-primary') }}
             <br />
+            <br />
             {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'btn btn-lg btn-primary') }}{% endverbatim %}
         </p>
 {# Success #}
         <p class="well">
-            {{ gv_offer_button(giftVoucher.id, 'btn-success') }}
+            {{ gv_offer_button(giftVoucher.id, 'btn btn-success') }}
             <br />
             {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}, 'btn btn-success') }}{% endverbatim %}
         </p>
         <hr />
-{# user-defined #}
+{# User defined #}
         <div class="well">
             <h4>
                 {{ 'label.user_defined'| trans }}

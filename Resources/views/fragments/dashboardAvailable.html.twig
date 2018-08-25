@@ -18,7 +18,6 @@
             <th class="text-center"><span class="fas fa-pencil-alt"></span>&nbsp;{{ 'label.modify'|trans({}, 'toolbar') }}</th>
             <th class="text-center"><span class="fas fa-copy"></span>&nbsp;{{ 'label.duplicate'|trans({}, 'toolbar') }}</th>
             <th class="text-center"><span class="fas fa-trash"></span>&nbsp;{{ 'label.delete'|trans({}, 'toolbar') }}</th>
-            <th class="text-center"><span class="fas fa-code"></span>&nbsp;{{ 'label.web_code'|trans }}</th>
         </tr>
     </thead>
     <tbody>
@@ -26,26 +25,19 @@
             <tr>
 {# Object #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_display', {'id': giftVoucher.id}) }}" title="{{ 'label.display'|trans({}, 'toolbar') }}">{{ giftVoucher.object }}</a>
+                    {{ toolbar_button_text(path('giftvoucher_display', {'id': giftVoucher.id}), 'display', 'sm', 'true', 'right', giftVoucher.object) }}
                 </td>
 {# Modify #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_modify', {'id': giftVoucher.id}) }}" title="{{ 'label.modify'|trans({}, 'toolbar') }}">{{ 'label.modify'|trans({}, 'toolbar') }}</a>
+                    {{ toolbar_button_text(path('giftvoucher_modify', {'id': giftVoucher.id}), 'modify', 'sm') }}
                 </td>
 {# Duplicate #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_duplicate', {'id': giftVoucher.id}) }}" title="{{ 'label.duplicate'|trans({}, 'toolbar') }}">{{ 'label.duplicate'|trans({}, 'toolbar') }}</a>
+                    {{ toolbar_button_text(path('giftvoucher_duplicate', {'id': giftVoucher.id}), 'duplicate', 'sm') }}
                 </td>
 {# Delete #}
                 <td class="text-center">
-                    <a href="{{ path('giftvoucher_delete', {'id': giftVoucher.id}) }}" title="{{ 'label.delete'|trans({}, 'toolbar') }}" class="text-danger">{{ 'label.delete'|trans({}, 'toolbar') }}</a>
-                </td>
-{# Copy code #}
-                <td class="text-center">
-                    <span id="code-{{ giftVoucher.id }}">
-                        {% verbatim %}{{ gv_offer_button({% endverbatim %}{{ giftVoucher.id }}{% verbatim %}) }}{% endverbatim %}
-                    </span>
-                    <button onclick="copyCode('{{ giftVoucher.id }}')" title="{{ 'label.copy_code'|trans }}"><span class="fas fa-code"></span></button>
+                    {{ toolbar_button_text(path('giftvoucher_delete', {'id': giftVoucher.id}), 'delete', 'sm') }}
                 </td>
             </tr>
         {% endfor %}
