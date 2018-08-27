@@ -7,20 +7,22 @@
  * with this source code in the file LICENSE.
  */
 
-namespace c975L\GiftVoucherBundle\Service\Email;
+namespace c975L\GiftVoucherBundle\Form;
 
-use c975L\PaymentBundle\Entity\Payment;
+use Symfony\Component\Form\Form;
+use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 
 /**
- * Interface to be called for DI for GiftVoucher Email related services
+ * Interface to be called for DI for GiftVoucherFormFactoryInterface related services
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-interface GiftVoucherEmailInterface
+interface GiftVoucherFormFactoryInterface
 {
     /**
-     * Sends email for GiftVoucherPurchased
+     * Returns the defined form
+     * @return Form
      */
-    public function send(GiftVoucherPurchased $giftVoucherPurchased, string $giftVoucherHtml, string $identifierFormatted);
+    public function create(string $name, $giftVoucher);
 }

@@ -25,7 +25,7 @@ use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
 use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
-use c975L\GiftVoucherBundle\Service\Slug\GiftVoucherSlugInterface;
+use c975L\ServicesBundle\Service\ServiceSlugInterface;
 
 /**
  * GiftVoucherAvailable Controller class
@@ -47,20 +47,20 @@ class AvailableController extends Controller
     private $giftVoucherPurchasedService;
 
     /**
-     * Stores GiftVoucherSlug
-     * @var GiftVoucherSlugInterface
+     * Stores ServiceSlugInterface
+     * @var ServiceSlugInterface
      */
-    private $giftVoucherSlug;
+    private $serviceSlug;
 
     public function __construct(
         GiftVoucherAvailableServiceInterface $giftVoucherAvailableService,
         GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService,
-        GiftVoucherSlugInterface $giftVoucherSlug
+        ServiceSlugInterface $serviceSlug
     )
     {
         $this->giftVoucherAvailableService = $giftVoucherAvailableService;
         $this->giftVoucherPurchasedService = $giftVoucherPurchasedService;
-        $this->giftVoucherSlug = $giftVoucherSlug;
+        $this->serviceSlug = $serviceSlug;
     }
 
 //DASHBOARD
@@ -139,8 +139,7 @@ class AvailableController extends Controller
         $this->denyAccessUnlessGranted('create', $giftVoucherAvailable);
 
         //Defines form
-        $giftVoucherConfig = array('action' => 'create');
-        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form = $this->giftVoucherAvailableService->createForm('create', $giftVoucherAvailable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -178,8 +177,7 @@ class AvailableController extends Controller
         $this->denyAccessUnlessGranted('modify', $giftVoucherAvailable);
 
         //Defines form
-        $giftVoucherConfig = array('action' => 'modify');
-        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form = $this->giftVoucherAvailableService->createForm('modify', $giftVoucherAvailable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -218,13 +216,8 @@ class AvailableController extends Controller
         $this->denyAccessUnlessGranted('duplicate', $giftVoucherAvailable);
 
         //Defines form
-        $giftVoucherAvailableClone = clone $giftVoucherAvailable;
-        $giftVoucherAvailableClone
-            ->setObject(null)
-            ->setSlug(null)
-        ;
-        $giftVoucherConfig = array('action' => 'duplicate');
-        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailableClone, array('giftVoucherConfig' => $giftVoucherConfig));
+        $giftVoucherAvailableClone = $this->giftVoucherAvailableService->cloneObject($giftVoucherAvailable);
+        $form = $this->giftVoucherAvailableService->createForm('duplicate', $giftVoucherAvailableClone);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -264,8 +257,7 @@ class AvailableController extends Controller
         $this->denyAccessUnlessGranted('delete', $giftVoucherAvailable);
 
         //Defines form
-        $giftVoucherConfig = array('action' => 'delete');
-        $form = $this->createForm(GiftVoucherAvailableType::class, $giftVoucherAvailable, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form = $this->giftVoucherAvailableService->createForm('delete', $giftVoucherAvailable);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -297,7 +289,7 @@ class AvailableController extends Controller
     {
         $this->denyAccessUnlessGranted('slug', null);
 
-        return $this->json(array('a' => $this->giftVoucherSlug->slugify($text)));
+        return $this->json(array('a' => $this->serviceSlug->slugify('c975LGiftVoucherBundle:GiftVoucherAvailable', $text)));
     }
 
 //HELP

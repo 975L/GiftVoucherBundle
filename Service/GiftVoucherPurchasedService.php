@@ -14,13 +14,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Twig_Environment;
 use c975L\PaymentBundle\Entity\Payment;
-use c975L\EmailBundle\Service\EmailServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
+use c975L\GiftVoucherBundle\Form\GiftVoucherFormFactoryInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\GiftVoucherBundle\Service\Email\GiftVoucherEmailInterface;
 use c975L\GiftVoucherBundle\Service\Pdf\GiftVoucherPdfInterface;
-use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
+use c975L\ServicesBundle\Service\ServiceToolsInterface;
 
 /**
  * Main services related to GiftVoucherPurchased
@@ -30,22 +30,28 @@ use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
 class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterface
 {
     /**
-     * Stores EntityManager
+     * Stores EntityManagerInterface
      * @var EntityManagerInterface
      */
     private $em;
 
     /**
-     * Stores GiftVoucherEmail
+     * Stores GiftVoucherEmailInterface
      * @var GiftVoucherEmailInterface
      */
     private $giftVoucherEmail;
 
     /**
-     * Stores GiftVoucherTools
-     * @var GiftVoucherToolsInterface
+     * Stores GiftVoucherFormFactoryInterface
+     * @var GiftVoucherFormFactoryInterface
      */
-    private $giftVoucherTools;
+    private $giftVoucherFormFactory;
+
+    /**
+     * Stores ServiceToolsInterface
+     * @var ServiceToolsInterface
+     */
+    private $serviceTools;
 
     /**
      * Stores current Request
@@ -54,7 +60,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
     private $request;
 
     /**
-     * Stores templating
+     * Stores Twig_Environment
      * @var Twig_Environment
      */
     private $templating;
@@ -62,14 +68,16 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
     public function __construct(
         EntityManagerInterface $em,
         GiftVoucherEmailInterface $giftVoucherEmail,
-        GiftVoucherToolsInterface $giftVoucherTools,
+        GiftVoucherFormFactoryInterface $giftVoucherFormFactory,
+        ServiceToolsInterface $serviceTools,
         RequestStack $requestStack,
         Twig_Environment $templating
     )
     {
         $this->em = $em;
         $this->giftVoucherEmail = $giftVoucherEmail;
-        $this->giftVoucherTools = $giftVoucherTools;
+        $this->giftVoucherFormFactory = $giftVoucherFormFactory;
+        $this->serviceTools = $serviceTools;
         $this->request = $requestStack->getCurrentRequest();
         $this->templating = $templating;
     }
@@ -91,6 +99,14 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
         ;
 
         return $giftVoucherPurchased;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForm(string $name, GiftVoucherPurchased $giftVoucherPurchased)
+    {
+        return $this->giftVoucherFormFactory->create($name, $giftVoucherPurchased);
     }
 
     /**
@@ -162,7 +178,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
         $this->em->flush();
 
         //Creates flash
-        $this->giftVoucherTools->createFlash('voucher_used');
+        $this->serviceTools->createFlash('giftVoucher', 'text.voucher_used');
     }
 
     /**
@@ -204,7 +220,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
             $this->giftVoucherEmail->send($giftVoucherPurchased, $this->getHtml($giftVoucherPurchased), $this->getIdentifierFormatted($giftVoucherPurchased->getIdentifier()));
 
             //Creates flash
-            $this->giftVoucherTools->createFlash('voucher_purchased');
+            $this->serviceTools->createFlash('giftVoucher', 'text.voucher_purchased');
 
             return $giftVoucherPurchased->getIdentifier() . $giftVoucherPurchased->getSecret();
         }

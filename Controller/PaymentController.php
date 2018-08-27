@@ -11,12 +11,12 @@ namespace c975L\GiftVoucherBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use c975L\PaymentBundle\Entity\Payment;
+use c975L\PaymentBundle\Service\PaymentServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 
 /**
@@ -35,14 +35,8 @@ class PaymentController extends Controller
      * @Route("/gift-voucher/payment-done/{orderId}",
      *      name="giftvoucher_payment_done")
      * @Method({"GET", "HEAD"})
-     * @ParamConverter("payment",
-     *      options={
-     *          "repository_method" = "findOneByOrderIdNotFinished",
-     *          "mapping": {"orderId": "orderId"},
-     *          "map_method_signature" = true
-     *      })
      */
-    public function paymentDone(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService, Payment $payment)
+    public function paymentDone(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService, PaymentServiceInterface $paymentService, Payment $payment)
     {
         $giftVoucherIdentifier = $giftVoucherPurchasedService->validate($payment);
 
@@ -52,5 +46,10 @@ class PaymentController extends Controller
                 'identifier' => $giftVoucherIdentifier,
             ));
         }
+
+        //Payment has been done but GiftVoucher was not validated
+        $paymentService->error($payment);
+
+        return $this->redirectToRoute('payment_display', array('orderId' => $payment->getOrderId()));
     }
 }

@@ -98,10 +98,6 @@
                 <source>text.explanation</source>
                 <target>Gift-Voucher to present before use.</target>
             </trans-unit>
-            <trans-unit id="25">
-                <source>label.made_with</source>
-                <target>Made with 975L/GiftVoucherBundle</target>
-            </trans-unit>
             <trans-unit id="26">
                 <source>label.identifier</source>
                 <target>Identifier</target>
@@ -198,14 +194,6 @@
                 <source>text.test_giftvoucher</source>
                 <target>This Gift-Voucher is a test, it is not valid.</target>
             </trans-unit>
-            <trans-unit id="51">
-                <source>label.accept_tos</source>
-                <target><![CDATA[I agree with <a href="%tosUrl%">Terms of sales</a>]]></target>
-            </trans-unit>
-            <trans-unit id="52">
-                <source>label.terms_of_sales_filename</source>
-                <target>TermsOfSales</target>
-            </trans-unit>
             <trans-unit id="53">
                 <source>label.offer_as_giftvoucher</source>
                 <target>Offer as a Gift-Voucher</target>
@@ -223,26 +211,14 @@
                 <target>Currency</target>
             </trans-unit>
             <trans-unit id="57">
-                <source>label.mandatory_field</source>
-                <target>* Mandatory field</target>
-            </trans-unit>
-            <trans-unit id="58">
                 <source>placeholder.username</source>
                 <target>Username (if you see this, leave it empty)</target>
             </trans-unit>
-            <trans-unit id="59">
-                <source>text.gdpr</source>
-                <target>I agree that this website stores the submitted data so that it can answer my request</target>
-            </trans-unit>
-            <trans-unit id="60">
-                <source>label.ip</source>
-                <target>IP Address</target>
-            </trans-unit>
-            <trans-unit id="61">
+            <trans-unit id="58">
                 <source>text.voucher_created</source>
                 <target>The Gift-Voucher has been well created</target>
             </trans-unit>
-            <trans-unit id="62">
+            <trans-unit id="59">
                 <source>text.voucher_deleted</source>
                 <target>The Gift-Voucher has been well deleted</target>
             </trans-unit>

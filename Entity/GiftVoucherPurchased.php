@@ -144,7 +144,7 @@ class GiftVoucherPurchased
     protected $used;
 
     /**
-     * Ip address of the user
+     * User IP address
      * @var string
      *
      * @ORM\Column(name="user_ip", type="string", nullable=true)

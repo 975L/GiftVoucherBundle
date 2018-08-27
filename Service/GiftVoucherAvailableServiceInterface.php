@@ -9,6 +9,7 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
+use Symfony\Component\Form\Form;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 
 /**
@@ -18,6 +19,18 @@ use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
  */
 interface GiftVoucherAvailableServiceInterface
 {
+    /**
+     * Clones the object
+     * @return GiftVoucherAvailable
+     */
+    public function cloneObject(GiftVoucherAvailable $giftVoucherAvailable);
+
+    /**
+     * Shortcut to call GiftVoucherFormFactory to create Form
+     * @return Form
+     */
+    public function createForm(string $name, GiftVoucherAvailable $giftVoucherAvailable);
+
     /**
      * Deletes the GiftVoucherAvailable
      */

@@ -55,16 +55,18 @@ class GiftVoucherPurchasedType extends AbstractType
                 )))
             ->add('userIp', TextType::class, array(
                 'label' => 'label.ip',
+                'translation_domain' => 'services',
                 'required' => true,
                 'attr' => array(
                     'readonly' => true,
                 )))
         ;
         //GDPR
-        if (true === $options['giftVoucherConfig']['gdpr']) {
+        if ($options['config']['gdpr']) {
             $builder
                 ->add('gdpr', CheckboxType::class, array(
                     'label' => 'text.gdpr',
+                    'translation_domain' => 'services',
                     'required' => true,
                     'mapped' => false,
                     ))
@@ -80,6 +82,6 @@ class GiftVoucherPurchasedType extends AbstractType
             'translation_domain' => 'giftVoucher',
         ));
 
-        $resolver->setRequired('giftVoucherConfig');
+        $resolver->setRequired('config');
     }
 }

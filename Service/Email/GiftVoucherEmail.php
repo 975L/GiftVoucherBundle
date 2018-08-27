@@ -11,11 +11,11 @@ namespace c975L\GiftVoucherBundle\Service\Email;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use c975L\PaymentBundle\Entity\Payment;
 use c975L\EmailBundle\Service\EmailServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\Email\GiftVoucherEmailInterface;
-use c975L\GiftVoucherBundle\Service\Pdf\GiftVoucherPdfInterface;
-use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
+use c975L\ServicesBundle\Service\ServicePdfInterface;
 
 /**
  * Services related to GiftVoucher Email
@@ -25,31 +25,25 @@ use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
 class GiftVoucherEmail implements GiftVoucherEmailInterface
 {
     /**
-     * Stores container
+     * Stores ContainerInterface
      * @var ContainerInterface
      */
     private $container;
 
     /**
-     * Stores EmailService
+     * Stores EmailServiceInterface
      * @var EmailServiceInterface
      */
     private $emailService;
 
     /**
-     * Stores GiftVoucherPdf
-     * @var GiftVoucherPdfInterface
+     * Stores ServicePdfInterface
+     * @var ServicePdfInterface
      */
-    private $giftVoucherPdf;
+    private $servicePdf;
 
     /**
-     * Stores GiftVoucherTools
-     * @var GiftVoucherToolsInterface
-     */
-    private $giftVoucherTools;
-
-    /**
-     * Stores Translator
+     * Stores TranslatorInterface
      * @var TranslatorInterface
      */
     private $translator;
@@ -57,15 +51,13 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
     public function __construct(
         ContainerInterface $container,
         EmailServiceInterface $emailService,
-        GiftVoucherPdfInterface $giftVoucherPdf,
-        GiftVoucherToolsInterface $giftVoucherTools,
+        ServicePdfInterface $servicePdf,
         TranslatorInterface $translator
     )
     {
         $this->container = $container;
         $this->emailService = $emailService;
-        $this->giftVoucherPdf = $giftVoucherPdf;
-        $this->giftVoucherTools = $giftVoucherTools;
+        $this->servicePdf = $servicePdf;
         $this->translator = $translator;
     }
 
@@ -75,10 +67,11 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
     public function send(GiftVoucherPurchased $giftVoucherPurchased, string $giftVoucherHtml, string $identifierFormatted)
     {
         //Gets Pdf for GiftVoucherPurchased
-        $giftVoucherPdf = $this->giftVoucherPdf->getPdf($giftVoucherHtml, $identifierFormatted);
+        $filenameGiftVoucher = $this->translator->trans('label.gift_voucher', array(), 'giftVoucher') . '-' . $identifierFormatted . '.pdf';
+        $giftVoucherPdf = $this->servicePdf->html2Pdf($filenameGiftVoucher, $giftVoucherHtml);
 
         //Gets the PDF for Terms of sales
-        $tosPdf = $this->giftVoucherPdf->getTosPdf($this->giftVoucherTools->getUrl($this->container->getParameter('c975_l_gift_voucher.tosPdf')));
+        $tosPdf = $this->servicePdf->getPdfFile('label.terms_of_sales_filename', $this->container->getParameter('c975_l_gift_voucher.tosPdf'));
 
         //Sends email
         $emailData = array(

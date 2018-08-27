@@ -98,10 +98,6 @@
                 <source>text.explanation</source>
                 <target>Bon-Cadeau à présenter préalablement à son utilisation.</target>
             </trans-unit>
-            <trans-unit id="25">
-                <source>label.made_with</source>
-                <target>Réalisé avec 975L/GiftVoucherBundle</target>
-            </trans-unit>
             <trans-unit id="26">
                 <source>label.identifier</source>
                 <target>Identifiant</target>
@@ -198,14 +194,6 @@
                 <source>text.test_giftvoucher</source>
                 <target>Ce Bon-Cadeau est un test, il n'est pas valide.</target>
             </trans-unit>
-            <trans-unit id="51">
-                <source>label.accept_tos</source>
-                <target><![CDATA[J'accepte les <a href="%tosUrl%">Conditions générales de vente</a>]]></target>
-            </trans-unit>
-            <trans-unit id="52">
-                <source>label.terms_of_sales_filename</source>
-                <target>ConditionsGeneralesVente</target>
-            </trans-unit>
             <trans-unit id="53">
                 <source>label.offer_as_giftvoucher</source>
                 <target>Offrir en Bon-Cadeau</target>
@@ -223,26 +211,14 @@
                 <target>Devise</target>
             </trans-unit>
             <trans-unit id="57">
-                <source>label.mandatory_field</source>
-                <target>* Champ requis</target>
-            </trans-unit>
-            <trans-unit id="58">
                 <source>placeholder.username</source>
                 <target>Nom d'utilisateur (si vous voyez ceci, laissez-le vide)</target>
             </trans-unit>
-            <trans-unit id="59">
-                <source>text.gdpr</source>
-                <target>Je consens que ce site Web stocke les données soumises afin qu'il puisse répondre à ma demande</target>
-            </trans-unit>
-            <trans-unit id="60">
-                <source>label.ip</source>
-                <target>Adresse IP</target>
-            </trans-unit>
-            <trans-unit id="61">
+            <trans-unit id="58">
                 <source>text.voucher_created</source>
                 <target>Le Bon-Cadeau a bien été créé</target>
             </trans-unit>
-            <trans-unit id="62">
+            <trans-unit id="59">
                 <source>text.voucher_deleted</source>
                 <target>Le Bon-Cadeau a bien été supprimé</target>
             </trans-unit>

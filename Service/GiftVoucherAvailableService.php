@@ -11,9 +11,10 @@ namespace c975L\GiftVoucherBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
+use c975L\GiftVoucherBundle\Form\GiftVoucherFormFactoryInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
-use c975L\GiftVoucherBundle\Service\Slug\GiftVoucherSlugInterface;
-use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
+use c975L\ServicesBundle\Service\ServiceSlugInterface;
+use c975L\ServicesBundle\Service\ServiceToolsInterface;
 
 /**
  * Interface to be called for DI for GiftVoucherAvailable Main related services
@@ -29,26 +30,56 @@ class GiftVoucherAvailableService implements GiftVoucherAvailableServiceInterfac
     private $em;
 
     /**
-     * Stores GiftVoucherSlug
-     * @var GiftVoucherSlugInterface
+     * Stores GiftVoucherFormFactoryInterface
+     * @var GiftVoucherFormFactoryInterface
      */
-    private $giftVoucherSlug;
+    private $giftVoucherFormFactory;
 
     /**
-     * Stores GiftVoucherTools
-     * @var GiftVoucherToolsInterface
+     * Stores ServiceSlugInterface
+     * @var ServiceSlugInterface
      */
-    private $giftVoucherTools;
+    private $serviceSlug;
+
+    /**
+     * Stores ServiceToolsInterface
+     * @var ServiceToolsInterface
+     */
+    private $serviceTools;
 
     public function __construct(
         EntityManagerInterface $em,
-        GiftVoucherSlugInterface $giftVoucherSlug,
-        GiftVoucherToolsInterface $giftVoucherTools
+        GiftVoucherFormFactoryInterface $giftVoucherFormFactory,
+        ServiceSlugInterface $serviceSlug,
+        ServiceToolsInterface $serviceTools
     )
     {
         $this->em = $em;
-        $this->giftVoucherSlug = $giftVoucherSlug;
-        $this->giftVoucherTools = $giftVoucherTools;
+        $this->giftVoucherFormFactory = $giftVoucherFormFactory;
+        $this->serviceSlug = $serviceSlug;
+        $this->serviceTools = $serviceTools;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function createForm(string $name, GiftVoucherAvailable $giftVoucherAvailable)
+    {
+        return $this->giftVoucherFormFactory->create($name, $giftVoucherAvailable);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function cloneObject(GiftVoucherAvailable $giftVoucherAvailable)
+    {
+        $giftVoucherAvailableClone = clone $giftVoucherAvailable;
+        $giftVoucherAvailableClone
+            ->setObject(null)
+            ->setSlug(null)
+        ;
+
+        return $giftVoucherAvailableClone;
     }
 
     /**
@@ -63,7 +94,8 @@ class GiftVoucherAvailableService implements GiftVoucherAvailableServiceInterfac
         $this->em->flush();
 
         //Creates flash
-        $this->giftVoucherTools->createFlash('voucher_deleted');    }
+        $this->serviceTools->createFlash('giftVoucher', 'text.voucher_deleted');
+    }
 
     /**
      * Gets all the GiftVoucherAvailable
@@ -82,14 +114,18 @@ class GiftVoucherAvailableService implements GiftVoucherAvailableServiceInterfac
      */
     public function register(GiftVoucherAvailable $giftVoucherAvailable)
     {
-        //Adjust slug in case of modified by user and not accepted signs
-        $giftVoucherAvailable->setSlug($this->giftVoucherSlug->slugify($giftVoucherAvailable->getSlug()));
+        //Adjust slug in case of not accepted signs that has been added by user
+        $uow = $this->em->getUnitOfWork();
+        $uow->computeChangeSets();
+        if (isset($uow->getEntityChangeSet($giftVoucherAvailable)['slug'])) {
+            $giftVoucherAvailable->setSlug($this->serviceSlug->slugify('c975LGiftVoucherBundle:GiftVoucherAvailable', $giftVoucherAvailable->getSlug()));
+        }
 
         //Persists data in DB
         $this->em->persist($giftVoucherAvailable);
         $this->em->flush();
 
         //Creates flash
-        $this->giftVoucherTools->createFlash('voucher_created');
+        $this->serviceTools->createFlash('giftVoucher', 'text.voucher_created');
     }
 }

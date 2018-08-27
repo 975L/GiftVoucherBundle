@@ -54,7 +54,7 @@ class PurchasedController extends Controller
         //Renders the GiftVoucherPurchased
         return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
             'giftVoucher' => $giftVoucherPurchased,
-            'display' => true === $authChecker->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded')) ? 'admin' : 'basic',
+            'display' => $authChecker->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded')) ? 'admin' : 'basic',
         ));
     }
 

@@ -1,5 +1,15 @@
 # Changelog
 
+v1.15.4
+-------
+- Added missing redirect if GiftVoucher purchase validation fails (25/08/2018)
+- Removed 'true ===' as not needed (25/08/2018)
+- Added dependency on "c975l/config-bundle" and "c975l/services-bundle" (26/08/2018)
+- Deleted un-needed translations (26/08/2018)
+- Removed un-needed Services (26/08/2018)
+- Added GiftVoucherFormFactory + Interface (27/08/2018)
+- Removed 'made with' link as it can lead to misunderstanding for users (27/08/2018)
+
 v1.15.3.1
 ---------
 - Replaced links in dashboard (for purchased) by buttons (25/08/2018)

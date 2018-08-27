@@ -20,14 +20,14 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use c975L\ServicesBundle\Service\ServiceSlugInterface;
+use c975L\ServicesBundle\Service\ServiceToolsInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Form\GiftVoucherPurchasedType;
 use c975L\GiftVoucherBundle\Service\OfferServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
-use c975L\GiftVoucherBundle\Service\Slug\GiftVoucherSlugInterface;
-use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
 
 /**
  * Offer Controller class
@@ -37,40 +37,40 @@ use c975L\GiftVoucherBundle\Service\Tools\GiftVoucherToolsInterface;
 class OfferController extends Controller
 {
     /**
-     * Stores Purchased Service
+     * Stores GiftVoucherPurchasedServiceInterface
      * @var GiftVoucherPurchasedServiceInterface
      */
     private $giftVoucherPurchasedService;
 
     /**
-     * Stores GiftVoucherPayment Service
+     * Stores GiftVoucherPaymentInterface
      * @var GiftVoucherPaymentInterface
      */
     private $giftVoucherPayment;
 
     /**
-     * Stores GiftVoucherSlug Service
-     * @var GiftVoucherSlugInterface
+     * Stores ServiceSlugInterface
+     * @var ServiceSlugInterface
      */
-    private $giftVoucherSlug;
+    private $serviceSlug;
 
     /**
-     * Stores GiftVoucherTools Service
-     * @var GiftVoucherToolsInterface
+     * Stores ServiceToolsInterface
+     * @var ServiceToolsInterface
      */
-    private $giftVoucherTools;
+    private $serviceTools;
 
     public function __construct(
         GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService,
         GiftVoucherPaymentInterface $giftVoucherPayment,
-        GiftVoucherSlugInterface $giftVoucherSlug,
-        GiftVoucherToolsInterface $giftVoucherTools
+        ServiceSlugInterface $serviceSlug,
+        ServiceToolsInterface $serviceTools
     )
     {
         $this->giftVoucherPurchasedService = $giftVoucherPurchasedService;
         $this->giftVoucherPayment = $giftVoucherPayment;
-        $this->giftVoucherSlug = $giftVoucherSlug;
-        $this->giftVoucherTools = $giftVoucherTools;
+        $this->serviceSlug = $serviceSlug;
+        $this->serviceTools = $serviceTools;
     }
 
 //OFFER ALL
@@ -131,17 +131,14 @@ class OfferController extends Controller
     public function offer(Request $request, GiftVoucherAvailable $giftVoucherAvailable, $slug)
     {
         //Redirects to good slug
-        $redirectUrl = $this->giftVoucherSlug->match('giftvoucher_offer', $giftVoucherAvailable, $slug);
+        $redirectUrl = $this->serviceSlug->match('giftvoucher_offer', $giftVoucherAvailable, $slug);
         if (null !== $redirectUrl) {
             return new RedirectResponse($redirectUrl);
         }
 
         //Defines form
         $giftVoucherPurchased = $this->giftVoucherPurchasedService->create($giftVoucherAvailable);
-        $giftVoucherConfig = array(
-            'gdpr' => $this->getParameter('c975_l_gift_voucher.gdpr'),
-        );
-        $form = $this->createForm(GiftVoucherPurchasedType::class, $giftVoucherPurchased, array('giftVoucherConfig' => $giftVoucherConfig));
+        $form = $this->giftVoucherPurchasedService->createForm('offer', $giftVoucherPurchased);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -159,7 +156,7 @@ class OfferController extends Controller
             'giftVoucher' => $giftVoucherPurchased,
             'giftVoucherAvailable' => $giftVoucherAvailable,
             'live' => $this->getParameter('c975_l_gift_voucher.live'),
-            'tosUrl' => $this->giftVoucherTools->getUrl($this->getParameter('c975_l_gift_voucher.tosUrl')),
+            'tosUrl' => $this->serviceTools->getUrl($this->getParameter('c975_l_gift_voucher.tosUrl')),
         ));
     }
 }

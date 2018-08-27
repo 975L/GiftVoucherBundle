@@ -98,10 +98,6 @@
                 <source>text.explanation</source>
                 <target>Vale-Regalo para presentar antes de su uso.</target>
             </trans-unit>
-            <trans-unit id="25">
-                <source>label.made_with</source>
-                <target>Hecho con 975L/GiftVoucherBundle</target>
-            </trans-unit>
             <trans-unit id="26">
                 <source>label.identifier</source>
                 <target>Identificador</target>
@@ -198,14 +194,6 @@
                 <source>text.test_giftvoucher</source>
                 <target>Este Vale-Regalo es una prueba, no es válido.</target>
             </trans-unit>
-            <trans-unit id="51">
-                <source>label.accept_tos</source>
-                <target><![CDATA[Acepto los <a href="%tosUrl%">Términos de venta</a>]]></target>
-            </trans-unit>
-            <trans-unit id="52">
-                <source>label.terms_of_sales_filename</source>
-                <target>TérminosVenta</target>
-            </trans-unit>
             <trans-unit id="53">
                 <source>label.offer_as_giftvoucher</source>
                 <target>Ofrecer como un Vale-Regalo</target>
@@ -223,26 +211,14 @@
                 <target>Moneda</target>
             </trans-unit>
             <trans-unit id="57">
-                <source>label.mandatory_field</source>
-                <target>* Campo obligatorio</target>
-            </trans-unit>
-            <trans-unit id="58">
                 <source>placeholder.username</source>
                 <target>Nombre de usuario (si ves esto, déjalo vacío)</target>
             </trans-unit>
-            <trans-unit id="59">
-                <source>text.gdpr</source>
-                <target>Acepto que este sitio web almacena los datos enviados para que pueda responder a mi solicitud</target>
-            </trans-unit>
-            <trans-unit id="60">
-                <source>label.ip</source>
-                <target>Dirección IP</target>
-            </trans-unit>
-            <trans-unit id="61">
+            <trans-unit id="58">
                 <source>text.voucher_created</source>
                 <target>El Vale-Regalo ha sido bien creado</target>
             </trans-unit>
-            <trans-unit id="62">
+            <trans-unit id="59">
                 <source>text.voucher_deleted</source>
                 <target>El Vale-Regalo ha sido bien eliminado</target>
             </trans-unit>

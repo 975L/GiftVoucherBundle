@@ -33,10 +33,9 @@ class GiftVoucherAvailableType extends AbstractType
         $this->container = $container;
     }
 
-    //Builds the form
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $disabled = $options['giftVoucherConfig']['action'] == 'delete' ? true : false;
+        $disabled = 'delete' === $options['config']['action'] ? true : false;
 
         $builder
             ->add('object', TextType::class, array(
@@ -85,7 +84,7 @@ class GiftVoucherAvailableType extends AbstractType
             ;
         //All currencies with defaultCurrency selected
         if (empty($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies'))) {
-            $dataCurrency = $options['giftVoucherConfig']['action'] == 'create' ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
+            $dataCurrency = 'create' === $options['config']['action'] ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
             $builder
                 ->add('currency', CurrencyType::class, array(
                     'label' => 'label.currency',
@@ -136,6 +135,6 @@ class GiftVoucherAvailableType extends AbstractType
             'translation_domain' => 'giftVoucher',
         ));
 
-        $resolver->setRequired('giftVoucherConfig');
+        $resolver->setRequired('config');
     }
 }

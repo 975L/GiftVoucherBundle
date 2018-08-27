@@ -9,6 +9,7 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
+use Symfony\Component\Form\Form;
 use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
@@ -25,6 +26,12 @@ interface GiftVoucherPurchasedServiceInterface
      * @return GiftVoucherPurchased
      */
     public function create(GiftVoucherAvailable $giftVoucherAvailable);
+
+    /**
+     * Shortcut to call GiftVoucherFormFactory to create Form
+     * @return Form
+     */
+    public function createForm(string $name, GiftVoucherPurchased $giftVoucherPurchased);
 
     /**
      * Defines the identifier of the GiftVoucherPurchased, including the secret code (only capital letters except "o" to avoid confusion with 0)
