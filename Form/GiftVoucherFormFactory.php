@@ -51,18 +51,24 @@ class GiftVoucherFormFactory implements GiftVoucherFormFactoryInterface
      */
     public function create(string $name, $giftVoucher)
     {
-        if ('offer' === $name) {
-            $config = array(
-                'gdpr' => $this->container->getParameter('c975_l_gift_voucher.gdpr'),
-            );
-
-            return $this->formFactory->create(GiftVoucherPurchasedType::class, $giftVoucher, array('config' => $config));
+        switch ($name) {
+            case 'create':
+            case 'modify':
+            case 'duplicate':
+            case 'delete':
+                $config = array('action' => $name);
+                $class = GiftVoucherAvailableType::class;
+                break;
+            case 'offer':
+                $config = array('gdpr' => $this->container->getParameter('c975_l_gift_voucher.gdpr'));
+                $class = GiftVoucherPurchasedType::class;
+                break;
+            default:
+                $config = array();
+                $class = '';
+                break;
         }
 
-        $config = array(
-            'action' => $name,
-        );
-
-        return $this->formFactory->create(GiftVoucherAvailableType::class, $giftVoucher, array('config' => $config));
+        return $this->formFactory->create($class, $giftVoucher, array('config' => $config));
     }
 }

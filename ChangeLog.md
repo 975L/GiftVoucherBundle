@@ -1,5 +1,9 @@
 # Changelog
 
+v1.15.4.1
+---------
+- Used a `switch()` for the FormFactory more readable (27/08/2018)
+
 v1.15.4
 -------
 - Added missing redirect if GiftVoucher purchase validation fails (25/08/2018)
