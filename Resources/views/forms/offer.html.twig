@@ -83,8 +83,8 @@
 {# Cancel #}
     <div class="row">
         <p class="text-center">
-            <a href="javascript:history.back()">
-                {{ 'label.cancel'|trans }}</a>
+            <a href="#" onclick="javascript:history.back(); return false;" title="{{ 'label.cancel'|trans({}, 'toolbar') }}">
+                {{ 'label.cancel'|trans({}, 'toolbar') }}</a>
         </p>
     </div>
 {% endblock %}

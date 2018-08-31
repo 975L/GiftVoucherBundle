@@ -36,49 +36,49 @@ class AvailableVoter extends Voter
      * Used for access to create
      * @var string
      */
-    public const CREATE = 'create';
+    public const CREATE = 'c975LGiftVoucher-create';
 
     /**
      * Used for access to dashboard
      * @var string
      */
-    public const DASHBOARD = 'dashboard';
+    public const DASHBOARD = 'c975LGiftVoucher-dashboard';
 
     /**
      * Used for access to delete
      * @var string
      */
-    public const DELETE = 'delete';
+    public const DELETE = 'c975LGiftVoucher-delete';
 
     /**
      * Used for access to display
      * @var string
      */
-    public const DISPLAY = 'display';
+    public const DISPLAY = 'c975LGiftVoucher-display';
 
     /**
      * Used for access to duplicate
      * @var string
      */
-    public const DUPLICATE = 'duplicate';
+    public const DUPLICATE = 'c975LGiftVoucher-duplicate';
 
     /**
      * Used for access to help
      * @var string
      */
-    public const HELP = 'help';
+    public const HELP = 'c975LGiftVoucher-help';
 
     /**
      * Used for access to modify
      * @var string
      */
-    public const MODIFY = 'modify';
+    public const MODIFY = 'c975LGiftVoucher-modify';
 
     /**
      * Used for access to slug
      * @var string
      */
-    public const SLUG = 'slug';
+    public const SLUG = 'c975LGiftVoucher-slug';
 
     /**
      * Contains all the available attributes to check with in supports()
@@ -132,6 +132,7 @@ class AvailableVoter extends Voter
             case self::MODIFY:
             case self::SLUG:
                 return $this->decisionManager->decide($token, array($this->roleNeeded));
+                break;
         }
 
         throw new \LogicException('Invalid attribute: ' . $attribute);

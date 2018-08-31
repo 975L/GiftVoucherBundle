@@ -1,5 +1,9 @@
 # Changelog
 
+v1.15.5
+-------
+- Fixed Voter constants (31/08/2018)
+
 v1.15.4.1
 ---------
 - Used a `switch()` for the FormFactory more readable (27/08/2018)

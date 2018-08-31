@@ -36,13 +36,13 @@ class PurchasedVoter extends Voter
      * Used for access to utilisation
      * @var string
      */
-    public const UTILISATION = 'utilisation';
+    public const UTILISATION = 'c975LGiftVoucher-utilisation';
 
     /**
      * Used for access to utilisation
      * @var string
      */
-    public const UTILISATION_CONFIRM = 'utilisation-confirm';
+    public const UTILISATION_CONFIRM = 'c975LGiftVoucher-utilisation-confirm';
 
     /**
      * Contains all the available attributes to check with in supports()
@@ -84,6 +84,7 @@ class PurchasedVoter extends Voter
             case self::UTILISATION:
             case self::UTILISATION_CONFIRM:
                 return $this->decisionManager->decide($token, array($this->roleNeeded));
+                break;
         }
 
         throw new \LogicException('Invalid attribute: ' . $attribute);

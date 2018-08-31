@@ -24,7 +24,6 @@ use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\ServicesBundle\Service\ServiceToolsInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
-use c975L\GiftVoucherBundle\Form\GiftVoucherPurchasedType;
 use c975L\GiftVoucherBundle\Service\OfferServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;

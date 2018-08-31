@@ -80,7 +80,7 @@ class PurchasedController extends Controller
      */
     public function utilisation(GiftVoucherPurchased $giftVoucherPurchased)
     {
-        $this->denyAccessUnlessGranted('utilisation', $giftVoucherPurchased);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-utilisation', $giftVoucherPurchased);
 
         //Renders the GiftVoucherPurchased
         return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
@@ -111,7 +111,7 @@ class PurchasedController extends Controller
      */
     public function utilisationConfirm(Request $request, GiftVoucherPurchased $giftVoucherPurchased, GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService)
     {
-        $this->denyAccessUnlessGranted('utilisation-confirm', $giftVoucherPurchased);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-utilisation-confirm', $giftVoucherPurchased);
 
         $now = new \DateTime();
         if (null === $giftVoucherPurchased->getValid() || $giftVoucherPurchased->getValid() > $now || $request->get('force') == 'true') {

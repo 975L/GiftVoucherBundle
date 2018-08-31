@@ -22,7 +22,6 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
-use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
 use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
@@ -75,7 +74,7 @@ class AvailableController extends Controller
      */
     public function dashboard(Request $request, PaginatorInterface $paginator)
     {
-        $this->denyAccessUnlessGranted('dashboard', null);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-dashboard', null);
 
         //Gets GiftVouchers Available
         if ('available' == $request->query->get('v')) {
@@ -115,7 +114,7 @@ class AvailableController extends Controller
      */
     public function display(GiftVoucherAvailable $giftVoucherAvailable)
     {
-        $this->denyAccessUnlessGranted('display', $giftVoucherAvailable);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-display', $giftVoucherAvailable);
 
         //Renders the GiftVoucherAvailable
         return $this->render('@c975LGiftVoucher/pages/displayAvailable.html.twig', array(
@@ -136,7 +135,7 @@ class AvailableController extends Controller
     public function create(Request $request)
     {
         $giftVoucherAvailable = new GiftVoucherAvailable();
-        $this->denyAccessUnlessGranted('create', $giftVoucherAvailable);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-create', $giftVoucherAvailable);
 
         //Defines form
         $form = $this->giftVoucherAvailableService->createForm('create', $giftVoucherAvailable);
@@ -174,7 +173,7 @@ class AvailableController extends Controller
      */
     public function modify(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
-        $this->denyAccessUnlessGranted('modify', $giftVoucherAvailable);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-modify', $giftVoucherAvailable);
 
         //Defines form
         $form = $this->giftVoucherAvailableService->createForm('modify', $giftVoucherAvailable);
@@ -213,7 +212,7 @@ class AvailableController extends Controller
      */
     public function duplicate(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
-        $this->denyAccessUnlessGranted('duplicate', $giftVoucherAvailable);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-duplicate', $giftVoucherAvailable);
 
         //Defines form
         $giftVoucherAvailableClone = $this->giftVoucherAvailableService->cloneObject($giftVoucherAvailable);
@@ -254,7 +253,7 @@ class AvailableController extends Controller
      */
     public function delete(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
-        $this->denyAccessUnlessGranted('delete', $giftVoucherAvailable);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-delete', $giftVoucherAvailable);
 
         //Defines form
         $form = $this->giftVoucherAvailableService->createForm('delete', $giftVoucherAvailable);
@@ -287,7 +286,7 @@ class AvailableController extends Controller
      */
     public function slug($text)
     {
-        $this->denyAccessUnlessGranted('slug', null);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-slug', null);
 
         return $this->json(array('a' => $this->serviceSlug->slugify('c975LGiftVoucherBundle:GiftVoucherAvailable', $text)));
     }
@@ -304,7 +303,7 @@ class AvailableController extends Controller
      */
     public function help()
     {
-        $this->denyAccessUnlessGranted('help', null);
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-help', null);
 
         //Renders the help
         return $this->render('@c975LGiftVoucher/pages/help.html.twig');
