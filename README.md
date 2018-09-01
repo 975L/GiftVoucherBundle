@@ -72,7 +72,7 @@ Check dependencies for their configuration:
 - [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle)
 - [wkhtmltopdf-amd64](https://github.com/h4cc/wkhtmltopdf-amd64)
 - [QrCodeBundle](https://github.com/endroid/qr-code)
-- [PHP Library](https://github.com/stripe/stripe-php).
+- [Stripe PHP Library](https://github.com/stripe/stripe-php).
 - [c975LEmailBundle](https://github.com/975L/EmailBundle)
 - [c975LPaymentBundle](https://github.com/975L/PaymentBundle)
 
