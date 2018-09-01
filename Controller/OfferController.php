@@ -20,6 +20,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\ServicesBundle\Service\ServiceToolsInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
@@ -127,7 +128,7 @@ class OfferController extends Controller
      * @Method({"GET", "HEAD", "POST"})
      * @ParamConverter("giftVoucherAvailable", options={"mapping": {"id": "id"}})
      */
-    public function offer(Request $request, GiftVoucherAvailable $giftVoucherAvailable, $slug)
+    public function offer(Request $request, GiftVoucherAvailable $giftVoucherAvailable, ConfigServiceInterface $configService, $slug)
     {
         //Redirects to good slug
         $redirectUrl = $this->serviceSlug->match('giftvoucher_offer', $giftVoucherAvailable, $slug);
@@ -142,7 +143,7 @@ class OfferController extends Controller
 
         if ($form->isSubmitted() && $form->isValid()) {
             //Registers the GitftVoucherPurchased
-            $this->giftVoucherPurchasedService->register($giftVoucherPurchased, $this->getParameter('c975_l_gift_voucher.live'));
+            $this->giftVoucherPurchasedService->register($giftVoucherPurchased, $configService->getParameter('c975LGiftVoucher.live'));
 
             //Redirects to the payment
             $this->giftVoucherPayment->payment($giftVoucherPurchased, $this->getUser());
@@ -154,8 +155,8 @@ class OfferController extends Controller
             'form' => $form->createView(),
             'giftVoucher' => $giftVoucherPurchased,
             'giftVoucherAvailable' => $giftVoucherAvailable,
-            'live' => $this->getParameter('c975_l_gift_voucher.live'),
-            'tosUrl' => $this->serviceTools->getUrl($this->getParameter('c975_l_gift_voucher.tosUrl')),
+            'live' => $configService->getParameter('c975LGiftVoucher.live'),
+            'tosUrl' => $this->serviceTools->getUrl($configService->getParameter('c975LGiftVoucher.tosUrl')),
         ));
     }
 }

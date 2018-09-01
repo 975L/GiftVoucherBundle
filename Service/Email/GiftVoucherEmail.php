@@ -9,10 +9,10 @@
 
 namespace c975L\GiftVoucherBundle\Service\Email;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use c975L\PaymentBundle\Entity\Payment;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\EmailBundle\Service\EmailServiceInterface;
+use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\Email\GiftVoucherEmailInterface;
 use c975L\ServicesBundle\Service\ServicePdfInterface;
@@ -25,10 +25,10 @@ use c975L\ServicesBundle\Service\ServicePdfInterface;
 class GiftVoucherEmail implements GiftVoucherEmailInterface
 {
     /**
-     * Stores ContainerInterface
-     * @var ContainerInterface
+     * Stores ConfigServiceInterface
+     * @var ConfigServiceInterface
      */
-    private $container;
+    private $configService;
 
     /**
      * Stores EmailServiceInterface
@@ -49,13 +49,13 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
     private $translator;
 
     public function __construct(
-        ContainerInterface $container,
+        ConfigServiceInterface $configService,
         EmailServiceInterface $emailService,
         ServicePdfInterface $servicePdf,
         TranslatorInterface $translator
     )
     {
-        $this->container = $container;
+        $this->configService = $configService;
         $this->emailService = $emailService;
         $this->servicePdf = $servicePdf;
         $this->translator = $translator;
@@ -71,14 +71,14 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
         $giftVoucherPdf = $this->servicePdf->html2Pdf($filenameGiftVoucher, $giftVoucherHtml);
 
         //Gets the PDF for Terms of sales
-        $tosPdf = $this->servicePdf->getPdfFile('label.terms_of_sales_filename', $this->container->getParameter('c975_l_gift_voucher.tosPdf'));
+        $tosPdf = $this->servicePdf->getPdfFile('label.terms_of_sales_filename', $this->configService->getParameter('c975LGiftVoucher.tosPdf'));
 
         //Sends email
         $emailData = array(
             'subject' => $this->translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' "' . $giftVoucherPurchased->getObject() . '" (' . $identifierFormatted . ')',
-            'sentFrom' => $this->container->getParameter('c975_l_email.sentFrom'),
+            'sentFrom' => $this->configService->getParameter('c975LEmail.sentFrom'),
             'sentTo' => $giftVoucherPurchased->getSendToEmail(),
-            'replyTo' => $this->container->getParameter('c975_l_email.sentFrom'),
+            'replyTo' => $this->configService->getParameter('c975LEmail.sentFrom'),
             'body' => preg_replace('/<style(.*)<\/style>/s', '', $giftVoucherHtml),
             'attach' => array(
                 $giftVoucherPdf,
