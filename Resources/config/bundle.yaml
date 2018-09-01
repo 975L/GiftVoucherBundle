@@ -1,0 +1,41 @@
+c975LGiftVoucher:
+    roleNeeded:
+        type: string
+        required: true
+        default: ROLE_ADMIN
+        info: "User's role needed to enable access to data linked to GiftVoucherBundle: i.e. ROLE_ADMIN (Default: ROLE_ADMIN)"
+    live:
+        type: bool
+        required: false
+        default: false
+        info: "If your GiftVoucher are live and will charge user's card (Default: false)"
+    gdpr:
+        type: bool
+        required: false
+        default: true
+        info: "If the checkbox related to GDPR rules should be displayed"
+    defaultCurrency:
+        type: string
+        required: true
+        default: EUR
+        info: "Your default currency three letters code: i.e. EUR (Default: EUR)"
+    proposedCurrencies:
+        type: array
+        required: false
+        default: null
+        info: "#null to propose all currencies OR ['EUR', 'USD'] for a set of currencies OR ['EUR'] for only one currency (Default null)"
+    vat:
+        type: float
+        required: false
+        default: null
+        info: "Your VAT rate without %: i.e. 5.5 for 5.5%, or 20 for 20% (Default: null)"
+    tosUrl:
+        type: string
+        required: true
+        default: null
+        info: "The location of your Terms of sales to be displayed to user, it can be a Route with parameters or an absolute url: i.e. pageedit_display, {page: terms-of-sales}"
+    tosPdf:
+        type: string
+        required: true
+        default: null
+        info: "The location of your Terms of sales, in PDF, to be sent to user, it can be a Route with parameters or an absolute url: i.e. pageedit_pdf, {page: terms-of-sales}"
