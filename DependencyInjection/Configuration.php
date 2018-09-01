@@ -22,35 +22,6 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('c975_l_gift_voucher');
-
-        $rootNode
-            ->children()
-                ->scalarNode('live')
-                    ->defaultFalse()
-                ->end()
-                ->scalarNode('roleNeeded')
-                    ->defaultValue('ROLE_ADMIN')
-                ->end()
-                ->booleanNode('gdpr')
-                    ->defaultTrue()
-                ->end()
-                ->scalarNode('defaultCurrency')
-                    ->defaultValue('EUR')
-                ->end()
-                ->arrayNode('proposedCurrencies')
-                    ->prototype('scalar')->end()
-                    ->defaultValue(array())
-                ->end()
-                ->floatNode('vat')
-                    ->defaultNull()
-                ->end()
-                ->scalarNode('tosUrl')
-                ->end()
-                ->scalarNode('tosPdf')
-                ->end()
-            ->end()
-        ;
 
         return $treeBuilder;
     }
