@@ -10,8 +10,8 @@
 namespace c975L\GiftVoucherBundle\Form;
 
 use Symfony\Component\Form\Form;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
@@ -26,10 +26,10 @@ use c975L\GiftVoucherBundle\Form\GiftVoucherFormFactoryInterface;
 class GiftVoucherFormFactory implements GiftVoucherFormFactoryInterface
 {
     /**
-     * Stores container
-     * @var ContainerInterface
+     * Stores ConfigServiceInterface
+     * @var ConfigServiceInterface
      */
-    private $container;
+    private $configService;
 
     /**
      * Stores FormFactoryInterface
@@ -38,11 +38,11 @@ class GiftVoucherFormFactory implements GiftVoucherFormFactoryInterface
     private $formFactory;
 
     public function __construct(
-        ContainerInterface $container,
+        ConfigServiceInterface $configService,
         FormFactoryInterface $formFactory
     )
     {
-        $this->container = $container;
+        $this->configService = $configService;
         $this->formFactory = $formFactory;
     }
 
@@ -60,7 +60,7 @@ class GiftVoucherFormFactory implements GiftVoucherFormFactoryInterface
                 $class = GiftVoucherAvailableType::class;
                 break;
             case 'offer':
-                $config = array('gdpr' => $this->container->getParameter('c975_l_gift_voucher.gdpr'));
+                $config = array('gdpr' => $this->configService->getParameter('c975LGiftVoucher.gdpr'));
                 $class = GiftVoucherPurchasedType::class;
                 break;
             default:

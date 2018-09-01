@@ -20,6 +20,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 
@@ -49,12 +50,12 @@ class PurchasedController extends Controller
      *          "map_method_signature" = true
      *      })
      */
-    public function display(GiftVoucherPurchased $giftVoucherPurchased, AuthorizationCheckerInterface $authChecker)
+    public function display(GiftVoucherPurchased $giftVoucherPurchased, AuthorizationCheckerInterface $authChecker, ConfigServiceInterface $configService)
     {
         //Renders the GiftVoucherPurchased
         return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
             'giftVoucher' => $giftVoucherPurchased,
-            'display' => $authChecker->isGranted($this->getParameter('c975_l_gift_voucher.roleNeeded')) ? 'admin' : 'basic',
+            'display' => $authChecker->isGranted($configService->getParameter('c975LGiftVoucher.roleNeeded')) ? 'admin' : 'basic',
         ));
     }
 

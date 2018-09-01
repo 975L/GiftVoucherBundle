@@ -34,6 +34,11 @@
     {{ toolbar_button(path('giftvoucher_delete', {'id': object.id}), 'delete') }}
 {% endif %}
 
+{# Config #}
+{% if type != 'config' %}
+    {{ toolbar_button(path('giftvoucher_config'), 'config') }}
+{% endif %}
+
 {# Help #}
 {% if type != 'help' %}
     {{ toolbar_button(path('giftvoucher_help'), 'help') }}

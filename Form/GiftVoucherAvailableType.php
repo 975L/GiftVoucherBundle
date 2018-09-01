@@ -18,6 +18,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 
 /**
  * GiftVoucherAvailable FormType
@@ -26,11 +27,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class GiftVoucherAvailableType extends AbstractType
 {
-    private $container;
+    /**
+     * Stores ConfigServiceInterface
+     * @var ConfigServiceInterface
+     */
+    private $configService;
 
-    public function __construct(\Symfony\Component\DependencyInjection\ContainerInterface $container)
+    public function __construct(ConfigServiceInterface $configService)
     {
-        $this->container = $container;
+        $this->configService = $configService;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)
@@ -83,8 +88,8 @@ class GiftVoucherAvailableType extends AbstractType
                 )))
             ;
         //All currencies with defaultCurrency selected
-        if (empty($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies'))) {
-            $dataCurrency = 'create' === $options['config']['action'] ? $this->container->getParameter('c975_l_gift_voucher.defaultCurrency') : $options['data']->getCurrency();
+        if (empty($this->configService->getParameter('c975LGiftVoucher.proposedCurrencies'))) {
+            $dataCurrency = 'create' === $options['config']['action'] ? $this->configService->getParameter('c975LGiftVoucher.defaultCurrency') : $options['data']->getCurrency();
             $builder
                 ->add('currency', CurrencyType::class, array(
                     'label' => 'label.currency',
@@ -98,7 +103,7 @@ class GiftVoucherAvailableType extends AbstractType
         //Only proposed currencies
         } else {
             $currencies = array();
-            foreach ($this->container->getParameter('c975_l_gift_voucher.proposedCurrencies') as $currency) {
+            foreach ($this->configService->getParameter('c975LGiftVoucher.proposedCurrencies') as $currency) {
                 $currencies[strtoupper($currency)] = $currency;
             }
             //Multiples currencies

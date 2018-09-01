@@ -9,8 +9,8 @@
 
 namespace c975L\GiftVoucherBundle\Service\Payment;
 
-use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\PaymentBundle\Service\PaymentServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
@@ -23,10 +23,10 @@ use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
 class GiftVoucherPayment implements GiftVoucherPaymentInterface
 {
     /**
-     * Stores Container
-     * @var ContainerInterface
+     * Stores ConfigServiceInterface
+     * @var ConfigServiceInterface
      */
-    private $container;
+    private $configService;
 
     /**
      * Stores PaymentService
@@ -41,12 +41,12 @@ class GiftVoucherPayment implements GiftVoucherPaymentInterface
     private $translator;
 
     public function __construct(
-        ContainerInterface $container,
+        ConfigServiceInterface $configService,
         PaymentServiceInterface $paymentService,
         TranslatorInterface $translator
     )
     {
-        $this->container = $container;
+        $this->configService = $configService;
         $this->paymentService = $paymentService;
         $this->translator = $translator;
     }
@@ -63,9 +63,9 @@ class GiftVoucherPayment implements GiftVoucherPaymentInterface
             'description' => $this->translator->trans('label.gift_voucher', array(), 'giftVoucher') . ' - ' . $giftVoucherPurchased->getObject(),
             'userId' => null !== $user ? $user->getId() : null,
             'userIp' => $giftVoucherPurchased->getUserIp(),
-            'live' => $this->container->getParameter('c975_l_gift_voucher.live'),
+            'live' => $this->configService->getParameter('c975LGiftVoucher.live'),
             'returnRoute' => 'giftvoucher_payment_done',
-            'vat' => $this->container->getParameter('c975_l_gift_voucher.vat'),
+            'vat' => $this->configService->getParameter('c975LGiftVoucher.vat'),
             );
 
         $this->paymentService->create($paymentData);

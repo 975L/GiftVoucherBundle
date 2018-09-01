@@ -12,6 +12,7 @@ namespace c975L\GiftVoucherBundle\Security;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 
 /**
@@ -22,15 +23,22 @@ use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 class AvailableVoter extends Voter
 {
     /**
+     * Stores ConfigServiceInterface
+     * @var ConfigServiceInterface
+     */
+    private $configService;
+
+    /**
+     * Stores AccessDecisionManagerInterface
      * @var AccessDecisionManagerInterface
      */
     private $decisionManager;
 
     /**
-     * The role needed to be allowed access (defined in config)
+     * Used for access to config
      * @var string
      */
-    private $roleNeeded;
+    public const CONFIG = 'c975LGiftVoucher-config';
 
     /**
      * Used for access to create
@@ -85,6 +93,7 @@ class AvailableVoter extends Voter
      * @var array
      */
     private const ATTRIBUTES = array(
+        self::CONFIG,
         self::CREATE,
         self::DASHBOARD,
         self::DELETE,
@@ -95,10 +104,13 @@ class AvailableVoter extends Voter
         self::SLUG,
     );
 
-    public function __construct(AccessDecisionManagerInterface $decisionManager, string $roleNeeded)
+    public function __construct(
+        ConfigServiceInterface $configService,
+        AccessDecisionManagerInterface $decisionManager
+    )
     {
+        $this->configService = $configService;
         $this->decisionManager = $decisionManager;
-        $this->roleNeeded = $roleNeeded;
     }
 
     /**
@@ -123,6 +135,7 @@ class AvailableVoter extends Voter
     {
         //Defines access rights
         switch ($attribute) {
+            case self::CONFIG:
             case self::CREATE:
             case self::DASHBOARD:
             case self::DELETE:
@@ -131,7 +144,7 @@ class AvailableVoter extends Voter
             case self::HELP:
             case self::MODIFY:
             case self::SLUG:
-                return $this->decisionManager->decide($token, array($this->roleNeeded));
+                return $this->decisionManager->decide($token, array($this->configService->getParameter('c975LGiftVoucher.roleNeeded', 'c975l/giftvoucher-bundle')));
                 break;
         }
 
