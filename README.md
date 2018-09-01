@@ -44,9 +44,9 @@ Use [Composer](https://getcomposer.org) to install the library
     composer require c975l/giftvoucher-bundle
 ```
 
-Step 2: Enable the Bundles
---------------------------
-Then, enable the bundles by adding them to the list of registered bundles in the `app/AppKernel.php` file of your project:
+Step 2: Enable the Bundle
+-------------------------
+Then, enable the bundle by adding it the list of registered bundles in the `app/AppKernel.php` file of your project:
 
 ```php
 <?php
@@ -56,10 +56,6 @@ class AppKernel extends Kernel
     {
         $bundles = [
             // ...
-            new Knp\Bundle\SnappyBundle\KnpSnappyBundle(),
-            new Knp\Bundle\TimeBundle\KnpTimeBundle(),
-            new c975L\EmailBundle\c975LEmailBundle(),
-            new c975L\PaymentBundle\c975LPaymentBundle(),
             new c975L\GiftVoucherBundle\c975LGiftVoucherBundle(),
         ];
     }
@@ -68,10 +64,19 @@ class AppKernel extends Kernel
 
 Step 3: Configure the Bundle
 ----------------------------
-Check [c975LEmailBundle](https://github.com/975L/EmailBundle) and [c975LPaymentBundle](https://github.com/975L/PaymentBundle) for their specific configuration.
-You should also check [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle) for its configuration but below is a common set.
-In the `app/config.yml` file of your project, define the following:
+Check dependencies for their configuration:
+- [Swiftmailer](https://github.com/symfony/swiftmailer-bundle)
+- [Doctrine](https://github.com/doctrine/DoctrineBundle)
+- [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle)
+- [KnpTimeBundle](https://github.com/KnpLabs/KnpTimeBundle)
+- [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle)
+- [wkhtmltopdf-amd64](https://github.com/h4cc/wkhtmltopdf-amd64)
+- [QrCodeBundle](https://github.com/endroid/qr-code)
+- [PHP Library](https://github.com/stripe/stripe-php).
+- [c975LEmailBundle](https://github.com/975L/EmailBundle)
+- [c975LPaymentBundle](https://github.com/975L/PaymentBundle)
 
+For KnpSnappyBundle you can use this configuration if it suits to your needs.
 ```yml
 knp_snappy:
     process_timeout: 20
@@ -93,28 +98,11 @@ knp_snappy:
             margin-bottom: 10mm
     image:
         enabled: false
-
-c975_l_gift_voucher:
-    #The role needed to create/modify/use a GiftVoucher
-    roleNeeded: 'ROLE_ADMIN'
-    #If your gift-vouchers are live or in test
-    live: true #Default false
-    #If you want to display the checkbox for GDPR agreement
-    gdpr: false #true(default)
-    #The default currency code on 3 letters
-    defaultCurrency: 'EUR' #'EUR'(default)
-    #(Optional) The proposed currencies codes on 3 letters
-    #If you want to propose all currencies leave it null
-    #If you want to propose a set of currencies make a yaml array ['EUR', 'USD']
-    #If you want to propose only one currency, make a yaml array with only one value ['EUR']
-    proposedCurrencies: ['EUR', 'USD'] #null(default)
-    #(Optional) Your VAT rate without % i.e. 5.5 for 5.5%, or 20 for 20%
-    vat: 5.5 #null(default)
-    #The location of your Terms of sales to be displayed to user, it can be a Route with parameters or an absolute url
-    tosUrl: "pageedit_display, {page: terms-of-sales}"
-    #The location of your Terms of sales, in PDF, to be sent to user, it can be a Route with parameters or an absolute url
-    tosPdf: 'pageedit_pdf, {page: terms-of-sales}'
 ```
+
+v2.0+ of c975LGiftVoucherBundle uses [c975L/ConfigBundle](https://github.com/975L/ConfigBundle) to manage configuration parameters. Use the Route "/gift-voucher/config" with the proper user role to modify them.
+
+**Upgrading from v1.x? Check [UPGRADE.md](UPGRADE.md).**
 
 Step 4: Enable the Routes
 -------------------------
@@ -177,6 +165,7 @@ Routes
 ------
 The different Routes (naming self-explanatory) available are:
 - giftvoucher_display
+- giftvoucher_config
 - giftvoucher_create
 - giftvoucher_modify
 - giftvoucher_duplicate
