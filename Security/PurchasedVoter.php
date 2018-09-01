@@ -12,6 +12,7 @@ namespace c975L\GiftVoucherBundle\Security;
 use Symfony\Component\Security\Core\Authorization\AccessDecisionManagerInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 
 /**
@@ -22,15 +23,16 @@ use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 class PurchasedVoter extends Voter
 {
     /**
+     * Stores ConfigServiceInterface
+     * @var ConfigServiceInterface
+     */
+    private $configService;
+
+    /**
+     * Stores AccessDecisionManagerInterface
      * @var AccessDecisionManagerInterface
      */
     private $decisionManager;
-
-    /**
-     * The role needed to be allowed access (defined in config)
-     * @var string
-     */
-    private $roleNeeded;
 
     /**
      * Used for access to utilisation
@@ -53,10 +55,13 @@ class PurchasedVoter extends Voter
         self::UTILISATION_CONFIRM,
     );
 
-    public function __construct(AccessDecisionManagerInterface $decisionManager, string $roleNeeded)
+    public function __construct(
+        ConfigServiceInterface $configService,
+        AccessDecisionManagerInterface $decisionManager
+    )
     {
+        $this->configService = $configService;
         $this->decisionManager = $decisionManager;
-        $this->roleNeeded = $roleNeeded;
     }
 
     /**
@@ -83,7 +88,7 @@ class PurchasedVoter extends Voter
         switch ($attribute) {
             case self::UTILISATION:
             case self::UTILISATION_CONFIRM:
-                return $this->decisionManager->decide($token, array($this->roleNeeded));
+                return $this->decisionManager->decide($token, array($this->configService->getParameter('c975LGiftVoucher.roleNeeded', 'c975l/giftvoucher-bundle')));
                 break;
         }
 

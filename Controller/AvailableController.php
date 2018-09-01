@@ -21,10 +21,11 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Knp\Component\Pager\PaginatorInterface;
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
+use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
-use c975L\ServicesBundle\Service\ServiceSlugInterface;
 
 /**
  * GiftVoucherAvailable Controller class
@@ -271,6 +272,39 @@ class AvailableController extends Controller
         return $this->render('@c975LGiftVoucher/forms/delete.html.twig', array(
             'form' => $form->createView(),
             'giftVoucher' => $giftVoucherAvailable,
+        ));
+    }
+
+//CONFIG
+    /**
+     * Displays the configuration
+     * @return Response
+     * @throws AccessDeniedException
+     *
+     * @Route("/gift-voucher/config",
+     *      name="giftvoucher_config")
+     * @Method({"GET", "HEAD", "POST"})
+     */
+    public function config(Request $request, ConfigServiceInterface $configService)
+    {
+        $this->denyAccessUnlessGranted('c975LGiftVoucher-config', null);
+
+        //Defines form
+        $form = $configService->createForm('c975l/giftvoucher-bundle');
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            //Validates config
+            $configService->setConfig($form);
+
+            //Redirects
+            return $this->redirectToRoute('giftvoucher_dashboard');
+        }
+
+        //Renders the config form
+        return $this->render('@c975LConfig/forms/config.html.twig', array(
+            'form' => $form->createView(),
+            'toolbar' => '@c975LGiftVoucher',
         ));
     }
 
