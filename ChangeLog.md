@@ -1,5 +1,7 @@
 # Changelog
 
+- Updated composer.json (01/09/2018)
+
 v1.15.5
 -------
 - Fixed Voter constants (31/08/2018)
