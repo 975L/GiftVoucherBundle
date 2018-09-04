@@ -1,0 +1,21 @@
+{# Updates when title changes #}
+$('#gift_voucher_available_object')
+    .change(function() {
+        updateSlug($('#gift_voucher_available_object').val())
+    });
+{# Updates when slug changes #}
+$('#gift_voucher_available_slug')
+    .change(function() {
+        updateSlug($('#gift_voucher_available_slug').val())
+    });
+{# Updates slug #}
+function updateSlug(text) {
+    var slugUrl = '{{ absolute_url(path('giftvoucher_slug', {'text': 'TEXT'})) }}';
+    var slug = $.post(slugUrl.replace('TEXT', text));
+    slug.done(function(data) {
+        if (data.a != 'false') {
+            $('#gift_voucher_available_slug')
+                .val(data.a);
+        }
+    });
+};

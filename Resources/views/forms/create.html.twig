@@ -21,5 +21,9 @@
         {{ form_end(form) }}
     </div>
 {# Javascript #}
-    {{ include('@c975LGiftVoucher/fragments/javascript.html.twig') }}
+    <script>
+        $(document).ready(function() {
+            {{ include('@c975LGiftVoucher/fragments/updateSlug.html.twig') }}
+        });
+    </script>
 {% endblock %}
