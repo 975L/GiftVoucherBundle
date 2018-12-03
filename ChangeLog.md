@@ -2,6 +2,7 @@
 
 - Updated `README.md` (01/09/2018)
 - Renamed `fragments/javascript.html.twig` (04/09/2018)
+- Corrected `UPGRADE.md` for `php bin/console config:create` (03/12/2018)
 
 v2.0
 ----
