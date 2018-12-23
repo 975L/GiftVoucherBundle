@@ -9,20 +9,19 @@
 
 namespace c975L\GiftVoucherBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * GiftVoucherPurchased Controller class
@@ -32,6 +31,7 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 class PurchasedController extends Controller
 {
 //DISPLAY
+
     /**
      * Displays the GiftVoucherPurchased
      * @return Response
@@ -60,6 +60,7 @@ class PurchasedController extends Controller
     }
 
 //USE
+
     /**
      * Displays the form to mark the GiftVoucherPurchased as used by the merchant
      * @return Response
@@ -91,6 +92,7 @@ class PurchasedController extends Controller
     }
 
 //USE CONFIRMATION
+
     /**
      * Marks the GiftVoucherPurchased as used by the merchant
      * @return Response
@@ -114,7 +116,7 @@ class PurchasedController extends Controller
     {
         $this->denyAccessUnlessGranted('c975LGiftVoucher-utilisation-confirm', $giftVoucherPurchased);
 
-        $now = new \DateTime();
+        $now = new DateTime();
         if (null === $giftVoucherPurchased->getValid() || $giftVoucherPurchased->getValid() > $now || $request->get('force') == 'true') {
             //Marks the GiftVoucherPurchased as used
             $giftVoucherPurchasedService->utilisation($giftVoucherPurchased, $now);

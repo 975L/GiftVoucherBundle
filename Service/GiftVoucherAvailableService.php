@@ -9,12 +9,11 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Form\GiftVoucherFormFactoryInterface;
-use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\ServicesBundle\Service\ServiceToolsInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * Interface to be called for DI for GiftVoucherAvailable Main related services

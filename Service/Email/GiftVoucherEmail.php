@@ -9,13 +9,11 @@
 
 namespace c975L\GiftVoucherBundle\Service\Email;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\EmailBundle\Service\EmailServiceInterface;
-use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
-use c975L\GiftVoucherBundle\Service\Email\GiftVoucherEmailInterface;
 use c975L\ServicesBundle\Service\ServicePdfInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Services related to GiftVoucher Email

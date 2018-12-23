@@ -9,6 +9,7 @@
 
 namespace c975L\GiftVoucherBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -97,7 +98,7 @@ class GiftVoucherPurchased
 
     /**
      * DateTime of purchase
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="purchase", type="datetime", nullable=true)
      */
@@ -105,7 +106,7 @@ class GiftVoucherPurchased
 
     /**
      * Final DateTime for validity
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="valid", type="datetime", nullable=true)
      */
@@ -137,7 +138,7 @@ class GiftVoucherPurchased
 
     /**
      * DateTime the GiftVoucherPurchased has been used
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="used", type="datetime")
      */
@@ -330,7 +331,7 @@ class GiftVoucherPurchased
 
     /**
      * Set purchase
-     * @param \DateTime
+     * @param DateTime
      * @return GiftVoucherPurchased
      */
     public function setPurchase($purchase)
@@ -342,7 +343,7 @@ class GiftVoucherPurchased
 
     /**
      * Get purchase
-     * @return \DateTime
+     * @return DateTime
      */
     public function getPurchase()
     {
@@ -351,7 +352,7 @@ class GiftVoucherPurchased
 
     /**
      * Set valid
-     * @param \DateTime
+     * @param DateTime
      * @return GiftVoucherPurchased
      */
     public function setValid($valid)
@@ -363,7 +364,7 @@ class GiftVoucherPurchased
 
     /**
      * Get valid
-     * @return \DateTime
+     * @return DateTime
      */
     public function getValid()
     {
@@ -435,7 +436,7 @@ class GiftVoucherPurchased
 
     /**
      * Set used
-     * @param \DateTime
+     * @param DateTime
      * @return GiftVoucherPurchased
      */
     public function setUsed($used)
@@ -447,7 +448,7 @@ class GiftVoucherPurchased
 
     /**
      * Get used
-     * @return \DateTime
+     * @return DateTime
      */
     public function getUsed()
     {

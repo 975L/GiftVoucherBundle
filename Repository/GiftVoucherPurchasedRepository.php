@@ -9,8 +9,8 @@
 
 namespace c975L\GiftVoucherBundle\Repository;
 
-use Doctrine\ORM\EntityRepository;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * Repository for Event Entity

@@ -9,6 +9,7 @@
 
 namespace c975L\GiftVoucherBundle\Entity;
 
+use DateInterval;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -66,7 +67,7 @@ class GiftVoucherAvailable
 
     /**
      * Interval for which the GiftVoucherAvailable will be valid
-     * @var \DateInterval
+     * @var DateInterval
      *
      * @ORM\Column(name="valid", type="dateinterval", nullable=true)
      */
@@ -183,7 +184,7 @@ class GiftVoucherAvailable
 
     /**
      * Set valid
-     * @param \DateInterval
+     * @param DateInterval
      * @return GiftVoucherAvailable
      */
     public function setValid($valid)
@@ -195,7 +196,7 @@ class GiftVoucherAvailable
 
     /**
      * Get valid
-     * @return \DateInterval
+     * @return DateInterval
      */
     public function getValid()
     {

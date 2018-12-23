@@ -9,7 +9,6 @@
 
 namespace c975L\GiftVoucherBundle\Service\Email;
 
-use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 
 /**

@@ -9,10 +9,11 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
-use Symfony\Component\Form\Form;
-use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
+use c975L\PaymentBundle\Entity\Payment;
+use DateTime;
+use Symfony\Component\Form\Form;
 
 /**
  * Interface to be called for DI for GiftVoucherPurchased Main related services
@@ -65,7 +66,7 @@ interface GiftVoucherPurchasedServiceInterface
     /**
      * Marks the GiftVoucherPurchased as used
      */
-    public function utilisation(GiftVoucherPurchased $giftVoucherPurchased, \DateTime $now);
+    public function utilisation(GiftVoucherPurchased $giftVoucherPurchased, DateTime $now);
 
     /**
      * Validates the GiftVoucherPurchased after its payment

@@ -9,19 +9,16 @@
 
 namespace c975L\GiftVoucherBundle\Controller;
 
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\LabelAlignment;
-use Endroid\QrCode\Response\QrCodeResponse;
-use Endroid\QrCode\QrCode;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Response\QrCodeResponse;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
  * Qrcode Controller class
@@ -31,6 +28,7 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 class QrcodeController extends Controller
 {
 //DISPLAY
+
     /**
      * Builds and displays the Qrcode
      * @return ImagePng

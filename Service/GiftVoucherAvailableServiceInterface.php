@@ -9,8 +9,8 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
-use Symfony\Component\Form\Form;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
+use Symfony\Component\Form\Form;
 
 /**
  * Interface to be called for DI for GiftVoucherAvailable Main related services

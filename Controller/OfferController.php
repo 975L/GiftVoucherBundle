@@ -9,25 +9,20 @@
 
 namespace c975L\GiftVoucherBundle\Controller;
 
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
+use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
+use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
+use c975L\ServicesBundle\Service\ServiceSlugInterface;
+use c975L\ServicesBundle\Service\ServiceToolsInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use c975L\ConfigBundle\Service\ConfigServiceInterface;
-use c975L\ServicesBundle\Service\ServiceSlugInterface;
-use c975L\ServicesBundle\Service\ServiceToolsInterface;
-use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
-use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
-use c975L\GiftVoucherBundle\Service\OfferServiceInterface;
-use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
-use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
 
 /**
  * Offer Controller class
@@ -74,6 +69,7 @@ class OfferController extends Controller
     }
 
 //OFFER ALL
+
     /**
      * Displays all the GiftVoucherAvailable that can be offered
      * @return Response
@@ -95,6 +91,7 @@ class OfferController extends Controller
     }
 
 //OFFER
+
     /**
      * Redirects to the Route containing slug to display the specific GiftVoucherAvailable offer
      * @return Redirect
@@ -114,6 +111,7 @@ class OfferController extends Controller
             'id' => $giftVoucherAvailable->getId(),
         ));
     }
+
     /**
      * Displays the specific GiftVoucherAvailable offer
      * @return Response

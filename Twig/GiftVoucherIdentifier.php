@@ -10,13 +10,14 @@
 namespace c975L\GiftVoucherBundle\Twig;
 
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+use Twig_Extension;
 
 /**
  * Twig extension to display the formatted GiftVoucherPurchased identifier using `|gv_identifier`
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class GiftVoucherIdentifier extends \Twig_Extension
+class GiftVoucherIdentifier extends Twig_Extension
 {
     /**
      * Stores purchasedService
@@ -32,7 +33,7 @@ class GiftVoucherIdentifier extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('gv_identifier', array($this, 'identifier')),
+            new Twig_SimpleFilter('gv_identifier', array($this, 'identifier')),
         );
     }
 

@@ -10,13 +10,15 @@
 namespace c975L\GiftVoucherBundle\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Twig_Environment;
+use Twig_Extension;
 
 /**
  * Twig extension to display all the GiftVoucherAvailable as a list (object, description, offer button) using `gv_view_all([$number, $orderField])`
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class GiftVoucherViewAll extends \Twig_Extension
+class GiftVoucherViewAll extends Twig_Extension
 {
     /**
      * Stores EntityManager
@@ -32,7 +34,7 @@ class GiftVoucherViewAll extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction(
+            new Twig_SimpleFunction(
                 'gv_view_all',
                 array($this, 'viewAll'),
                 array(
@@ -47,7 +49,7 @@ class GiftVoucherViewAll extends \Twig_Extension
      * Returns the xhtml code to view all the GiftVoucherAvailable
      * @return string
      */
-    public function viewAll(\Twig_Environment $environment, $number = null, $order = 'object')
+    public function viewAll(Twig_Environment $environment, $number = null, $order = 'object')
     {
         //Defines button
         $giftVouchers = $this->em

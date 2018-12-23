@@ -9,16 +9,16 @@
 
 namespace c975L\GiftVoucherBundle\Form;
 
+use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CurrencyType;
 use Symfony\Component\Form\Extension\Core\Type\DateIntervalType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use c975L\ConfigBundle\Service\ConfigServiceInterface;
 
 /**
  * GiftVoucherAvailable FormType

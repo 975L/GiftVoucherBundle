@@ -9,18 +9,17 @@
 
 namespace c975L\GiftVoucherBundle\Service;
 
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\HttpFoundation\RequestStack;
-use Twig_Environment;
-use c975L\PaymentBundle\Entity\Payment;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Form\GiftVoucherFormFactoryInterface;
-use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\GiftVoucherBundle\Service\Email\GiftVoucherEmailInterface;
-use c975L\GiftVoucherBundle\Service\Pdf\GiftVoucherPdfInterface;
+use c975L\PaymentBundle\Entity\Payment;
 use c975L\ServicesBundle\Service\ServiceToolsInterface;
+use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Twig_Environment;
 
 /**
  * Main services related to GiftVoucherPurchased
@@ -55,7 +54,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
 
     /**
      * Stores current Request
-     * @var RequestStack
+     * @var Request
      */
     private $request;
 
@@ -88,7 +87,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
     public function create(GiftVoucherAvailable $giftVoucherAvailable)
     {
         $giftVoucherPurchased = new GiftVoucherPurchased();
-        $validDate = new \DateTime();
+        $validDate = new DateTime();
         $giftVoucherPurchased
             ->setObject($giftVoucherAvailable->getObject())
             ->setDescription($giftVoucherAvailable->getDescription())
@@ -169,7 +168,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
     /**
      * {@inheritdoc}
      */
-    public function utilisation(GiftVoucherPurchased $giftVoucherPurchased, \DateTime $now)
+    public function utilisation(GiftVoucherPurchased $giftVoucherPurchased, DateTime $now)
     {
         $giftVoucherPurchased->setUsed($now);
 
@@ -204,7 +203,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
 
             //Updates giftVoucherPurchased
             $giftVoucherPurchased
-                ->setPurchase(new \DateTime())
+                ->setPurchase(new DateTime())
                 ->setIdentifier(substr($identifier, 0, 12))
                 ->setSecret(substr($identifier, 12))
                 ->setOrderId($payment->getOrderId())

@@ -10,13 +10,15 @@
 namespace c975L\GiftVoucherBundle\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Twig_Environment;
+use Twig_Extension;
 
 /**
  * Twig extension to display the Offer button for the GiftVoucherAvailable using `gv_offer_button(id)`
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class GiftVoucherOfferButton extends \Twig_Extension
+class GiftVoucherOfferButton extends Twig_Extension
 {
     /**
      * Stores EntityManager
@@ -32,7 +34,7 @@ class GiftVoucherOfferButton extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            new \Twig_SimpleFunction(
+            new Twig_SimpleFunction(
                 'gv_offer_button',
                 array($this, 'offerButton'),
                 array(
@@ -47,7 +49,7 @@ class GiftVoucherOfferButton extends \Twig_Extension
      * Returns the xhtml code for the Offer button
      * @return string
      */
-    public function offerButton(\Twig_Environment $environment, $id, $style = 'btn btn-lg btn-block btn-primary')
+    public function offerButton(Twig_Environment $environment, $id, $style = 'btn btn-lg btn-block btn-primary')
     {
 dump($style);
         //Defines button

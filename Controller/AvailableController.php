@@ -9,23 +9,20 @@
 
 namespace c975L\GiftVoucherBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Exception\HttpException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use c975L\ConfigBundle\Service\ConfigServiceInterface;
-use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
 use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
+use c975L\ServicesBundle\Service\ServiceSlugInterface;
+use Knp\Component\Pager\PaginatorInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * GiftVoucherAvailable Controller class
@@ -64,6 +61,7 @@ class AvailableController extends Controller
     }
 
 //DASHBOARD
+
     /**
      * Displays the dashboard
      * @return Response
@@ -100,6 +98,7 @@ class AvailableController extends Controller
     }
 
 //DISPLAY
+
     /**
      * Displays the GiftVoucherAvailable
      * @return Response
@@ -124,6 +123,7 @@ class AvailableController extends Controller
     }
 
 //CREATE
+
     /**
      * Creates a GiftVoucherAvailable
      * @return Response
@@ -159,6 +159,7 @@ class AvailableController extends Controller
     }
 
 //MODIFY
+
     /**
      * Modifies the GiftVoucherAvailable using its unique id
      * @return Response
@@ -198,6 +199,7 @@ class AvailableController extends Controller
     }
 
 //DUPLICATE
+
     /**
      * Duplicates the GiftVoucherAvailable using its unique id
      * @return Response
@@ -239,6 +241,7 @@ class AvailableController extends Controller
     }
 
 //DELETE
+
     /**
      * Deletes the GiftVoucherAvailable using its unique id
      * @return Response
@@ -276,6 +279,7 @@ class AvailableController extends Controller
     }
 
 //CONFIG
+
     /**
      * Displays the configuration
      * @return Response
@@ -309,6 +313,7 @@ class AvailableController extends Controller
     }
 
 //SLUG
+
     /**
      * Returns the slug corresponding to the text provided
      * @return JsonResponse
@@ -326,6 +331,7 @@ class AvailableController extends Controller
     }
 
 //HELP
+
     /**
      * Displays the help
      * @return Response

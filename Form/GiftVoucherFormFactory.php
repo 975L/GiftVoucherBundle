@@ -9,14 +9,8 @@
 
 namespace c975L\GiftVoucherBundle\Form;
 
-use Symfony\Component\Form\Form;
-use Symfony\Component\Form\FormFactoryInterface;
 use c975L\ConfigBundle\Service\ConfigServiceInterface;
-use c975L\GiftVoucherBundle\Entity\GiftVoucherAvailable;
-use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
-use c975L\GiftVoucherBundle\Form\GiftVoucherAvailableType;
-use c975L\GiftVoucherBundle\Form\GiftVoucherPurchasedType;
-use c975L\GiftVoucherBundle\Form\GiftVoucherFormFactoryInterface;
+use Symfony\Component\Form\FormFactoryInterface;
 
 /**
  * GiftVoucherFormFactory class

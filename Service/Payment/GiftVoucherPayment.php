@@ -9,11 +9,10 @@
 
 namespace c975L\GiftVoucherBundle\Service\Payment;
 
-use Symfony\Component\Translation\TranslatorInterface;
 use c975L\ConfigBundle\Service\ConfigServiceInterface;
-use c975L\PaymentBundle\Service\PaymentServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
-use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
+use c975L\PaymentBundle\Service\PaymentServiceInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Services related to GiftVoucher Payment
