@@ -11,6 +11,7 @@ namespace c975L\GiftVoucherBundle\Twig;
 
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use Twig_Extension;
+use Twig_SimpleFilter;
 
 /**
  * Twig extension to display the formatted GiftVoucherPurchased identifier using `|gv_identifier`

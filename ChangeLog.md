@@ -1,5 +1,9 @@
 # Changelog
 
+v2.0.2
+------
+- Added missing use (25/12/2018)
+
 v2.0.1
 ------
 - Updated `README.md` (01/09/2018)

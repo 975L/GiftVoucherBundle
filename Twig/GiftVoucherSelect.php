@@ -12,6 +12,7 @@ namespace c975L\GiftVoucherBundle\Twig;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig_Environment;
 use Twig_Extension;
+use Twig_SimpleFunction;
 
 /**
  * Twig extension to display the select form for GiftVoucherAvailable using `gv_select([id])`

@@ -12,6 +12,7 @@ namespace c975L\GiftVoucherBundle\Twig;
 use Doctrine\ORM\EntityManagerInterface;
 use Twig_Environment;
 use Twig_Extension;
+use Twig_SimpleFunction;
 
 /**
  * Twig extension to display all the GiftVoucherAvailable as a list (object, description, offer button) using `gv_view_all([$number, $orderField])`
