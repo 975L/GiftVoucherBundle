@@ -12,9 +12,8 @@ namespace c975L\GiftVoucherBundle\Controller;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\PaymentBundle\Entity\Payment;
 use c975L\PaymentBundle\Service\PaymentServiceInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -22,7 +21,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class PaymentController extends Controller
+class PaymentController extends AbstractController
 {
 //PAYMENT DONE
 
@@ -32,8 +31,8 @@ class PaymentController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/payment-done/{orderId}",
-     *      name="giftvoucher_payment_done")
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_payment_done",
+     *    methods={"HEAD", "GET"})
      */
     public function paymentDone(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService, PaymentServiceInterface $paymentService, Payment $payment)
     {

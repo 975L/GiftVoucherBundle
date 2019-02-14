@@ -14,9 +14,8 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Response\QrCodeResponse;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -25,7 +24,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2017 975L <contact@975l.com>
  */
-class QrcodeController extends Controller
+class QrcodeController extends AbstractController
 {
 //DISPLAY
 
@@ -35,11 +34,9 @@ class QrcodeController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/qrcode/{identifier}",
-     *      name="giftvoucher_qrcode",
-     *      requirements={
-     *          "identifier": "^([a-zA-Z]{16})$"
-     *      })
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_qrcode",
+     *    requirements={"identifier": "^([a-zA-Z]{16})$"},
+     *    methods={"HEAD", "GET"})
      */
     public function qrcode(GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService, $identifier)
     {

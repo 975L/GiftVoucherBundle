@@ -13,10 +13,9 @@ use c975L\ConfigBundle\Service\ConfigServiceInterface;
 use c975L\GiftVoucherBundle\Entity\GiftVoucherPurchased;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use DateTime;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -28,7 +27,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2017 975L <contact@975l.com>
  */
-class PurchasedController extends Controller
+class PurchasedController extends AbstractController
 {
 //DISPLAY
 
@@ -38,11 +37,9 @@ class PurchasedController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/{identifier}",
-     *      name="giftvoucher_purchased",
-     *      requirements={
-     *          "identifier": "^([a-zA-Z]{16})$"
-     *      })
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_purchased",
+     *    requirements={"identifier": "^([a-zA-Z]{16})$"},
+     *    methods={"HEAD", "GET"})
      * @ParamConverter("giftVoucherPurchased",
      *      options={
      *          "repository_method" = "findOneBasedOnIdentifier",
@@ -68,11 +65,9 @@ class PurchasedController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/use/{identifier}",
-     *      name="giftvoucher_use",
-     *      requirements={
-     *          "identifier": "^([a-zA-Z]{16})$"
-     *      })
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_use",
+     *    requirements={"identifier": "^([a-zA-Z]{16})$"},
+     *    methods={"HEAD", "GET"})
      * @ParamConverter("giftVoucherPurchased",
      *      options={
      *          "repository_method" = "findOneBasedOnIdentifier",
@@ -100,11 +95,9 @@ class PurchasedController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/use/confirm/{identifier}",
-     *      name="giftvoucher_use_confirm",
-     *      requirements={
-     *          "identifier": "^([a-zA-Z]{16})$"
-     *      })
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_use_confirm",
+     *    requirements={"identifier": "^([a-zA-Z]{16})$"},
+     *    methods={"HEAD", "GET"})
      * @ParamConverter("giftVoucherPurchased",
      *      options={
      *          "repository_method" = "findOneBasedOnIdentifier",

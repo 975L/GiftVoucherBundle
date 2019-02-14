@@ -15,10 +15,9 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\ServicesBundle\Service\ServiceToolsInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +28,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class OfferController extends Controller
+class OfferController extends AbstractController
 {
     /**
      * Stores GiftVoucherPurchasedServiceInterface
@@ -75,8 +74,8 @@ class OfferController extends Controller
      * @return Response
      *
      * @Route("/gift-voucher/offer",
-     *      name="giftvoucher_offer_all")
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_offer_all",
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function offerAll(Request $request)
     {
@@ -97,11 +96,9 @@ class OfferController extends Controller
      * @return Redirect
      *
      * @Route("/gift-voucher/offer/{id}",
-     *      name="giftvoucher_offer_id_redirect",
-     *      requirements={
-     *          "id": "^([0-9])+$"
-     *      })
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_offer_id_redirect",
+     *    requirements={"id": "^([0-9])+$"},
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function offerIdRedirect(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
@@ -118,12 +115,12 @@ class OfferController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/offer/{slug}/{id}",
-     *      name="giftvoucher_offer",
-     *      requirements={
-     *          "slug": "^([a-zA-Z0-9\-]+)$",
-     *          "id": "^([0-9]+)$"
-     *      })
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_offer",
+     *    requirements={
+     *        "slug": "^([a-zA-Z0-9\-]+)$",
+     *        "id": "^([0-9]+)$"
+     *    },
+     *    methods={"HEAD", "GET", "POST"})
      * @ParamConverter("giftVoucherAvailable", options={"mapping": {"id": "id"}})
      */
     public function offer(Request $request, GiftVoucherAvailable $giftVoucherAvailable, ConfigServiceInterface $configService, $slug)

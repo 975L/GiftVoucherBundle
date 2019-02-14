@@ -15,9 +15,8 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +28,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2017 975L <contact@975l.com>
  */
-class AvailableController extends Controller
+class AvailableController extends AbstractController
 {
     /**
      * Stores GiftVoucherAvailableService
@@ -68,8 +67,8 @@ class AvailableController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/dashboard",
-     *      name="giftvoucher_dashboard")
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_dashboard",
+     *    methods={"HEAD", "GET"})
      */
     public function dashboard(Request $request, PaginatorInterface $paginator)
     {
@@ -106,11 +105,9 @@ class AvailableController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/display/{id}",
-     *      name="giftvoucher_display",
-     *      requirements={
-     *          "id": "^([0-9]+)$"
-     *      })
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_display",
+     *    requirements={"id": "^([0-9]+)$"},
+     *    methods={"HEAD", "GET"})
      */
     public function display(GiftVoucherAvailable $giftVoucherAvailable)
     {
@@ -130,8 +127,8 @@ class AvailableController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/create",
-     *      name="giftvoucher_create")
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_create",
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function create(Request $request)
     {
@@ -167,11 +164,9 @@ class AvailableController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/modify/{id}",
-     *      name="giftvoucher_modify",
-     *      requirements={
-     *          "id": "^([0-9]+)$"
-     *      })
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_modify",
+     *    requirements={"id": "^([0-9]+)$"},
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function modify(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
@@ -207,11 +202,9 @@ class AvailableController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/duplicate/{id}",
-     *      name="giftvoucher_duplicate",
-     *      requirements={
-     *          "id": "^([0-9]+)$"
-     *      })
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_duplicate",
+     *    requirements={"id": "^([0-9]+)$"},
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function duplicate(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
@@ -249,11 +242,9 @@ class AvailableController extends Controller
      * @throws NotFoundHttpException
      *
      * @Route("/gift-voucher/delete/{id}",
-     *      name="giftvoucher_delete",
-     *      requirements={
-     *          "id": "^([0-9]+)$"
-     *      })
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_delete",
+     *    requirements={"id": "^([0-9]+)$"},
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function delete(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
     {
@@ -286,8 +277,8 @@ class AvailableController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/config",
-     *      name="giftvoucher_config")
-     * @Method({"GET", "HEAD", "POST"})
+     *    name="giftvoucher_config",
+     *    methods={"HEAD", "GET", "POST"})
      */
     public function config(Request $request, ConfigServiceInterface $configService)
     {
@@ -320,7 +311,8 @@ class AvailableController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/slug/{text}",
-     *      name="giftvoucher_slug")
+     *    name="giftvoucher_slug",
+     *    methods={"POST"})
      * @Method({"POST"})
      */
     public function slug($text)
@@ -338,8 +330,8 @@ class AvailableController extends Controller
      * @throws AccessDeniedException
      *
      * @Route("/gift-voucher/help",
-     *      name="giftvoucher_help")
-     * @Method({"GET", "HEAD"})
+     *    name="giftvoucher_help",
+     *    methods={"HEAD", "GET"})
      */
     public function help()
     {
