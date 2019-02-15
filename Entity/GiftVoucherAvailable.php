@@ -42,26 +42,26 @@ class GiftVoucherAvailable
     protected $suppressed;
 
     /**
-     * Slug for the GiftVoucherAvailable
-     * @var string
-     *
-     * @ORM\Column(name="slug", type="string", nullable=true)
-     */
-    protected $slug;
-
-    /**
      * Object for the GiftVoucherAvailable
      * @var string
      *
-     * @ORM\Column(name="object", type="string", nullable=true)
+     * @ORM\Column(name="object", type="string", length=128, nullable=true)
      */
     protected $object;
+
+    /**
+     * Slug for the GiftVoucherAvailable
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=128, nullable=true)
+     */
+    protected $slug;
 
     /**
      * Description for the GiftVoucherAvailable
      * @var string
      *
-     * @ORM\Column(name="description", type="string", nullable=true)
+     * @ORM\Column(name="description", type="text", length=65000, nullable=true)
      */
     protected $description;
 
@@ -85,7 +85,7 @@ class GiftVoucherAvailable
      * Currency for the GiftVoucherAvailable
      * @var string
      *
-     * @ORM\Column(name="currency", type="string", nullable=true)
+     * @ORM\Column(name="currency", type="string", length=3, nullable=true)
      */
     protected $currency;
 
@@ -93,7 +93,7 @@ class GiftVoucherAvailable
      * Get id
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -103,7 +103,7 @@ class GiftVoucherAvailable
      * @param bool
      * @return GiftVoucherAvailable
      */
-    public function setSuppressed($suppressed)
+    public function setSuppressed(?bool $suppressed)
     {
         $this->suppressed = $suppressed;
 
@@ -114,7 +114,7 @@ class GiftVoucherAvailable
      * Get suppressed
      * @return bool
      */
-    public function getSuppressed()
+    public function getSuppressed(): ?bool
     {
         return $this->suppressed;
     }
@@ -124,7 +124,7 @@ class GiftVoucherAvailable
      * @param string
      * @return GiftVoucherAvailable
      */
-    public function setObject($object)
+    public function setObject(?string $object)
     {
         $this->object = $object;
 
@@ -135,7 +135,7 @@ class GiftVoucherAvailable
      * Get object
      * @return string
      */
-    public function getObject()
+    public function getObject(): ?string
     {
         return $this->object;
     }
@@ -145,7 +145,7 @@ class GiftVoucherAvailable
      * @param string
      * @return GiftVoucherAvailable
      */
-    public function setSlug($slug)
+    public function setSlug(?string $slug)
     {
         $this->slug = $slug;
 
@@ -156,7 +156,7 @@ class GiftVoucherAvailable
      * Get slug
      * @return string
      */
-    public function getSlug()
+    public function getSlug():?string
     {
         return $this->slug;
     }
@@ -166,7 +166,7 @@ class GiftVoucherAvailable
      * @param string
      * @return GiftVoucherAvailable
      */
-    public function setDescription($description)
+    public function setDescription(?string $description)
     {
         $this->description = $description;
 
@@ -177,7 +177,7 @@ class GiftVoucherAvailable
      * Get description
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -187,7 +187,7 @@ class GiftVoucherAvailable
      * @param DateInterval
      * @return GiftVoucherAvailable
      */
-    public function setValid($valid)
+    public function setValid(?DateInterval $valid)
     {
         $this->valid = $valid;
 
@@ -198,17 +198,17 @@ class GiftVoucherAvailable
      * Get valid
      * @return DateInterval
      */
-    public function getValid()
+    public function getValid(): ?DateInterval
     {
         return $this->valid;
     }
 
     /**
      * Set amount
-     * @param integer
+     * @param int
      * @return GiftVoucherAvailable
      */
-    public function setAmount($amount)
+    public function setAmount(?int $amount)
     {
         $this->amount = $amount;
 
@@ -217,9 +217,9 @@ class GiftVoucherAvailable
 
     /**
      * Get amount
-     * @return integer
+     * @return int
      */
-    public function getAmount()
+    public function getAmount(): int
     {
         return $this->amount;
     }
@@ -229,7 +229,7 @@ class GiftVoucherAvailable
      * @param string
      * @return GiftVoucherAvailable
      */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency)
     {
         $this->currency = strtoupper($currency);
 
@@ -240,7 +240,7 @@ class GiftVoucherAvailable
      * Get currency
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return strtoupper($this->currency);
     }

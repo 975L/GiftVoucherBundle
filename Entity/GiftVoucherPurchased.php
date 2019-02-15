@@ -36,7 +36,7 @@ class GiftVoucherPurchased
      * Unique identifier for GiftVoucherPurchased
      * @var string
      *
-     * @ORM\Column(name="identifier", type="string")
+     * @ORM\Column(name="identifier", type="string", length=12)
      */
     protected $identifier;
 
@@ -44,7 +44,7 @@ class GiftVoucherPurchased
      * Secret code for GiftVoucherPurchased
      * @var string
      *
-     * @ORM\Column(name="secret", type="string")
+     * @ORM\Column(name="secret", type="string", length=4)
      */
     protected $secret;
 
@@ -52,7 +52,7 @@ class GiftVoucherPurchased
      * Object for the GiftVoucherPurchased (copy of the object of GiftVoucherAvailable in cas it changes between purchase and use)
      * @var string
      *
-     * @ORM\Column(name="object", type="string", nullable=true)
+     * @ORM\Column(name="object", type="string", length=128, nullable=true)
      */
     protected $object;
 
@@ -60,7 +60,7 @@ class GiftVoucherPurchased
      * Description for the GiftVoucherPurchased (copy of the description of GiftVoucherAvailable in cas it changes between purchase and use)
      * @var string
      *
-     * @ORM\Column(name="description", type="string", nullable=true)
+     * @ORM\Column(name="description", type="text", length=65000, nullable=true)
      */
     protected $description;
 
@@ -68,7 +68,7 @@ class GiftVoucherPurchased
      * Name of the offering person
      * @var string
      *
-     * @ORM\Column(name="offered_by", type="string", nullable=true)
+     * @ORM\Column(name="offered_by", type="string", length=128, nullable=true)
      */
     protected $offeredBy;
 
@@ -76,7 +76,7 @@ class GiftVoucherPurchased
      * Name of the receiving offer person
      * @var string
      *
-     * @ORM\Column(name="offered_to", type="string", nullable=true)
+     * @ORM\Column(name="offered_to", type="string", length=128, nullable=true)
      */
     protected $offeredTo;
 
@@ -84,7 +84,7 @@ class GiftVoucherPurchased
      * Message left by offering person to receiving one
      * @var string
      *
-     * @ORM\Column(name="message", type="string", nullable=true)
+     * @ORM\Column(name="message", type="text", length=65000, nullable=true)
      */
     protected $message;
 
@@ -92,7 +92,7 @@ class GiftVoucherPurchased
      * Email address the GiftVoucherPurchased will be sent to
      * @var string
      *
-     * @ORM\Column(name="send_to_email", type="string", nullable=true)
+     * @ORM\Column(name="send_to_email", type="string", length=128, nullable=true)
      */
     protected $sendToEmail;
 
@@ -124,7 +124,7 @@ class GiftVoucherPurchased
      * Currency of the GiftVoucherPurchased
      * @var string
      *
-     * @ORM\Column(name="currency", type="string", nullable=true)
+     * @ORM\Column(name="currency", type="string", length=3, nullable=true)
      */
     protected $currency;
 
@@ -132,7 +132,7 @@ class GiftVoucherPurchased
      * Payment order id
      * @var string
      *
-     * @ORM\Column(name="order_id", type="string", nullable=true)
+     * @ORM\Column(name="order_id", type="string", length=48, nullable=true)
      */
     protected $orderId;
 
@@ -148,7 +148,7 @@ class GiftVoucherPurchased
      * User IP address
      * @var string
      *
-     * @ORM\Column(name="user_ip", type="string", nullable=true)
+     * @ORM\Column(name="user_ip", type="string", length=48, nullable=true)
      */
     protected $userIp;
 
@@ -156,7 +156,7 @@ class GiftVoucherPurchased
      * Get id
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -166,7 +166,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setIdentifier($identifier)
+    public function setIdentifier(?string $identifier)
     {
         $this->identifier = strtoupper($identifier);
 
@@ -177,7 +177,7 @@ class GiftVoucherPurchased
      * Get identifier
      * @return string
      */
-    public function getIdentifier()
+    public function getIdentifier(): ?string
     {
         return $this->identifier;
     }
@@ -187,7 +187,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setSecret($secret)
+    public function setSecret(?string $secret)
     {
         $this->secret = strtoupper($secret);
 
@@ -198,7 +198,7 @@ class GiftVoucherPurchased
      * Get secret
      * @return string
      */
-    public function getSecret()
+    public function getSecret(): ?string
     {
         return $this->secret;
     }
@@ -208,7 +208,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setObject($object)
+    public function setObject(?string $object)
     {
         $this->object = $object;
 
@@ -219,7 +219,7 @@ class GiftVoucherPurchased
      * Get object
      * @return string
      */
-    public function getObject()
+    public function getObject():?string
     {
         return $this->object;
     }
@@ -229,7 +229,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setDescription($description)
+    public function setDescription(?string $description)
     {
         $this->description = $description;
 
@@ -240,7 +240,7 @@ class GiftVoucherPurchased
      * Get description
      * @return string
      */
-    public function getDescription()
+    public function getDescription(): ?string
     {
         return $this->description;
     }
@@ -250,7 +250,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setOfferedBy($offeredBy)
+    public function setOfferedBy(?string $offeredBy)
     {
         $this->offeredBy = $offeredBy;
 
@@ -261,7 +261,7 @@ class GiftVoucherPurchased
      * Get offeredBy
      * @return string
      */
-    public function getOfferedBy()
+    public function getOfferedBy(): ?string
     {
         return $this->offeredBy;
     }
@@ -271,7 +271,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setOfferedTo($offeredTo)
+    public function setOfferedTo(?string $offeredTo)
     {
         $this->offeredTo = $offeredTo;
 
@@ -282,7 +282,7 @@ class GiftVoucherPurchased
      * Get offeredTo
      * @return string
      */
-    public function getOfferedTo()
+    public function getOfferedTo(): ?string
     {
         return $this->offeredTo;
     }
@@ -292,7 +292,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setMessage($message)
+    public function setMessage(?string $message)
     {
         $this->message = $message;
 
@@ -303,7 +303,7 @@ class GiftVoucherPurchased
      * Get message
      * @return string
      */
-    public function getMessage()
+    public function getMessage(): ?string
     {
         return $this->message;
     }
@@ -313,7 +313,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setSendToEmail($sendToEmail)
+    public function setSendToEmail(?string $sendToEmail)
     {
         $this->sendToEmail = $sendToEmail;
 
@@ -324,7 +324,7 @@ class GiftVoucherPurchased
      * Get sendToEmail
      * @return string
      */
-    public function getSendToEmail()
+    public function getSendToEmail(): ?string
     {
         return $this->sendToEmail;
     }
@@ -334,7 +334,7 @@ class GiftVoucherPurchased
      * @param DateTime
      * @return GiftVoucherPurchased
      */
-    public function setPurchase($purchase)
+    public function setPurchase(?DateTime $purchase)
     {
         $this->purchase = $purchase;
 
@@ -345,7 +345,7 @@ class GiftVoucherPurchased
      * Get purchase
      * @return DateTime
      */
-    public function getPurchase()
+    public function getPurchase(): ?DateTime
     {
         return $this->purchase;
     }
@@ -355,7 +355,7 @@ class GiftVoucherPurchased
      * @param DateTime
      * @return GiftVoucherPurchased
      */
-    public function setValid($valid)
+    public function setValid(?DateTime $valid)
     {
         $this->valid = $valid;
 
@@ -366,7 +366,7 @@ class GiftVoucherPurchased
      * Get valid
      * @return DateTime
      */
-    public function getValid()
+    public function getValid(): ?DateTime
     {
         return $this->valid;
     }
@@ -376,7 +376,7 @@ class GiftVoucherPurchased
      * @param int
      * @return GiftVoucherPurchased
      */
-    public function setAmount($amount)
+    public function setAmount(?int $amount)
     {
         $this->amount = $amount;
 
@@ -387,7 +387,7 @@ class GiftVoucherPurchased
      * Get amount
      * @return int
      */
-    public function getAmount()
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
@@ -397,7 +397,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setCurrency($currency)
+    public function setCurrency(?string $currency)
     {
         $this->currency = strtoupper($currency);
 
@@ -408,7 +408,7 @@ class GiftVoucherPurchased
      * Get currency
      * @return string
      */
-    public function getCurrency()
+    public function getCurrency(): ?string
     {
         return strtoupper($this->currency);
     }
@@ -418,7 +418,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setOrderId($orderId)
+    public function setOrderId(?string $orderId)
     {
         $this->orderId = $orderId;
 
@@ -429,7 +429,7 @@ class GiftVoucherPurchased
      * Get orderId
      * @return string
      */
-    public function getOrderId()
+    public function getOrderId(): ?string
     {
         return $this->orderId;
     }
@@ -439,7 +439,7 @@ class GiftVoucherPurchased
      * @param DateTime
      * @return GiftVoucherPurchased
      */
-    public function setUsed($used)
+    public function setUsed(?DateTime $used)
     {
         $this->used = $used;
 
@@ -450,7 +450,7 @@ class GiftVoucherPurchased
      * Get used
      * @return DateTime
      */
-    public function getUsed()
+    public function getUsed(): ?DateTime
     {
         return $this->used;
     }
@@ -460,7 +460,7 @@ class GiftVoucherPurchased
      * @param string
      * @return GiftVoucherPurchased
      */
-    public function setUserIp($userIp)
+    public function setUserIp(?string $userIp)
     {
         $this->userIp = $userIp;
 
@@ -471,7 +471,7 @@ class GiftVoucherPurchased
      * Get userIp
      * @return string
      */
-    public function getUserIp()
+    public function getUserIp(): ?string
     {
         return $this->userIp;
     }
