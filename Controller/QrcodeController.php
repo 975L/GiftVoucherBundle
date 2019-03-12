@@ -14,9 +14,9 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Response\QrCodeResponse;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 /**
@@ -27,7 +27,6 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class QrcodeController extends AbstractController
 {
 //DISPLAY
-
     /**
      * Builds and displays the Qrcode
      * @return ImagePng

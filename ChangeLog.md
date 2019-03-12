@@ -1,5 +1,9 @@
 # Changelog
 
+v2.1.1
+------
+- Made use of Twig namespace (07/03/2019)
+
 v2.1
 ----
 - Modified Entity to specify lengths for strings (15/02/2019)

@@ -19,7 +19,7 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
-use Twig_Environment;
+use Twig\Environment;
 
 /**
  * Main services related to GiftVoucherPurchased
@@ -59,10 +59,10 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
     private $request;
 
     /**
-     * Stores Twig_Environment
-     * @var Twig_Environment
+     * Stores Environment
+     * @var Environment
      */
-    private $templating;
+    private $environment;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -70,7 +70,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
         GiftVoucherFormFactoryInterface $giftVoucherFormFactory,
         ServiceToolsInterface $serviceTools,
         RequestStack $requestStack,
-        Twig_Environment $templating
+        Environment $environment
     )
     {
         $this->em = $em;
@@ -78,7 +78,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
         $this->giftVoucherFormFactory = $giftVoucherFormFactory;
         $this->serviceTools = $serviceTools;
         $this->request = $requestStack->getCurrentRequest();
-        $this->templating = $templating;
+        $this->environment = $environment;
     }
 
     /**
@@ -136,7 +136,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
      */
     public function getHtml(GiftVoucherPurchased $giftVoucherPurchased)
     {
-        return $this->templating->render('@c975LGiftVoucher/pages/display.html.twig', array(
+        return $this->environment->render('@c975LGiftVoucher/pages/display.html.twig', array(
             'giftVoucher' => $giftVoucherPurchased,
             'display' => 'pdf',
         ));

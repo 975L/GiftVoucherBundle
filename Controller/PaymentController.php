@@ -12,9 +12,9 @@ namespace c975L\GiftVoucherBundle\Controller;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\PaymentBundle\Entity\Payment;
 use c975L\PaymentBundle\Service\PaymentServiceInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * GiftVoucherPurchased Controller class
@@ -24,7 +24,6 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class PaymentController extends AbstractController
 {
 //PAYMENT DONE
-
     /**
      * Return Route after having done payment
      * @return Redirect

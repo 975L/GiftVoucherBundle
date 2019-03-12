@@ -16,12 +16,12 @@ use c975L\GiftVoucherBundle\Service\Payment\GiftVoucherPaymentInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use c975L\ServicesBundle\Service\ServiceToolsInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Offer Controller class
@@ -35,19 +35,16 @@ class OfferController extends AbstractController
      * @var GiftVoucherPurchasedServiceInterface
      */
     private $giftVoucherPurchasedService;
-
     /**
      * Stores GiftVoucherPaymentInterface
      * @var GiftVoucherPaymentInterface
      */
     private $giftVoucherPayment;
-
     /**
      * Stores ServiceSlugInterface
      * @var ServiceSlugInterface
      */
     private $serviceSlug;
-
     /**
      * Stores ServiceToolsInterface
      * @var ServiceToolsInterface
@@ -68,7 +65,6 @@ class OfferController extends AbstractController
     }
 
 //OFFER ALL
-
     /**
      * Displays all the GiftVoucherAvailable that can be offered
      * @return Response
@@ -90,7 +86,6 @@ class OfferController extends AbstractController
     }
 
 //OFFER
-
     /**
      * Redirects to the Route containing slug to display the specific GiftVoucherAvailable offer
      * @return Redirect
@@ -108,7 +103,6 @@ class OfferController extends AbstractController
             'id' => $giftVoucherAvailable->getId(),
         ));
     }
-
     /**
      * Displays the specific GiftVoucherAvailable offer
      * @return Response

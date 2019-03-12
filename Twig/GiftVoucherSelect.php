@@ -10,16 +10,16 @@
 namespace c975L\GiftVoucherBundle\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Twig_Environment;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Twig extension to display the select form for GiftVoucherAvailable using `gv_select([id])`
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class GiftVoucherSelect extends Twig_Extension
+class GiftVoucherSelect extends AbstractExtension
 {
     /**
      * Stores EntityManager
@@ -35,7 +35,7 @@ class GiftVoucherSelect extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'gv_select',
                 array($this, 'select'),
                 array(
@@ -50,7 +50,7 @@ class GiftVoucherSelect extends Twig_Extension
      * Returns the xhtml code for the select for GiftVoucherAvailable
      * @return string
      */
-    public function select(Twig_Environment $environment, $id = 0)
+    public function select(Environment $environment, $id = 0)
     {
         //Defines button
         $giftVouchers = $this->em

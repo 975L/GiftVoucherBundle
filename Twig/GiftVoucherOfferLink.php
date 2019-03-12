@@ -10,16 +10,16 @@
 namespace c975L\GiftVoucherBundle\Twig;
 
 use Doctrine\ORM\EntityManagerInterface;
-use Twig_Environment;
-use Twig_Extension;
-use Twig_SimpleFunction;
+use Twig\Environment;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
 
 /**
  * Twig extension to display the Link for the GiftVoucherAvailable using `gv_offer_link(id)`
  * @author Laurent Marquet <laurent.marquet@laposte.net>
  * @copyright 2018 975L <contact@975l.com>
  */
-class GiftVoucherOfferLink extends Twig_Extension
+class GiftVoucherOfferLink extends AbstractExtension
 {
     /**
      * Stores EntityManager
@@ -35,7 +35,7 @@ class GiftVoucherOfferLink extends Twig_Extension
     public function getFunctions()
     {
         return array(
-            new Twig_SimpleFunction(
+            new TwigFunction(
                 'gv_offer_link',
                 array($this, 'offerLink'),
                 array(
@@ -50,7 +50,7 @@ class GiftVoucherOfferLink extends Twig_Extension
      * Returns the xhtml code for the Offer link
      * @return string
      */
-    public function offerLink(Twig_Environment $environment, $id)
+    public function offerLink(Environment $environment, $id)
     {
         //Defines link
         $giftVoucher = $this->em

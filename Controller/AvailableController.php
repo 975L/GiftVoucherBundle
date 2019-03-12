@@ -15,12 +15,12 @@ use c975L\GiftVoucherBundle\Service\GiftVoucherAvailableServiceInterface;
 use c975L\GiftVoucherBundle\Service\GiftVoucherPurchasedServiceInterface;
 use c975L\ServicesBundle\Service\ServiceSlugInterface;
 use Knp\Component\Pager\PaginatorInterface;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -35,13 +35,11 @@ class AvailableController extends AbstractController
      * @var GiftVoucherAvailableServiceInterface
      */
     private $giftVoucherAvailableService;
-
     /**
      * Stores GiftVoucherPurchasedService
      * @var GiftVoucherPurchasedServiceInterface
      */
     private $giftVoucherPurchasedService;
-
     /**
      * Stores ServiceSlugInterface
      * @var ServiceSlugInterface
@@ -60,7 +58,6 @@ class AvailableController extends AbstractController
     }
 
 //DASHBOARD
-
     /**
      * Displays the dashboard
      * @return Response
@@ -97,7 +94,6 @@ class AvailableController extends AbstractController
     }
 
 //DISPLAY
-
     /**
      * Displays the GiftVoucherAvailable
      * @return Response
@@ -120,7 +116,6 @@ class AvailableController extends AbstractController
     }
 
 //CREATE
-
     /**
      * Creates a GiftVoucherAvailable
      * @return Response
@@ -156,7 +151,6 @@ class AvailableController extends AbstractController
     }
 
 //MODIFY
-
     /**
      * Modifies the GiftVoucherAvailable using its unique id
      * @return Response
@@ -194,7 +188,6 @@ class AvailableController extends AbstractController
     }
 
 //DUPLICATE
-
     /**
      * Duplicates the GiftVoucherAvailable using its unique id
      * @return Response
@@ -234,7 +227,6 @@ class AvailableController extends AbstractController
     }
 
 //DELETE
-
     /**
      * Deletes the GiftVoucherAvailable using its unique id
      * @return Response
@@ -270,7 +262,6 @@ class AvailableController extends AbstractController
     }
 
 //CONFIG
-
     /**
      * Displays the configuration
      * @return Response
@@ -304,7 +295,6 @@ class AvailableController extends AbstractController
     }
 
 //SLUG
-
     /**
      * Returns the slug corresponding to the text provided
      * @return JsonResponse
@@ -323,7 +313,6 @@ class AvailableController extends AbstractController
     }
 
 //HELP
-
     /**
      * Displays the help
      * @return Response
