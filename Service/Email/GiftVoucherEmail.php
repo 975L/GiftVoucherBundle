@@ -69,7 +69,7 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
         $giftVoucherPdf = $this->servicePdf->html2Pdf($filenameGiftVoucher, $giftVoucherHtml);
 
         //Gets the PDF for Terms of sales
-        $tosPdf = $this->servicePdf->getPdfFile('label.terms_of_sales_filename', $this->configService->getParameter('c975LGiftVoucher.tosPdf'));
+        $tosPdf = $this->servicePdf->getPdfFilePath('label.terms_of_sales_filename', $this->configService->getParameter('c975LGiftVoucher.tosPdf'));
 
         //Sends email
         $emailData = array(
@@ -81,9 +81,9 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
             'attach' => array(
                 $giftVoucherPdf,
                 $tosPdf,
-                ),
+            ),
             'ip' => $giftVoucherPurchased->getUserIp(),
-            );
+        );
         $this->emailService->send($emailData, true);
     }
 }
