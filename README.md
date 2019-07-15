@@ -39,33 +39,16 @@ Bundle installation
 
 Step 1: Download the Bundle
 ---------------------------
+**v3.x works with Symfony 4.x. Use v2.x for Symfony 3.x**
 Use [Composer](https://getcomposer.org) to install the library
 ```bash
     composer require c975l/giftvoucher-bundle
 ```
 
-Step 2: Enable the Bundle
--------------------------
-Then, enable the bundle by adding it the list of registered bundles in the `app/AppKernel.php` file of your project:
-
-```php
-<?php
-class AppKernel extends Kernel
-{
-    public function registerBundles()
-    {
-        $bundles = [
-            // ...
-            new c975L\GiftVoucherBundle\c975LGiftVoucherBundle(),
-        ];
-    }
-}
-```
-
-Step 3: Configure the Bundle
+Step 2: Configure the Bundle
 ----------------------------
 Check dependencies for their configuration:
-- [Swiftmailer](https://github.com/symfony/swiftmailer-bundle)
+- [Symfony Mailer](https://github.com/symfony/mailer)
 - [Doctrine](https://github.com/doctrine/DoctrineBundle)
 - [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle)
 - [KnpTimeBundle](https://github.com/KnpLabs/KnpTimeBundle)
@@ -100,13 +83,11 @@ knp_snappy:
         enabled: false
 ```
 
-v2.0+ of c975LGiftVoucherBundle uses [c975L/ConfigBundle](https://github.com/975L/ConfigBundle) to manage configuration parameters. Use the Route "/gift-voucher/config" with the proper user role to modify them.
+c975LGiftVoucherBundle uses [c975L/ConfigBundle](https://github.com/975L/ConfigBundle) to manage configuration parameters. Use the Route "/gift-voucher/config" with the proper user role to modify them.
 
-**Upgrading from v1.x? Check [UPGRADE.md](UPGRADE.md).**
-
-Step 4: Enable the Routes
+Step 3: Enable the Routes
 -------------------------
-Then, enable the routes by adding them to the `app/config/routing.yml` file of your project:
+Then, enable the routes by adding them to the `/config/routes.yaml` file of your project:
 
 ```yml
 c975_l_giftvoucher:
@@ -120,15 +101,15 @@ c975_l_giftvoucher:
     #    _locale: en|fr|es
 ```
 
-Step 5: Create MySql tables
+Step 4: Create MySql tables
 ---------------------------
 You can use `php bin/console make:migration` to create the migration file as documented in [Symfony's Doctrine docs](https://symfony.com/doc/current/doctrine.html) OR use `/Resources/sql/gift-voucher.sql` to create the tables `gift_voucher_available` and `gift_voucher_purchased`. The `DROP TABLE` are commented to avoid dropping by mistake.
 
-Step 6: Override templates
+Step 5: Override templates
 --------------------------
 It is strongly recommended to use the [Override Templates from Third-Party Bundles feature](http://symfony.com/doc/current/templating/overriding.html) to integrate fully with your site.
 
-For this, simply, create the following structure `app/Resources/c975LGiftVoucherBundle/views/` in your app and then duplicate the file `layout.html.twig` in it, to override the existing Bundle file.
+For this, simply, create the following structure `/templates/bundles/c975LGiftVoucherBundle/` in your app and then duplicate the file `layout.html.twig` in it, to override the existing Bundle file.
 
 In `layout.html.twig`, it will mainly consist to extend your layout and define specific variables, i.e. :
 ```twig
