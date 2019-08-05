@@ -1,6 +1,6 @@
 {% trans_default_domain 'giftVoucher' %}
 
-{% spaceless %}
+{% apply spaceless %}
 {% for giftVoucher in giftVouchers %}
     <div class="panel panel-primary">
         <div class="panel-heading">
@@ -22,4 +22,4 @@
         </div>
     </div>
 {% endfor %}
-{% endspaceless %}
+{% endapply %}

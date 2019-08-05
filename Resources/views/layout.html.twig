@@ -3,7 +3,7 @@
     {% set display = 'html' %}
 {% endif %}
 
-{% spaceless %}
+{% apply spaceless %}
 <!DOCTYPE html>
 <html lang="{{ app.request.locale }}">
     <head>
@@ -72,4 +72,4 @@
         {% endif %}
     </body>
 </html>
-{% endspaceless %}
+{% endapply %}

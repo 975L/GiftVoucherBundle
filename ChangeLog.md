@@ -1,5 +1,9 @@
 # Changelog
 
+v3.1
+----
+- Made use of apply spaceless (05/08/2019)
+
 v3.0.1
 ------
 - Updated `GiftVoucherEmail` to use `getPdfFilePath()` that returns the url instead of the content (15/07/2019)

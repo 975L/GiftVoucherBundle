@@ -1,6 +1,4 @@
 {% trans_default_domain 'giftVoucher' %}
 
-{% spaceless %}
 <a href="{{ path('giftvoucher_offer', {'slug': giftVoucher.slug, 'id': giftVoucher.id}) }}" class="{{ style }}" title="{{ 'label.offer_as_giftvoucher'|trans }}" role="button">
     {{ 'label.offer_as_giftvoucher'|trans }}</a>
-{% endspaceless %}
