@@ -1,5 +1,9 @@
 # Changelog
 
+v3.1.1
+------
+- Suppressed missing  @Method (07/10/2019)
+
 v3.1
 ----
 - Made use of apply spaceless (05/08/2019)

@@ -303,7 +303,6 @@ class AvailableController extends AbstractController
      * @Route("/gift-voucher/slug/{text}",
      *    name="giftvoucher_slug",
      *    methods={"POST"})
-     * @Method({"POST"})
      */
     public function slug($text)
     {
