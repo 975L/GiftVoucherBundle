@@ -26,7 +26,7 @@
         "c975l/services-bundle": "^1",
         "c975l/toolbar-bundle": "^1",
         "cocur/slugify": "^3",
-        "doctrine/doctrine-bundle": "^1",
+        "doctrine/doctrine-bundle": "^2",
         "doctrine/orm": "^2",
         "endroid/qr-code": "^3",
         "h4cc/wkhtmltopdf-amd64": "^0",

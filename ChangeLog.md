@@ -1,5 +1,10 @@
 # Changelog
 
+v3.1.2
+------
+- Corrected missing ? in entity GiftVoucherAvailable (18/12/2019)
+- Modified doctrine-bundle version (18/12/2019)
+
 v3.1.1
 ------
 - Suppressed missing  @Method (07/10/2019)

@@ -219,7 +219,7 @@ class GiftVoucherAvailable
      * Get amount
      * @return int
      */
-    public function getAmount(): int
+    public function getAmount(): ?int
     {
         return $this->amount;
     }
