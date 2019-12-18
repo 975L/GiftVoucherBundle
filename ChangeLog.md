@@ -1,5 +1,9 @@
 # Changelog
 
+v3.1.4
+------
+- Updated README.md (18/12/2019)
+
 v3.1.3
 ------
 - Corrected ErrorCorrectionLevel for QrCode (18/12/2019)

@@ -5,7 +5,7 @@ GiftVoucherBundle does the following:
 
 - Allows to create Gift Voucher request form,
 - Interfaces with Stripe via [c975LPaymentBundle](https://github.com/975L/PaymentBundle) for its payment,
-- Creates a PDF, using [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle) and [wkhtmltopdf](https://wkhtmltopdf.org/), of the GiftVoucher and sends it by email,
+- Creates a PDF of the GiftVoucher and sends it by email,
 - Creates a QR Code using [QrCodeBundle](https://github.com/endroid/qr-code),
 - Allows to use the GiftVoucher via a QrCode plus validation aftewards,
 - Integrates with [c975LToolbarBundle](https://github.com/975L/ToolbarBundle),
@@ -52,36 +52,10 @@ Check dependencies for their configuration:
 - [Doctrine](https://github.com/doctrine/DoctrineBundle)
 - [KnpPaginatorBundle](https://github.com/KnpLabs/KnpPaginatorBundle)
 - [KnpTimeBundle](https://github.com/KnpLabs/KnpTimeBundle)
-- [KnpSnappyBundle](https://github.com/KnpLabs/KnpSnappyBundle)
-- [wkhtmltopdf-amd64](https://github.com/h4cc/wkhtmltopdf-amd64)
 - [QrCodeBundle](https://github.com/endroid/qr-code)
 - [Stripe PHP Library](https://github.com/stripe/stripe-php).
 - [c975LEmailBundle](https://github.com/975L/EmailBundle)
 - [c975LPaymentBundle](https://github.com/975L/PaymentBundle)
-
-For KnpSnappyBundle you can use this configuration if it suits to your needs.
-```yml
-knp_snappy:
-    process_timeout: 20
-    temporary_folder: "%kernel.cache_dir%/snappy"
-    pdf:
-        enabled: true
-        binary: "%kernel.root_dir%/../vendor/h4cc/wkhtmltopdf-amd64/bin/wkhtmltopdf-amd64"
-        options:
-            print-media-type: true
-            page-size: A4
-            orientation: 'portrait'
-            encoding : utf-8
-            dpi: 300
-            images: true
-            image-quality: 80
-            margin-left: 10mm
-            margin-right: 10mm
-            margin-top: 10mm
-            margin-bottom: 10mm
-    image:
-        enabled: false
-```
 
 c975LGiftVoucherBundle uses [c975L/ConfigBundle](https://github.com/975L/ConfigBundle) to manage configuration parameters. Use the Route "/gift-voucher/config" with the proper user role to modify them.
 
@@ -123,24 +97,6 @@ In `layout.html.twig`, it will mainly consist to extend your layout and define s
 Then in your `layout.html.twig` and its dependencies, such as `header.html.twig`, `footer.html.twig`, `navbar.html.twig`, etc. you can use the condition `if display == 'pdf'` or `if display == 'html'` to choose what to display to which format, and you keep all your data in one place.
 
 **Keep in mind that links have to be absolute, or their content included, to be exported (see below).**
-
-How to use
-----------
-GiftVoucherBundle uses `KnpSnappyBundle` to generates PDF, which itself uses `wkhtmltopdf`. `wkhtmltopdf` requires that included files, like stylesheets, are included with an absolute url. But, there is a known problem with SSL, see https://github.com/wkhtmltopdf/wkhtmltopdf/issues/3001, which force you to downgrade openssl, like in https://gist.github.com/kai101/99d57462f2459245d28b4f5ea51aa7d0.
-
-You can avoid this problem by including the whole content of included files, which is what `wkhtmltopdf` does, in your html output. To integrate them easily, you can, as [c975L/SiteBundle](https://github.com/975L/SiteBundle) does, use [c975L/IncludeLibraryBundle](https://github.com/975L/IncludeLibraryBundle) with the following code:
-```twig
-{# in your layout.html.twig > head #}
-    {% if display == 'pdf' %}
-        {{ inc_content('bootstrap', 'css', '3.*') }}
-        {{ inc_content(absolute_url(asset('css/styles.min.css')), 'local') }}
-    {% else %}
-        {{ inc_lib('bootstrap', 'css', '3.*') }}
-        {{ inc_lib('cookieconsent', 'css', '3.*') }}
-        {{ inc_lib('fontawesome', 'css', '5.*') }}
-        {{ inc_lib(absolute_url(asset('css/styles.min.css')), 'local') }}
-    {% endif %}
-```
 
 Routes
 ------
