@@ -93,6 +93,7 @@ In `layout.html.twig`, it will mainly consist to extend your layout and define s
     {% block giftVoucher_content %}
     {% endblock %}
 {% endblock %}```
+```
 
 Then in your `layout.html.twig` and its dependencies, such as `header.html.twig`, `footer.html.twig`, `navbar.html.twig`, etc. you can use the condition `if display == 'pdf'` or `if display == 'html'` to choose what to display to which format, and you keep all your data in one place.
 
