@@ -1,5 +1,9 @@
 # Changelog
 
+v3.2
+----
+- Removed use of symplify/easy-coding-standard as abandonned (19/02/2020)
+
 v3.1.4.1
 --------
 - Corrected README.md (18/12/2019)
