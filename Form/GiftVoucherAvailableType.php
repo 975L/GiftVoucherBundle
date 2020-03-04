@@ -38,6 +38,9 @@ class GiftVoucherAvailableType extends AbstractType
         $this->configService = $configService;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $disabled = 'delete' === $options['config']['action'] ? true : false;

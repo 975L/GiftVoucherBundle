@@ -39,14 +39,20 @@ class PaymentController extends AbstractController
 
         //Redirects to the GiftVoucherPurchased
         if (false !== $giftVoucherIdentifier) {
-            return $this->redirectToRoute('giftvoucher_purchased', array(
-                'identifier' => $giftVoucherIdentifier,
-            ));
+            return $this->redirectToRoute(
+                'giftvoucher_purchased',
+                array(
+                    'identifier' => $giftVoucherIdentifier,
+                ));
         }
 
         //Payment has been done but GiftVoucher was not validated
         $paymentService->error($payment);
 
-        return $this->redirectToRoute('payment_display', array('orderId' => $payment->getOrderId()));
+        return $this->redirectToRoute(
+            'payment_display',
+            array(
+                'orderId' => $payment->getOrderId(),
+            ));
     }
 }

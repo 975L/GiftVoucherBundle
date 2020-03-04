@@ -43,7 +43,8 @@ class QrcodeController extends AbstractController
         $giftVoucherPurchased = $this->getDoctrine()
             ->getManager()
             ->getRepository('c975LGiftVoucherBundle:GiftVoucherPurchased')
-            ->findOneBasedOnIdentifier($identifier);
+            ->findOneBasedOnIdentifier($identifier)
+        ;
 
         //Not existing GiftVoucher
         if (!$giftVoucherPurchased instanceof GiftVoucherPurchased) {

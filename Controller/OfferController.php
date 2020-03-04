@@ -56,8 +56,7 @@ class OfferController extends AbstractController
         GiftVoucherPaymentInterface $giftVoucherPayment,
         ServiceSlugInterface $serviceSlug,
         ServiceToolsInterface $serviceTools
-    )
-    {
+    ) {
         $this->giftVoucherPurchasedService = $giftVoucherPurchasedService;
         $this->giftVoucherPayment = $giftVoucherPayment;
         $this->serviceSlug = $serviceSlug;
@@ -73,16 +72,19 @@ class OfferController extends AbstractController
      *    name="giftvoucher_offer_all",
      *    methods={"HEAD", "GET", "POST"})
      */
-    public function offerAll(Request $request)
+    public function offerAll()
     {
         //Renders the page
         $giftVouchers = $this->getDoctrine()
             ->getManager()
             ->getRepository('c975LGiftVoucherBundle:GiftVoucherAvailable')
-            ->findNotSuppressed();
-        return $this->render('@c975LGiftVoucher/pages/offerAll.html.twig', array(
-            'giftVouchers' => $giftVouchers,
-        ));
+            ->findNotSuppressed()
+        ;
+        return $this->render(
+            '@c975LGiftVoucher/pages/offerAll.html.twig',
+            array(
+                'giftVouchers' => $giftVouchers,
+            ));
     }
 
 //OFFER
@@ -95,13 +97,15 @@ class OfferController extends AbstractController
      *    requirements={"id": "^([0-9])+$"},
      *    methods={"HEAD", "GET", "POST"})
      */
-    public function offerIdRedirect(Request $request, GiftVoucherAvailable $giftVoucherAvailable)
+    public function offerIdRedirect(GiftVoucherAvailable $giftVoucherAvailable)
     {
         //Redirects to the GiftVoucher
-        return $this->redirectToRoute('giftvoucher_offer', array(
-            'slug' => $giftVoucherAvailable->getSlug(),
-            'id' => $giftVoucherAvailable->getId(),
-        ));
+        return $this->redirectToRoute(
+            'giftvoucher_offer',
+            array(
+                'slug' => $giftVoucherAvailable->getSlug(),
+                'id' => $giftVoucherAvailable->getId(),
+            ));
     }
     /**
      * Displays the specific GiftVoucherAvailable offer
@@ -140,12 +144,14 @@ class OfferController extends AbstractController
         }
 
         //Renders the offer form
-        return $this->render('@c975LGiftVoucher/forms/offer.html.twig', array(
-            'form' => $form->createView(),
-            'giftVoucher' => $giftVoucherPurchased,
-            'giftVoucherAvailable' => $giftVoucherAvailable,
-            'live' => $configService->getParameter('c975LGiftVoucher.live'),
-            'tosUrl' => $this->serviceTools->getUrl($configService->getParameter('c975LGiftVoucher.tosUrl')),
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/forms/offer.html.twig',
+            array(
+                'form' => $form->createView(),
+                'giftVoucher' => $giftVoucherPurchased,
+                'giftVoucherAvailable' => $giftVoucherAvailable,
+                'live' => $configService->getParameter('c975LGiftVoucher.live'),
+                'tosUrl' => $this->serviceTools->getUrl($configService->getParameter('c975LGiftVoucher.tosUrl')),
+            ));
     }
 }

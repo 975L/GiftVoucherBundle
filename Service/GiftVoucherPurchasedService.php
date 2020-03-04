@@ -71,8 +71,7 @@ class GiftVoucherPurchasedService implements GiftVoucherPurchasedServiceInterfac
         ServiceToolsInterface $serviceTools,
         RequestStack $requestStack,
         Environment $environment
-    )
-    {
+    ) {
         $this->em = $em;
         $this->giftVoucherEmail = $giftVoucherEmail;
         $this->giftVoucherFormFactory = $giftVoucherFormFactory;

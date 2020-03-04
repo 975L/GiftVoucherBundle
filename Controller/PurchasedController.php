@@ -49,10 +49,12 @@ class PurchasedController extends AbstractController
     public function display(GiftVoucherPurchased $giftVoucherPurchased, AuthorizationCheckerInterface $authChecker, ConfigServiceInterface $configService)
     {
         //Renders the GiftVoucherPurchased
-        return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
-            'giftVoucher' => $giftVoucherPurchased,
-            'display' => $authChecker->isGranted($configService->getParameter('c975LGiftVoucher.roleNeeded')) ? 'admin' : 'basic',
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/pages/display.html.twig',
+            array(
+                'giftVoucher' => $giftVoucherPurchased,
+                'display' => $authChecker->isGranted($configService->getParameter('c975LGiftVoucher.roleNeeded')) ? 'admin' : 'basic',
+            ));
     }
 
 //USE
@@ -78,10 +80,12 @@ class PurchasedController extends AbstractController
         $this->denyAccessUnlessGranted('c975LGiftVoucher-utilisation', $giftVoucherPurchased);
 
         //Renders the GiftVoucherPurchased
-        return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
-            'giftVoucher' => $giftVoucherPurchased,
-            'display' => 'admin',
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/pages/display.html.twig',
+            array(
+                'giftVoucher' => $giftVoucherPurchased,
+                'display' => 'admin',
+            ));
     }
 
 //USE CONFIRMATION
@@ -113,11 +117,13 @@ class PurchasedController extends AbstractController
         //Out of date not "forced"
         } else {
             //Renders GiftVoucher to allow force use
-            return $this->render('@c975LGiftVoucher/pages/display.html.twig', array(
-                'giftVoucher' => $giftVoucherPurchased,
-                'display' =>'admin',
-                'forceUse' => true,
-            ));
+            return $this->render(
+                '@c975LGiftVoucher/pages/display.html.twig',
+                array(
+                    /**
+     * {@inheritdoc}
+     */
+
         }
 
         //Redirects to GiftVoucher

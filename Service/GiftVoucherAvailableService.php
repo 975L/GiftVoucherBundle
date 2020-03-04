@@ -51,8 +51,7 @@ class GiftVoucherAvailableService implements GiftVoucherAvailableServiceInterfac
         GiftVoucherFormFactoryInterface $giftVoucherFormFactory,
         ServiceSlugInterface $serviceSlug,
         ServiceToolsInterface $serviceTools
-    )
-    {
+    ) {
         $this->em = $em;
         $this->giftVoucherFormFactory = $giftVoucherFormFactory;
         $this->serviceSlug = $serviceSlug;

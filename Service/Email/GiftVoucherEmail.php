@@ -51,8 +51,7 @@ class GiftVoucherEmail implements GiftVoucherEmailInterface
         EmailServiceInterface $emailService,
         ServicePdfInterface $servicePdf,
         TranslatorInterface $translator
-    )
-    {
+    ) {
         $this->configService = $configService;
         $this->emailService = $emailService;
         $this->servicePdf = $servicePdf;

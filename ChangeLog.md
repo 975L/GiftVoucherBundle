@@ -1,97 +1,99 @@
 # Changelog
 
-v3.2
-----
+## v3.2.1
+
+- Cosmetic changes due to Codacy review (04/03/2020)
+
+## v3.2
+
 - Removed use of symplify/easy-coding-standard as abandonned (19/02/2020)
 
-v3.1.4.1
---------
+## v3.1.4.1
+
 - Corrected README.md (18/12/2019)
 
-v3.1.4
-------
+## v3.1.4
+
 - Updated README.md (18/12/2019)
 
-v3.1.3
-------
+## v3.1.3
+
 - Corrected ErrorCorrectionLevel for QrCode (18/12/2019)
 
-v3.1.2
-------
+## v3.1.2
+
 - Corrected missing ? in entity GiftVoucherAvailable (18/12/2019)
 - Modified doctrine-bundle version (18/12/2019)
 
-v3.1.1
-------
+## v3.1.1
+
 - Suppressed missing  @Method (07/10/2019)
 
-v3.1
-----
+## v3.1
+
 - Made use of apply spaceless (05/08/2019)
 
-v3.0.1
-------
+## v3.0.1
+
 - Updated `GiftVoucherEmail` to use `getPdfFilePath()` that returns the url instead of the content (15/07/2019)
 
-v3.0
-----
+## v3.0
+
 - Made use of c975LEmailBundle v3 which use Symfony/Mailer (15/07/2019)
 - Made use of c975LPaymentBundle v3 (15/07/2019)
 - Made use of KnpPagnigatorBundle v4 (15/07/2019)
 - Drop support of Symfony 3.x (15/07/2019)
 
+Upgrading from v2.x? **Check UPGRADE.md**
 
+## v2.x
 
-v2.x
-====
+## v2.1.1.2
 
-v2.1.1.2
---------
 - Changed file rights (15/07/2019)
 
-v2.1.1.1
---------
+## v2.1.1.1
+
 - Changed Github's author reference url (08/04/2019)
 
-v2.1.1
-------
+## v2.1.1
+
 - Made use of Twig namespace (07/03/2019)
 
-v2.1
-----
+## v2.1
+
 - Modified Entity to specify lengths for strings (15/02/2019)
 - Modified Entity to use typehint (15/02/2019)
 - Documented the possibility to use `php bin/console make:migration` (15/02/2019)
 
-v2.0.5
-------
+## v2.0.5
+
 - Removed deprecations for @Method (13/02/2019)
 - Implemented AstractController instead of Controller (13/02/2019)*
 - Modified Dependencyinjection rootNode to be not empty (13/02/2019)
 
-v2.0.4
-------
+## v2.0.4
+
 - Updated composer.json (15/01/2019)
 
-v2.0.3
-------
+## v2.0.3
+
 - Modified required versions in `composer.json` (25/12/2018)
 
-v2.0.2
-------
+## v2.0.2
+
 - Added missing use (25/12/2018)
 
-v2.0.1
-------
+## v2.0.1
+
 - Updated `README.md` (01/09/2018)
 - Renamed `fragments/javascript.html.twig` (04/09/2018)
 - Corrected `UPGRADE.md` for `php bin/console config:create` (03/12/2018)
 - Added rector to composer dev part (23/12/2018)
 - Modified required versions in composer (23/12/2018)
 
-v2.0
-----
-**Upgrading from v1.x? Check UPGRADE.md**
+## v2.0
+
 - Created branch 1.x (31/08/2018)
 - Updated composer.json (01/09/2018)
 - Updated `README.md` (01/09/2018)
@@ -101,20 +103,20 @@ v2.0
 - Added Route `giftvoucher_config` (01/09/2018)
 - Removed calls of `$container->getParameter()` (01/09/2018)
 
+Upgrading from v1.x? **Check UPGRADE.md**
 
-v1.x
-====
+## v1.x
 
-v1.15.5
--------
+## v1.15.5
+
 - Fixed Voter constants (31/08/2018)
 
-v1.15.4.1
----------
+## v1.15.4.1
+
 - Used a `switch()` for the FormFactory more readable (27/08/2018)
 
-v1.15.4
--------
+## v1.15.4
+
 - Added missing redirect if GiftVoucher purchase validation fails (25/08/2018)
 - Removed 'true ===' as not needed (25/08/2018)
 - Added dependency on "c975l/config-bundle" and "c975l/services-bundle" (26/08/2018)
@@ -123,27 +125,27 @@ v1.15.4
 - Added GiftVoucherFormFactory + Interface (27/08/2018)
 - Removed 'made with' link as it can lead to misunderstanding for users (27/08/2018)
 
-v1.15.3.1
----------
+## v1.15.3.1
+
 - Replaced links in dashboard (for purchased) by buttons (25/08/2018)
 
-v1.15.3
--------
+## v1.15.3
+
 - Suppressed link for copying code in Dashboard (25/08/2018)
 - Replaced links in dashboard by buttons (25/08/2018)
 - Corrected display for offer buttons in display available Gift-Voucher (25/08/2018)
 
-v1.15.2
--------
+## v1.15.2
+
 - Made use of @ParamConverter for payment returnRoute (24/08/2018)
 
-v1.15.1
--------
+## v1.15.1
+
 - Renamed `samples` file and calls (23/08/2018)
 - Put javascript for forms in a separate file (23/08/2018)
 
-v1.15
------
+## v1.15
+
 - Added Voter for Slug Route (02/08/2018)
 - Added link to BuyMeCoffee (23/08/2018)
 - Added link to apidoc (23/08/2018)
@@ -161,27 +163,27 @@ v1.15
 - Added confirmation step for utilisation of GiftVoucherPurchased (23/08/2018)
 - Removed id display in dashboard for GiftVoucherAvailable (23/08/2018)
 
-v1.14.2
--------
+## v1.14.2
+
 - Update slugify method to check unicity of slug (02/08/2018)
 - Renamed things link to `add` to `create` (02/08/2018)
 - Ordered in alphabetical AvailableVoter constants (02/08/2018)
 - Renamed Routes (02/08/2018)
 
-v1.14.1
--------
+## v1.14.1
+
 - Renamed `forms/new.html.twig` to `forms/add.html.twig` (01/08/2018)
 
-v1.14
------
+## v1.14
+
 - Made use of TranslatorInterface (31/07/2018)
 - Made use of Voters for access rights (01/08/2018)
 - Merged `GiftVoucherController.php` to `AvailableController.php` more logical (01/08/2018)
 - Renamed `new` to `add` to avoid using php reserved word (01/08/2018)
 - Renamed `use` to `utilization` to avoid using php reserved word (01/08/2018)
 
-v1.13.2
--------
+## v1.13.2
+
 - Injected `AuthorizationCheckerInterface` in Controllers to avoid use of `$this->get()` (30/07/2018)
 - Made use of ParamConverter (30/07/2018)
 - Injected `Translator` (30/07/2018)
@@ -189,66 +191,66 @@ v1.13.2
 - Corrected toolbar in help file (30/07/2018)
 - Corrected dashboard links (30/07/2018)
 
-v1.13.1
--------
+## v1.13.1
+
 - Corrected PurchasedController (29/07/2018)
 
-v1.13
------
+## v1.13
+
 - Corrected offer Route (26/07/2018)
 - Added Controller for auto-wire (26/07/2018)
 - Corrected Service > sendEmail method (26/07/2018)
 - Split controller files (27/07/2018)
 - Moved to Endroid/QrCode ^3 (27/07/2018)
 
-v1.12.1
--------
+## v1.12.1
+
 - Removed `SubmitType` in GiftVoucherAvailableType and replaced by adding button in template as it's not a "Best Practice" (Revert of v1.11.1) (21/07/2018)
 
-v1.12
------
+## v1.12
+
 - Removed required in composer.json (22/05/2018)
 - Removed `Action` in controller method name as not requested anymore (21/07/2018)
 - Corrected meta in `layout.html.twig` (21/07/2018)
 - Use of Yoda notation (21/07/2018)
 
-v1.11.2
--------
+## v1.11.2
+
 - Modified toolbars calls due to modification of c975LToolbarBundle (13/05/2018)
 
-v1.11.1
--------
+## v1.11.1
+
 - Replaced submit button by `SubmitType` (16/04/2018)
 
-v1.11
------
+## v1.11
+
 - Updated `layout.html.twig` to limit overriding files and promote the use of Twig variable `display` (22/03/2018)
 - Removed `fragments/header-pdf.html.twig` and `footer.html.twig` [BC-Break] (22/03/2018)
 - Updated `README.md` (22/03/2018)
 
-v1.10
------
+## v1.10
+
 - Added VAT config value (21/03/2018)
 - Added info about ToS in `README.md` (21/03/2018)
 
-v1.9.3
-------
+## v1.9.3
+
 - Modified label for Terms of Sales acceptance (21/03/2018)
 - Added mandatory field (21/03/2018)
 
-v1.9.2
-------
+## v1.9.2
+
 - Added `proposedCurrencies` config value to allow only a set of currencies when creating Gift-Voucher (21/03/2018)
 
-v1.9.1
-------
+## v1.9.1
+
 - Added `returnRoute` to paymentData as it has changed in c975LPaymentBundle (20/03/2018)
 - Renamed Route `payment_done` (20/03/2018)
 - Added `setFinished(true)` to payment when GiftVoucher has been bought (20/03/2018)
 - Redirect to Route `payment_display` in place of NotFound if Route `giftvoucher_payment_done` is called again after payment finished (20/03/2018)
 
-v1.9
-----
+## v1.9
+
 - Removed unused data in `GiftVoucherService` (18/03/2018)
 - Corrected `offerLink` template (19/03/2018)
 - Added userId if exists to payment data (19/03/2018)
@@ -257,8 +259,8 @@ v1.9
 - Added Currency selector on creation of GiftVoucher (19/03/2018)
 - Set currency to be uppercase in DB and Entities `GiftVoucherAvailable` and `GiftVoucherPurchased` (19/03/2018)
 
-v1.8
-----
+## v1.8
+
 - Changed TermsOfSales pdf filename to a translated one (13/03/2018)
 - Added a global view to display Gift-Voucher to user (13/03/2018)
 - Changed wording for offer link and button (13/03/2018)
@@ -266,8 +268,8 @@ v1.8
 - Added Twig extension to display some Gift-Vouchers (14/03/2018)
 - Added explanations on `README.md` (14/03/2018)
 
-v1.7
-----
+## v1.7
+
 - Added "_locale requirement" part for multilingual prefix in `routing.yml` in `README.md` (04/03/2018)
 - Added `live` config value (05/03/2018)
 - Added mention of test if Gift-Vouchers are not live (05/03/2018)
@@ -286,36 +288,36 @@ v1.7
 - Created method `Service > getIdentifierFormatted()` and made Twig extension to call it (to have it formatted in only one place) (08/03/2018)
 - Grouped all display GiftVoucher templates under `display.html.twig` and removed the unused ones (08/03/2018)
 
-v1.6.1
-------
+## v1.6.1
+
 - Removed the "|raw" for `toolbar_button` call as safe html is now sent (01/03/2018)
 - Added 'is_safe' to Twig extensions `GiftVoucherOfferButton` and `GiftVoucherOfferLink` to remove "|raw" on each call (01/03/2018)
 
-v1.6
-----
+## v1.6
+
 - Added c957L/IncludeLibrary to include libraries in layout.html.twig (27/02/2018)
 
-v1.5
-----
+## v1.5
+
 - Updated `README.md` for package name (21/02/2018)
 - Abandoned Glyphicon and replaced by fontawesome (22/02/2018)
 
-v1.4.1
-------
+## v1.4.1
+
 - Updated `README.md` for package name (20/02/2018)
 
-v1.4
-----
+## v1.4
+
 - Changed composer folder name (20/02/2018)
 
-v1.3
-----
+## v1.3
+
 - Added possibilty to style offer button (19/02/2018)
 - Removed `<pre></pre>` as they get copied withe code (19/02/2018)
 - Reduced name of Twig function to get button/link from 'gift_voucher_' to 'gv_' (19/02/2018)
 
-v1.2
-----
+## v1.2
+
 - Updated ToolbarBundle product -> dashboard (05/02/2018)
 - Updated Route `payment_display`  to `payment_form` (05/02/2018)
 - Updated Route `payment_order`  to `payment_confirm` (05/02/2018)
@@ -332,16 +334,16 @@ v1.2
 - Changed data used to describe payment (18/02/2018)
 - Added help pages (18/02/2018)
 
-v1.1
-----
+## v1.1
+
 - Remove of .travis.yml as tests have to be defined before (18/07/2017)
 - Add of Bundle files (04/02/2018)
 - Add support in `composer.json`+ use of ^ for versions request (04/02/2018)
 
-v1.0.1
-------
+## v1.0.1
+
 - Update of `composer.json` (08/07/2017)
 
-v1.0
-----
+## v1.0
+
 - Creation of bundle (08/07/2017)

@@ -50,8 +50,7 @@ class AvailableController extends AbstractController
         GiftVoucherAvailableServiceInterface $giftVoucherAvailableService,
         GiftVoucherPurchasedServiceInterface $giftVoucherPurchasedService,
         ServiceSlugInterface $serviceSlug
-    )
-    {
+    ) {
         $this->giftVoucherAvailableService = $giftVoucherAvailableService;
         $this->giftVoucherPurchasedService = $giftVoucherPurchasedService;
         $this->serviceSlug = $serviceSlug;
@@ -72,7 +71,7 @@ class AvailableController extends AbstractController
         $this->denyAccessUnlessGranted('c975LGiftVoucher-dashboard', null);
 
         //Gets GiftVouchers Available
-        if ('available' == $request->query->get('v')) {
+        if ('available' === $request->query->get('v')) {
             $giftVouchers = $paginator->paginate(
                 $this->giftVoucherAvailableService->getAll(),
                 $request->query->getInt('p', 1),
@@ -88,9 +87,11 @@ class AvailableController extends AbstractController
         }
 
         //Renders the dashboard
-        return $this->render('@c975LGiftVoucher/pages/dashboard.html.twig', array(
-            'giftVouchers' => $giftVouchers,
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/pages/dashboard.html.twig',
+            array(
+                'giftVouchers' => $giftVouchers,
+            ));
     }
 
 //DISPLAY
@@ -110,9 +111,11 @@ class AvailableController extends AbstractController
         $this->denyAccessUnlessGranted('c975LGiftVoucher-display', $giftVoucherAvailable);
 
         //Renders the GiftVoucherAvailable
-        return $this->render('@c975LGiftVoucher/pages/displayAvailable.html.twig', array(
-            'giftVoucher' => $giftVoucherAvailable,
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/pages/displayAvailable.html.twig',
+            array(
+                'giftVoucher' => $giftVoucherAvailable,
+            ));
     }
 
 //CREATE
@@ -145,9 +148,11 @@ class AvailableController extends AbstractController
         }
 
         //Renders the create form
-        return $this->render('@c975LGiftVoucher/forms/create.html.twig', array(
-            'form' => $form->createView(),
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/forms/create.html.twig',
+            array(
+                'form' => $form->createView(),
+            ));
     }
 
 //MODIFY
@@ -181,10 +186,12 @@ class AvailableController extends AbstractController
         }
 
         //Renders the modify form
-        return $this->render('@c975LGiftVoucher/forms/modify.html.twig', array(
-            'giftVoucher' => $giftVoucherAvailable,
-            'form' => $form->createView(),
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/forms/modify.html.twig',
+            array(
+                'giftVoucher' => $giftVoucherAvailable,
+                'form' => $form->createView(),
+            ));
     }
 
 //DUPLICATE
@@ -213,17 +220,21 @@ class AvailableController extends AbstractController
             $this->giftVoucherAvailableService->register($giftVoucherAvailableClone);
 
             //Redirects to the GiftVoucher
-            return $this->redirectToRoute('giftvoucher_display', array(
-                'id' => $giftVoucherAvailableClone->getId(),
-            ));
+            return $this->redirectToRoute(
+                'giftvoucher_display',
+                array(
+                    'id' => $giftVoucherAvailableClone->getId(),
+                ));
         }
 
         //Returns the form to duplicate content
-        return $this->render('@c975LGiftVoucher/forms/duplicate.html.twig', array(
-            'form' => $form->createView(),
-            'giftVoucher' => $giftVoucherAvailableClone,
-            'object' => $giftVoucherAvailable->getObject(),
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/forms/duplicate.html.twig',
+            array(
+                'form' => $form->createView(),
+                'giftVoucher' => $giftVoucherAvailableClone,
+                'object' => $giftVoucherAvailable->getObject(),
+            ));
     }
 
 //DELETE
@@ -255,10 +266,12 @@ class AvailableController extends AbstractController
         }
 
         //Renders the delete form
-        return $this->render('@c975LGiftVoucher/forms/delete.html.twig', array(
-            'form' => $form->createView(),
-            'giftVoucher' => $giftVoucherAvailable,
-        ));
+        return $this->render(
+            '@c975LGiftVoucher/forms/delete.html.twig',
+            array(
+                'form' => $form->createView(),
+                'giftVoucher' => $giftVoucherAvailable,
+            ));
     }
 
 //CONFIG
@@ -288,10 +301,12 @@ class AvailableController extends AbstractController
         }
 
         //Renders the config form
-        return $this->render('@c975LConfig/forms/config.html.twig', array(
-            'form' => $form->createView(),
-            'toolbar' => '@c975LGiftVoucher',
-        ));
+        return $this->render(
+            '@c975LConfig/forms/config.html.twig',
+            array(
+                'form' => $form->createView(),
+                'toolbar' => '@c975LGiftVoucher',
+            ));
     }
 
 //SLUG
